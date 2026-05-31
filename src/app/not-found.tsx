@@ -15,10 +15,10 @@ export default function NotFound() {
         autoplay
         style={{ height: 400 }}
       />
-      <Text size={"large"}>Trang không tồn tại</Text>
+      <Text size={"large"}>Page not found</Text>
       <Button variant="text">
         <Link href="/" className="text-primary">
-          Quay lại trang chủ
+          Go back to home
         </Link>
       </Button>
     </Container>

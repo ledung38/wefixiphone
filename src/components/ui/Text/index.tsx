@@ -125,7 +125,7 @@ const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
               onClick={() => setIsExpanded((prev) => !prev)}
               className="ml-1 h-fit p-0 text-xs hover:bg-transparent"
             >
-              {isExpanded ? "Thu gọn" : "Xem thêm"}
+              {isExpanded ? "Show less" : "Show more"}
             </Button>
           )}
         </div>

@@ -20,7 +20,7 @@ export const Empty = (props: Props) => {
     >
       <EmptyIcon className={props.iconClassName} />
       <Text size={TextSize.SMALL} color={"var(--text-2)"}>
-        {props.description ?? "Không có dữ liệu !"}
+        {props.description ?? "No data available"}
       </Text>
     </Flex>
   );

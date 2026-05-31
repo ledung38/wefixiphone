@@ -221,8 +221,8 @@ const Footer = () => {
             className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400"
           >
             <p>
-              © {currentYear} WeFixiPhone. All Rights Reserved. Sửa chữa iPhone
-              tận nơi Sydney.
+              © {currentYear} WeFixiPhone. All Rights Reserved. Sydney Mobile
+              iPhone Repair.
             </p>
             <div className="flex gap-6">
               <motion.a

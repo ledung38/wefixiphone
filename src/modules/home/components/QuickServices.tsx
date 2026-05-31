@@ -76,14 +76,14 @@ export const QuickServices = () => {
       description:
         "Full glass back panel restoration to repair spiderweb cracks, loose falling glass shards, and keep internal electronics protected. Preserves MagSafe and wireless charging coils functioning seamlessly.",
       icon: "/back-glass.png",
-      link: Routes.BOOKING,
+      link: `${Routes.PRICING}?part=back-glass`,
     },
   ];
 
   // 5 Remaining Services (1-row grid layout)
   const otherServices: ServiceItem[] = [
     {
-      id: "charging-port",
+      id: "charging",
       title: "Charging Port Repair",
       price: "$89",
       duration: "20 mins",
@@ -91,7 +91,7 @@ export const QuickServices = () => {
       description:
         "Fix loose Lightning/USB-C connectors that won't hold cables, require wiggling to charge, or show moisture warning screens.",
       icon: Wrench,
-      link: Routes.BOOKING,
+      link: `${Routes.PRICING}?part=charging`,
     },
     {
       id: "camera",
@@ -102,7 +102,7 @@ export const QuickServices = () => {
       description:
         "Fix blurry lenses, autofocus failures, cracked protective glass covers, camera sensor dark spots, or shaky image OIS failures.",
       icon: Camera,
-      link: Routes.BOOKING,
+      link: `${Routes.PRICING}?part=camera`,
     },
     {
       id: "audio",
@@ -113,7 +113,7 @@ export const QuickServices = () => {
       description:
         "Fix low or muffled ear speaker volume during phone calls, microphone issues, or crackling static audio sounds.",
       icon: Volume2,
-      link: Routes.BOOKING,
+      link: `${Routes.PRICING}?part=audio`,
     },
     {
       id: "housing",
@@ -124,7 +124,7 @@ export const QuickServices = () => {
       description:
         "Replace entire bent metal frames, structural chassis corners with deep scratches/dents, or restore stuck hardware buttons.",
       icon: Shield,
-      link: Routes.BOOKING,
+      link: `${Routes.PRICING}?part=housing`,
     },
     {
       id: "software",
@@ -135,7 +135,7 @@ export const QuickServices = () => {
       description:
         "Solve iOS boot loops, forgotten passcode locks, stuck recovery mode logos, failing system updates, or iTunes errors.",
       icon: Cpu,
-      link: Routes.BOOKING,
+      link: `${Routes.PRICING}?part=software`,
     },
   ];
 

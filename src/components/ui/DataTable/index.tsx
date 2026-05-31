@@ -197,7 +197,7 @@ const DataTable = ({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  Không có dữ liệu
+                  No data available
                 </TableCell>
               </TableRow>
             )}

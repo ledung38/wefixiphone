@@ -177,7 +177,7 @@ const Home = () => {
                 onClick={() => router.push(Routes.BOOKING)}
                 className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white font-bold px-4 py-6 rounded-xl flex items-center justify-center gap-3 shadow-lg shadow-primary/30 transform active:scale-95 transition-transform"
               >
-                GET AN INSTANT QUOTE
+                BOOK A QUOTE
                 <AnimateSpan
                   animate={{ x: [0, 4, 0] }}
                   transition={{
@@ -218,7 +218,7 @@ const Home = () => {
       <FreeConsultationBanner />
 
       {/* 3. BEFORE / AFTER SLIDER SECTION */}
-      {/* <DIff /> */}
+      <DIff />
 
       {/* 4. WHY FIX NOW SECTION */}
       <WhyFixNow />

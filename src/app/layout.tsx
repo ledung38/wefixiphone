@@ -18,23 +18,23 @@ const geistMono = Geist_Mono({
 const baseUrl = "https://wefixiphone-sydney.com.au";
 const siteName = "WeFixiPhone";
 const description =
-  "Dịch vụ sửa chữa iPhone tận nơi chuyên nghiệp tại Sydney. Thay màn hình, thay pin lấy ngay trong 20 phút trước mặt khách hàng. Bảo hành 12 tháng, thợ sửa đến tận nơi.";
+  "Professional mobile on-site iPhone repair in Sydney. Screen and battery replacements completed in 20 minutes right in front of you. 12-month warranty, direct doorstep service.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${siteName} - Sửa chữa iPhone tận nơi tại Sydney`,
+    default: `${siteName} - On-Site iPhone Repair in Sydney`,
     template: `%s | ${siteName}`,
   },
   description,
   keywords: [
-    "sửa iphone tận nơi sydney",
-    "thay màn hình iphone sydney",
-    "thay pin iphone sydney",
-    "sửa iphone tại nhà sydney",
+    "on-site iphone repair sydney",
     "iphone screen replacement sydney",
     "iphone battery replacement sydney",
-    "sửa chữa điện thoại sydney",
+    "home iphone repair sydney",
+    "iphone screen replacement sydney",
+    "iphone battery replacement sydney",
+    "mobile phone repair sydney",
     "wefixiphone sydney",
   ],
   authors: [
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: baseUrl,
-    title: `${siteName} - Sửa chữa iPhone tận nơi tại Sydney`,
+    title: `${siteName} - On-Site iPhone Repair in Sydney`,
     description,
     siteName,
     images: [
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
         url: `/hero_repair.png`,
         width: 1200,
         height: 630,
-        alt: `${siteName} - Sửa iPhone tận nơi`,
+        alt: `${siteName} - On-Site iPhone Repair`,
       },
     ],
     locale: "en_AU",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} - Sửa chữa iPhone tận nơi tại Sydney`,
+    title: `${siteName} - On-Site iPhone Repair in Sydney`,
     description,
     images: [`/hero_repair.png`],
     creator: "@wefixiphone",

@@ -68,7 +68,7 @@ export const WhyFixNow = () => {
       title: "Cracked Camera Glass",
       severity: "WARNING",
       icon: Camera,
-      symptom: "Nứt kính camera sau",
+      symptom: "Cracked rear camera glass",
       consequence:
         "Dust enters lens ➔ Permanent camera spots & broken OIS stabilization",
       description:
@@ -82,7 +82,7 @@ export const WhyFixNow = () => {
       title: "Loose Charging Port",
       severity: "WARNING",
       icon: Wrench,
-      symptom: "Chân sạc lỏng lẻo",
+      symptom: "Loose charging port",
       consequence: "Short circuits ➔ Motherboard Power IC burn-out ($250+)",
       description:
         "Using a charger port that only connects at an angle creates rapid electrical arching (sparks). This damages the charging port pins and triggers short circuits that burn the motherboard's main Power IC chip.",

@@ -136,7 +136,7 @@ export const Header = () => {
             >
               <Link
                 href={Routes.HOME}
-                aria-label="Trở về trang chủ"
+                aria-label="Back to home"
                 className="flex items-center gap-3 flex-shrink-0 group"
               >
                 <div className="flex items-center gap-2">
