@@ -50,20 +50,24 @@ export const FreeConsultationBanner = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <div>
+                <Button
+                  onClick={() => router.push(Routes.BOOKING)}
+                  className="w-full bg-primary hover:bg-primary/95 text-white font-extrabold rounded-xl py-3 px-5 flex items-center justify-center gap-2 text-xs transition-transform hover:scale-[1.02] cursor-pointer"
+                >
+                  <span>Book Diagnostic Online</span>
+                  <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              </div>
               <a href="tel:0451210238" className="w-full sm:w-auto">
-                <Button className="w-full bg-primary hover:bg-primary/95 text-white font-extrabold rounded-xl py-3 px-5 flex items-center justify-center gap-2 text-xs transition-transform hover:scale-[1.02] cursor-pointer">
+                <Button
+                  variant="outline"
+                  className="w-full sm:w-auto border-white/20 text-white hover:bg-white/10 rounded-xl py-3 px-5 text-xs font-bold transition-transform hover:scale-[1.02] cursor-pointer"
+                >
                   <Phone className="w-4 h-4 animate-pulse" />
                   <span>Call 0451 210 238</span>
                 </Button>
               </a>
-              <Button
-                onClick={() => router.push(Routes.BOOKING)}
-                variant="outline"
-                className="w-full sm:w-auto border-white/20 text-white hover:bg-white/10 rounded-xl py-3 px-5 text-xs font-bold transition-transform hover:scale-[1.02] cursor-pointer"
-              >
-                <span>Book Diagnostic Online</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Button>
             </div>
           </div>
 

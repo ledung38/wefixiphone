@@ -1,28 +1,26 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import LayoutComponents from "@/components/layouts/LayoutComponents";
 import { Button } from "@/components/ui/Button";
 import { Select } from "@/components/ui/Select";
-import {
-  Check,
-  ChevronRight,
-  ChevronLeft,
-  Smartphone,
-  Settings,
-  MapPin,
-  Calendar,
-  User,
-  Phone,
-  Mail,
-  CheckCircle,
-  Truck,
-  Building,
-  Clock,
-  AlertCircle,
-} from "lucide-react";
 import { Routes } from "@/lib/enum/routes";
+import {
+  AlertCircle,
+  Calendar,
+  Check,
+  CheckCircle,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  Mail,
+  MapPin,
+  Settings,
+  Smartphone,
+  Truck,
+  User,
+} from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 // Models list matching pricing
 const IPHONE_MODELS = [
@@ -242,7 +240,7 @@ function BookingContent() {
   const [step, setStep] = useState(1);
 
   // Form states
-  const [model, setModel] = useState("iphone-13");
+  const [model, setModel] = useState("iphone-16-pro-max");
   const [part, setPart] = useState("screen");
   const [quality, setQuality] = useState("Premium Quality");
   const [serviceType, setServiceType] = useState("on-site"); // on-site vs drop-off
@@ -372,7 +370,7 @@ function BookingContent() {
 
   return (
     <LayoutComponents fullWidth>
-      <div className="w-full min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+      <div className="w-full min-h-screen bg-primary/20 dark:bg-slate-950 text-slate-900 dark:text-white py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
         <div className="max-w-3xl mx-auto">
           {/* Wizard step indicator */}
           {step <= 3 && (
@@ -384,20 +382,20 @@ function BookingContent() {
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                       step >= 1
                         ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20"
-                        : "bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
+                        : "bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-transparent"
                     }`}
                   >
                     {step > 1 ? <Check className="w-4 h-4 text-white" /> : "1"}
                   </div>
                   <span
-                    className={`text-[10px] uppercase font-bold tracking-wider ${step >= 1 ? "text-primary" : "text-slate-450 dark:text-slate-500"}`}
+                    className={`text-[10px] uppercase font-bold tracking-wider ${step >= 1 ? "text-primary" : "text-slate-600 dark:text-slate-400"}`}
                   >
                     Device
                   </span>
                 </div>
 
                 <div
-                  className={`flex-1 h-0.5 mx-4 transition-all duration-300 ${step >= 2 ? "bg-primary" : "bg-slate-200 dark:bg-slate-800"}`}
+                  className={`flex-1 h-0.5 mx-4 transition-all duration-300 ${step >= 2 ? "bg-primary" : "bg-slate-300 dark:bg-slate-800"}`}
                 />
 
                 {/* Step 2 */}
@@ -406,20 +404,20 @@ function BookingContent() {
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                       step >= 2
                         ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20"
-                        : "bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
+                        : "bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-transparent"
                     }`}
                   >
                     {step > 2 ? <Check className="w-4 h-4 text-white" /> : "2"}
                   </div>
                   <span
-                    className={`text-[10px] uppercase font-bold tracking-wider ${step >= 2 ? "text-primary" : "text-slate-450 dark:text-slate-500"}`}
+                    className={`text-[10px] uppercase font-bold tracking-wider ${step >= 2 ? "text-primary" : "text-slate-600 dark:text-slate-400"}`}
                   >
                     Confirm
                   </span>
                 </div>
 
                 <div
-                  className={`flex-1 h-0.5 mx-4 transition-all duration-300 ${step >= 3 ? "bg-primary" : "bg-slate-200 dark:bg-slate-800"}`}
+                  className={`flex-1 h-0.5 mx-4 transition-all duration-300 ${step >= 3 ? "bg-primary" : "bg-slate-300 dark:bg-slate-800"}`}
                 />
 
                 {/* Step 3 */}
@@ -428,13 +426,13 @@ function BookingContent() {
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                       step >= 3
                         ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20"
-                        : "bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
+                        : "bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-transparent"
                     }`}
                   >
                     {step >= 3 ? <Check className="w-4 h-4 text-white" /> : "3"}
                   </div>
                   <span
-                    className={`text-[10px] uppercase font-bold tracking-wider ${step >= 3 ? "text-primary" : "text-slate-450 dark:text-slate-500"}`}
+                    className={`text-[10px] uppercase font-bold tracking-wider ${step >= 3 ? "text-primary" : "text-slate-600 dark:text-slate-400"}`}
                   >
                     Complete
                   </span>
@@ -452,7 +450,7 @@ function BookingContent() {
                   <h2 className="text-2xl font-black text-slate-900 dark:text-white">
                     Select Device & Repair
                   </h2>
-                  <p className="text-sm text-slate-550 dark:text-slate-400">
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
                     Choose your exact iPhone model and the component that needs
                     repair.
                   </p>
@@ -576,7 +574,7 @@ function BookingContent() {
                       <User className="w-5 h-5 text-primary" />
                       1. Contact Information
                     </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                    <p className="text-xs text-slate-600 dark:text-slate-400">
                       Please enter your contact details.
                     </p>
                   </div>
@@ -651,7 +649,7 @@ function BookingContent() {
                       <MapPin className="w-5 h-5 text-primary" />
                       2. Service Location & Schedule
                     </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                    <p className="text-xs text-slate-600 dark:text-slate-400">
                       Our doorstep technician repairs the device live at your
                       location.
                     </p>
@@ -664,7 +662,7 @@ function BookingContent() {
                       <h4 className="font-bold text-xs">
                         Doorstep Service (Mobile)
                       </h4>
-                      <p className="text-[11px] text-slate-550 dark:text-slate-400">
+                      <p className="text-[11px] text-slate-600 dark:text-slate-400">
                         Technician drives to you in Sydney and repairs on-site.
                       </p>
                     </div>
@@ -781,11 +779,11 @@ function BookingContent() {
 
                   {/* Summary bill */}
                   <div className="p-5 bg-slate-100 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-white/5 space-y-3.5 text-sm">
-                    <h4 className="font-bold text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-white/5 pb-2">
+                    <h4 className="font-bold text-slate-800 dark:text-slate-200 border-b border-slate-200 dark:border-white/5 pb-2">
                       Booking Summary:
                     </h4>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 dark:text-slate-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         Customer Name:
                       </span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
@@ -793,7 +791,7 @@ function BookingContent() {
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 dark:text-slate-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         Phone Number:
                       </span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
@@ -801,7 +799,7 @@ function BookingContent() {
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 dark:text-slate-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         Email Address:
                       </span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
@@ -809,7 +807,7 @@ function BookingContent() {
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 dark:text-slate-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         Service Location:
                       </span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200 text-right">
@@ -818,7 +816,7 @@ function BookingContent() {
                       </span>
                     </div>
                     <div className="flex justify-between border-t border-slate-200 dark:border-white/5 pt-2">
-                      <span className="text-slate-500 dark:text-slate-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         Device & Service:
                       </span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
@@ -827,7 +825,7 @@ function BookingContent() {
                     </div>
                     {(part === "screen" || part === "battery") && (
                       <div className="flex justify-between">
-                        <span className="text-slate-500 dark:text-slate-400">
+                        <span className="text-slate-600 dark:text-slate-400">
                           Component Quality:
                         </span>
                         <span className="font-semibold text-slate-800 dark:text-slate-200">
@@ -836,7 +834,7 @@ function BookingContent() {
                       </div>
                     )}
                     <div className="flex justify-between">
-                      <span className="text-slate-550 dark:text-slate-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         Method:
                       </span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
@@ -844,7 +842,7 @@ function BookingContent() {
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 dark:text-slate-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         Appointment:
                       </span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
@@ -856,7 +854,7 @@ function BookingContent() {
                       </span>
                     </div>
                     <div className="flex justify-between pt-2 border-t border-slate-200 dark:border-white/5 text-base">
-                      <span className="font-bold text-slate-700 dark:text-slate-300">
+                      <span className="font-bold text-slate-800 dark:text-slate-200">
                         Total Estimated Cost:
                       </span>
                       <span className="font-black text-primary">
@@ -898,15 +896,15 @@ function BookingContent() {
                   <h2 className="text-3xl font-black text-slate-900 dark:text-white">
                     Booking Successful!
                   </h2>
-                  <p className="text-slate-550 dark:text-slate-400 text-sm max-w-md mx-auto">
+                  <p className="text-slate-650 dark:text-slate-400 text-sm max-w-md mx-auto">
                     Thank you for choosing WeFixiPhone. We have successfully
                     received your repair request.
                   </p>
                 </div>
 
-                <div className="bg-slate-100 dark:bg-slate-950 p-6 rounded-2xl border border-slate-200 dark:border-white/5 text-left max-w-md mx-auto space-y-3 text-sm text-slate-700 dark:text-slate-300">
+                <div className="bg-slate-100 dark:bg-slate-950 p-6 rounded-2xl border border-slate-200 dark:border-white/5 text-left max-w-md mx-auto space-y-3 text-sm text-slate-800 dark:text-slate-200">
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       Appointment ID:
                     </span>
                     <span className="font-mono font-bold text-slate-900 dark:text-white">
@@ -914,7 +912,7 @@ function BookingContent() {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       Customer Name:
                     </span>
                     <span className="font-semibold text-slate-900 dark:text-white">
@@ -922,7 +920,7 @@ function BookingContent() {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       Phone Number:
                     </span>
                     <span className="font-semibold text-slate-900 dark:text-white">
@@ -930,7 +928,7 @@ function BookingContent() {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       Email Address:
                     </span>
                     <span className="font-semibold text-slate-900 dark:text-white">
@@ -938,7 +936,7 @@ function BookingContent() {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       Service Location:
                     </span>
                     <span className="font-semibold text-slate-900 dark:text-white text-right">
@@ -946,7 +944,7 @@ function BookingContent() {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       Repair Service:
                     </span>
                     <span className="font-semibold text-slate-900 dark:text-white">
@@ -954,7 +952,7 @@ function BookingContent() {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       Appointment:
                     </span>
                     <span className="font-semibold text-slate-900 dark:text-white">
@@ -968,7 +966,7 @@ function BookingContent() {
                     </span>
                   </div>
                   <div className="flex justify-between pt-2 border-t border-slate-200 dark:border-white/5 font-bold">
-                    <span className="text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       Estimated Cost:
                     </span>
                     <span className="text-primary">${priceEstimate} AUD</span>
@@ -1002,7 +1000,7 @@ export default function BookingPage() {
   return (
     <React.Suspense
       fallback={
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white flex items-center justify-center">
+        <div className="min-h-screen bg-primary/20 dark:bg-slate-950 text-slate-900 dark:text-white flex items-center justify-center">
           Loading booking form...
         </div>
       }

@@ -3,7 +3,7 @@ import { Text } from "@/components/ui";
 import { cn } from "@/lib/utils/index";
 import React from "react";
 
-export const TextGradient = ({ className, as = "h2" as const, ...props }) => {
+export const TextGradient = ({ className, as = "h2" as any, ...props }) => {
   return (
     <Text
       className={cn(

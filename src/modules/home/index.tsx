@@ -75,7 +75,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white select-none transition-colors duration-300">
+    <div className="w-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
       {/* 1. HERO SECTION */}
       <section className="relative w-full min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-12 lg:py-24 px-4 md:px-8 lg:px-16 bg-slate-50 dark:bg-slate-950">
         {/* Background Image with overlay gradient */}
@@ -140,25 +140,25 @@ const Home = () => {
               className="grid grid-cols-2 gap-4 w-full mt-2 text-sm sm:text-base font-semibold text-slate-200"
             >
               <div className="flex items-center gap-3 gradient-border-premium px-4 py-3 rounded-2xl cursor-default">
-                <div className="h-6 w-6 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary flex items-center justify-center flex-shrink-0">
+                <div className="h-6 w-6 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
                   <Clock className="w-3.5 h-3.5" />
                 </div>
                 <span>Arrives in 30 mins</span>
               </div>
               <div className="flex items-center gap-3 gradient-border-premium px-4 py-3 rounded-2xl cursor-default">
-                <div className="h-6 w-6 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary flex items-center justify-center flex-shrink-0">
+                <div className="h-6 w-6 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-3.5 h-3.5" />
                 </div>
                 <span>Genuine-grade parts</span>
               </div>
               <div className="flex items-center gap-3 gradient-border-premium px-4 py-3 rounded-2xl cursor-default">
-                <div className="h-6 w-6 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary flex items-center justify-center flex-shrink-0">
+                <div className="h-6 w-6 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
                   <Eye className="w-3.5 h-3.5" />
                 </div>
                 <span>Watch the repair live</span>
               </div>
               <div className="flex items-center gap-3 gradient-border-premium px-4 py-3 rounded-2xl cursor-default">
-                <div className="h-6 w-6 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary flex items-center justify-center flex-shrink-0">
+                <div className="h-6 w-6 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
                   <CheckCircle className="w-3.5 h-3.5" />
                 </div>
                 <span>Done on the spot</span>
@@ -177,7 +177,7 @@ const Home = () => {
                 onClick={() => router.push(Routes.BOOKING)}
                 className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white font-bold px-4 py-6 rounded-xl flex items-center justify-center gap-3 shadow-lg shadow-primary/30 transform active:scale-95 transition-transform"
               >
-                BOOK A QUOTE
+                BOOK A REPAIR
                 <AnimateSpan
                   animate={{ x: [0, 4, 0] }}
                   transition={{
