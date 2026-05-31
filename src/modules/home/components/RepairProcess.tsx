@@ -66,8 +66,8 @@ export const RepairProcess = () => {
               <div className="h-4 w-4 rounded-full bg-slate-200 dark:bg-slate-800 text-[5px] font-black flex items-center justify-center text-slate-500 dark:text-slate-400">
                 W
               </div>
-              <div className="bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-350 p-2 rounded-2xl rounded-tl-none max-w-[80%] font-semibold">
-                Got it! Let's schedule a fix.
+              <div className="bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-355 p-2 rounded-2xl rounded-tl-none max-w-[80%] font-semibold">
+                Got it! Let&apos;s schedule a fix.
               </div>
             </div>
           </div>

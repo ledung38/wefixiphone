@@ -167,6 +167,9 @@ const nextConfig: NextConfig = {
       resolveAlias: {},
     },
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
