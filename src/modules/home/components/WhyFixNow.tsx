@@ -106,8 +106,8 @@ export const WhyFixNow = () => {
           <p className="mt-4 text-center mx-auto max-w-4xl">
             Repair your device as soon as you detect a problem to prevent damage
             to internal components, avoid higher repair costs, and extend the
-            device's lifespan. This is especially important in case of sudden
-            shutdowns or malfunctions in critical situations.
+            device&apos;s lifespan. This is especially important in case of
+            sudden shutdowns or malfunctions in critical situations.
           </p>
         </div>
 
