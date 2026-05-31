@@ -28,7 +28,7 @@ const request = async <T>(
       const errorMessage =
         error.response?.data ??
         ({
-          message: "Lỗi kết nối, vui lòng thử lại sau",
+          message: "Connection error, please try again later",
         } as ApiErrorResponse);
 
       throw errorMessage;

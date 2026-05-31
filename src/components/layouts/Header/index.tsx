@@ -2,18 +2,16 @@
 
 import { ModeToggle } from "@/components/common/ModeToggle";
 import { BellIcon, PhoneIcon } from "@/components/icons";
-import { MENU_ITEMS } from "@/components/layouts/contants";
+import { MENU_ITEMS, MenuItem } from "@/components/layouts/contants";
 import { NavLink } from "@/components/layouts/Header/NavLink";
 import {
   Button,
-  NextAvatar,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui";
 import { useAppRouter } from "@/hooks/useAppRouter";
 import useDidUpdateEffect from "@/hooks/useDidUpdateEffect";
-import logo from "@/lib/assets/images/logo.webp";
 import { Routes } from "@/lib/enum/routes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -28,7 +26,7 @@ const MobileMenuItem = ({
   item,
   onClose,
 }: {
-  item: (typeof MENU_ITEMS)[0];
+  item: MenuItem;
   onClose: () => void;
 }) => {
   const hasSubTabs = item.children && item.children.length > 0;
@@ -55,7 +53,7 @@ const MobileMenuItem = ({
         <Link
           href={`${item.key}`}
           onClick={onClose}
-          className="block px-4 py-3.5 text-white font-semibold hover:bg-white/15 hover:translate-x-1 rounded-lg transition-all duration-200"
+          className="block px-4 py-3.5 text-foreground font-semibold hover:bg-white/15 hover:translate-x-1 rounded-lg transition-all duration-200"
         >
           {item.label}
         </Link>
@@ -63,7 +61,7 @@ const MobileMenuItem = ({
 
       {hasSubTabs && openSubmenu && (
         <div className="pl-4 space-y-1 mt-1 animate-in fade-in slide-in-from-top-2 duration-200">
-          {item.children.map((subTab) => (
+          {item.children?.map((subTab) => (
             <Link
               key={subTab.key}
               href={`${subTab.key}`}
@@ -88,18 +86,8 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
-  const navigate = useAppRouter();
   const route = useAppRouter();
   const isHome = pathname === "/";
-
-  const onChangeTab = useCallback(
-    (key: string) => {
-      setActive(key);
-      navigate.push(key);
-      setIsMobileMenuOpen(false);
-    },
-    [navigate],
-  );
 
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -129,12 +117,12 @@ export const Header = () => {
     <>
       {/* Header */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all bg-white dark:bg-white/50  duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all bg-white dark:bg-slate-950 duration-500 ${
           isScrolled
-            ? "bg-white backdrop-blur-xl shadow-2xl"
+            ? "bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-2xl border-b border-slate-200/10"
             : isHome
-              ? "!bg-transparent"
-              : ""
+              ? "!bg-transparent border-transparent"
+              : "bg-white dark:bg-slate-950 border-b border-slate-200/10"
         }`}
         ref={ref}
       >
@@ -148,26 +136,56 @@ export const Header = () => {
             >
               <Link
                 href={Routes.HOME}
-                aria-label="Trở về trang chủ"
+                aria-label="Back to home"
                 className="flex items-center gap-3 flex-shrink-0 group"
               >
-                <div className="relative transition-all duration-300 group-hover:scale-110">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-75 transition-opacity duration-300" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-50 transition-opacity duration-300  group-hover:opacity-0" />
-                  <img
-                    src="/logo_header_v3.png"
-                    alt="Logo"
-                    className="relative h-18 "
-                  />
+                <div className="flex items-center gap-2">
+                  <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-white shadow-lg shadow-primary/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-primary/30">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M11 11l1-1 3 3m-3-3v5"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <span
+                      className={cn(
+                        "text-lg font-black leading-none tracking-tight transition-colors duration-300",
+                        isScrolled || !isHome
+                          ? "text-slate-900 dark:text-white"
+                          : "text-white",
+                      )}
+                    >
+                      WeFix
+                      <span className="text-primary font-extrabold">
+                        iPhone
+                      </span>
+                    </span>
+                    <span
+                      className={cn(
+                        "text-[9px] font-bold tracking-widest uppercase mt-1 transition-colors duration-300",
+                        isScrolled || !isHome
+                          ? "text-slate-500 dark:text-slate-400"
+                          : "text-blue-200",
+                      )}
+                    >
+                      Sydney Mobile Repair
+                    </span>
+                  </div>
                 </div>
-                {/* <div className="hidden sm:flex flex-col">
-                  <span className="text-lg font-black text-white leading-tight tracking-tight">
-                    N&T Spotless
-                  </span>
-                  <span className="text-xs text-blue-100 font-semibold tracking-wide uppercase">
-                    Cleaning
-                  </span>
-                </div> */}
               </Link>
             </motion.div>
 
@@ -205,7 +223,7 @@ export const Header = () => {
                           className="z-[1000] w-max rounded-xl bg-white shadow-2xl border border-blue-100 p-2 animate-in fade-in slide-in-from-top-2"
                         >
                           <div className="py-1 min-w-max">
-                            {item.children.map((subTab) => (
+                            {item.children?.map((subTab) => (
                               <Link
                                 key={subTab.key}
                                 href={`${subTab.key}`}
@@ -253,12 +271,11 @@ export const Header = () => {
                   <motion.div
                     whileHover="hover"
                     initial="initial"
-                    variants={{}} // cần để button có state để truyền xuống
-                    // className="w-full hidden lg:flex  gap-2 items-center bg-white text-primary font-semibold hover:bg-blue-50 hover:shadow-2xl transition-transform duration-300 active:scale-95 hover:scale-105 px-4 py-1.5 text-sm sm:text-base rounded-lg"
+                    variants={{}}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
                     style={{ originX: 0.5, originY: 0.5 }}
                   >
-                    <Button className="rounded-lg">
+                    <Button className="rounded-lg bg-primary hover:bg-primary/95 text-white">
                       <motion.div
                         variants={{
                           initial: { rotate: 0 },
@@ -270,7 +287,7 @@ export const Header = () => {
                       >
                         <PhoneIcon className="[&_path]:stroke-white size-5 transition-all " />
                       </motion.div>
-                      <span>0451210238</span>
+                      <span>0451 210 238</span>
                     </Button>
                   </motion.div>
                 </a>
@@ -285,8 +302,8 @@ export const Header = () => {
                 <motion.button
                   whileHover="hover"
                   initial="initial"
-                  variants={{}} // cần để button có state để truyền xuống
-                  className="w-full hidden lg:flex flex-1 gap-2 items-center bg-white  font-semibold hover:bg-blue-50 hover:shadow-2xl transition-transform duration-300 active:scale-95 hover:scale-105 px-4 py-1.5 text-sm sm:text-base rounded-lg group bg-gradient-to-r from-orange-500 to-red-500 text-white"
+                  variants={{}}
+                  className="w-full hidden lg:flex flex-1 gap-2 items-center bg-white font-semibold hover:bg-blue-50 hover:shadow-2xl transition-transform duration-300 active:scale-95 hover:scale-105 px-4 py-1.5 text-sm sm:text-base rounded-lg group bg-gradient-to-r from-orange-500 to-red-500 text-white cursor-pointer"
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}
                   style={{ originX: 0.5, originY: 0.5 }}
                   onClick={() => {
@@ -323,13 +340,13 @@ export const Header = () => {
                 transition={{ duration: 0.4, delay: 0.55 }}
                 onClick={toggleMobileMenu}
                 className={
-                  "lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-secondary hover:bg-secondary/20 transition-all duration-200 active:bg-secondary/30"
+                  "lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:bg-slate-500/10 transition-all duration-200 active:bg-slate-500/20"
                 }
               >
                 {isMobileMenuOpen ? (
-                  <X className="h-6 w-6 transition-transform duration-300" />
+                  <X className="h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white" />
                 ) : (
-                  <Menu className="h-6 w-6 transition-transform duration-300" />
+                  <Menu className="h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white" />
                 )}
               </motion.button>
             </div>
@@ -338,7 +355,7 @@ export const Header = () => {
 
         {/* Mobile Navigation - Premium Design */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-white/20 bg-gradient-to-b from-primary/98 to-primary/95 backdrop-blur-xl animate-in slide-in-from-top-2 duration-300">
+          <div className="lg:hidden border-t border-white/10 bg-slate-900/98 backdrop-blur-xl animate-in slide-in-from-top-2 duration-300">
             <div className="px-4 sm:px-6 py-6 space-y-1 max-h-[calc(100vh-80px)] overflow-y-auto">
               {MENU_ITEMS.map((item) => (
                 <MobileMenuItem
@@ -353,12 +370,13 @@ export const Header = () => {
                 <a href="tel:0451210238" className="block">
                   <Button className="w-full flex gap-2 bg-white text-primary font-semibold hover:bg-blue-50 transition-all duration-200 py-3 rounded-lg shadow-md">
                     <PhoneIcon className="[&_path]:stroke-primary size-5" />
-                    <span>0451210238</span>
+                    <span>0451 210 238</span>
                   </Button>
                 </a>
                 <Button
                   onClick={() => {
                     route.push(Routes.BOOKING);
+                    setIsMobileMenuOpen(false);
                   }}
                   className="w-full flex gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold hover:shadow-lg transition-all duration-200 py-3 rounded-lg"
                 >
@@ -371,8 +389,8 @@ export const Header = () => {
         )}
       </header>
 
-      {/* Spacing untuk fixed header */}
-      <div className="h-20" />
+      {/* Spacing cho fixed header */}
+      {!isHome && <div className="h-20" />}
     </>
   );
 };

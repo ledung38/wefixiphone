@@ -26,7 +26,7 @@ export default function GlobalError({
           style={{ height: 400 }}
         />
 
-        <h2>Có lỗi xảy ra vui lòng thử lại!</h2>
+        <h2>Something went wrong, please try again!</h2>
         <Button
           variant={"text"}
           color="primary"

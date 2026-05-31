@@ -68,11 +68,11 @@ const Upload = ({
 
       const validFiles = newFiles.filter((file) => {
         if (maxSize && file.size > maxSize) {
-          onError?.(`File ${file.name} không được lớn hơn ${maxSize} bytes`);
+          onError?.(`File ${file.name} cannot be larger than ${maxSize} bytes`);
           return false;
         }
         if (accept && !file.type.match(accept.replace(/,/g, "|"))) {
-          onError?.(`File ${file.name} không được hỗ trợ`);
+          onError?.(`File ${file.name} is not supported`);
           return false;
         }
         return true;

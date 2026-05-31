@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, Phone, Mail, MapPin } from "lucide-react";
-import { NextAvatar } from "@/components/ui";
 import { Routes } from "@/lib/enum/routes";
-import logo from "@/lib/assets/images/logo.webp";
 import { TikTokIcon } from "@/components/icons";
 import { AnimateLink } from "@/components/common/Animate";
 
@@ -37,38 +35,32 @@ const Footer = () => {
       title: "Quick Links",
       links: [
         { label: "Home", href: "/" },
-        { label: "About Us", href: Routes.ABOUT_US },
+        { label: "Pricing", href: Routes.PRICING },
+        { label: "Book a Repair", href: Routes.BOOKING },
         { label: "Services", href: "/#services" },
-        { label: "Contact", href: "/#contact" },
       ],
     },
     {
       title: "Services",
       links: [
-        {
-          label: "End of Lease Cleaning",
-          href: Routes.SERVICE_END_OF_LEASE_CLEANING,
-        },
-        { label: "Regular Cleaning", href: Routes.SERVICE_REGULAR_CLEANING },
-        { label: "Deep Cleaning", href: Routes.SERVICE_DEEP_CLEANING },
-        {
-          label: "Restaurant Cleaning",
-          href: Routes.SERVICE_RESTAURANT_CLEANING,
-        },
-        { label: "Airbnb Cleaning", href: Routes.SERVICE_AIRBNB_CLEANING },
-        { label: "Mould Cleaning", href: Routes.SERVICE_MOULD_CLEANING },
+        { label: "Screen Replacement", href: "/#services" },
+        { label: "Battery Replacement", href: "/#services" },
+        { label: "Face ID Repair", href: "/#services" },
+        { label: "Camera Repair", href: "/#services" },
+        { label: "Water Damage Repair", href: "/#services" },
+        { label: "Charging Port Repair", href: "/#services" },
       ],
     },
     {
       title: "Contact Info",
       links: [
-        { label: "0451210238", href: "tel:+0451210238", icon: Phone },
+        { label: "0451 210 238", href: "tel:0451210238", icon: Phone },
         {
-          label: "cleaningsydney102@gmail.com",
-          href: "mailto:cleaningsydney102@gmail.com",
+          label: "info@wefixiphone.com.au",
+          href: "mailto:info@wefixiphone.com.au",
           icon: Mail,
         },
-        { label: "Sydney, Australia", href: "#", icon: MapPin },
+        { label: "Sydney, NSW, Australia", href: "#", icon: MapPin },
       ],
     },
   ];
@@ -76,15 +68,15 @@ const Footer = () => {
   const socials = [
     {
       icon: Facebook,
-      href: "https://www.facebook.com/sydney.spotlesscleaning",
+      href: "#",
       label: "Facebook",
     },
     {
       icon: Instagram,
-      href: "https://www.instagram.com/sydney.spotlesscleaning/",
+      href: "#",
       label: "Instagram",
     },
-    { icon: TikTokIcon, href: "https://linkedin.com", label: "TikTok" },
+    { icon: TikTokIcon, href: "#", label: "TikTok" },
   ];
 
   return (
@@ -116,32 +108,46 @@ const Footer = () => {
               <div className="flex items-center gap-2 mb-4 max-sm:justify-center">
                 <Link
                   href={Routes.HOME}
-                  className="flex flex-col items-center gap-1   flex-shrink-0 group"
+                  className="flex items-center gap-2.5 flex-shrink-0 group"
                 >
-                  <div className="relative transition-all duration-300 group-hover:scale-110">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-75 transition-opacity duration-300" />
-                    <NextAvatar
-                      src={logo}
-                      alt="logo"
-                      className="relative w-20 h-20"
-                    />
+                  <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-primary text-white shadow-lg shadow-primary/20 transition-all duration-300 group-hover:scale-105">
+                    <svg
+                      className="w-5.5 h-5.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M11 11l1-1 3 3m-3-3v5"
+                      />
+                    </svg>
                   </div>
-                  <div className="hidden sm:flex flex-col">
-                    <span className="text-lg font-black text-white leading-tight tracking-tight">
-                      N&T Spotless Cleaning
+                  <div className="flex flex-col">
+                    <span className="text-lg font-black text-white leading-none tracking-tight">
+                      WeFix
+                      <span className="text-primary font-extrabold">
+                        iPhone
+                      </span>
+                    </span>
+                    <span className="text-[9px] text-blue-200 font-bold tracking-widest uppercase mt-1">
+                      Sydney Mobile Repair
                     </span>
                   </div>
-                  {/* <div className="relative transition-all duration-300 group-hover:scale-110">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-75 transition-opacity duration-300" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-50 transition-opacity duration-300  group-hover:opacity-0" />
-                    <img src="/logo_header_v3.png" className="relative h-18 " />
-                  </div> */}
                 </Link>
               </div>
 
-              <p className="text-white text-sm leading-relaxed mb-6">
-                Professional cleaning services you can trust. Making Sydney
-                cleaner, one space at a time.
+              <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                Premium on-site iPhone screen and battery replacement services
+                in Sydney. 20-minute repair at your home or office. 12-month
+                warranty.
               </p>
               {/* Social links */}
               <div className="flex gap-4  [&>a:last-child_path]:fill-primary [&>a:last-child:hover_svg_path]:fill-white">
@@ -151,8 +157,6 @@ const Footer = () => {
                     <motion.a
                       key={index}
                       href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.2, y: -4 }}
                       className="w-9 h-9 rounded-lg bg-primary/10 hover:bg-primary text-primary hover:text-white  flex items-center justify-center transition-colors"
                       title={social.label}
@@ -186,7 +190,7 @@ const Footer = () => {
                               : undefined
                           }
                           whileHover={{ x: 4 }}
-                          className="text-white hover:text-primary transition-colors text-sm flex items-center gap-2 cursor-pointer"
+                          className="text-slate-300 hover:text-primary transition-colors text-sm flex items-center gap-2 cursor-pointer"
                         >
                           {Icon && <Icon className="w-4 h-4" />}
                           {link.label}
@@ -214,21 +218,24 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white"
+            className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400"
           >
-            <p>© {currentYear} Spotless Cleaning. All Rights Reserved.</p>
+            <p>
+              © {currentYear} WeFixiPhone. All Rights Reserved. Sydney Mobile
+              iPhone Repair.
+            </p>
             <div className="flex gap-6">
               <motion.a
                 href="#"
-                whileHover={{ color: "#0A84FF" }}
-                className="hover:text-primary transition-colors cursor-pointer text-white"
+                whileHover={{ color: "var(--primary)" }}
+                className="hover:text-primary transition-colors cursor-pointer text-slate-400"
               >
                 Privacy Policy
               </motion.a>
               <motion.a
                 href="#"
-                whileHover={{ color: "#0A84FF" }}
-                className="hover:text-primary transition-colors cursor-pointer text-white"
+                whileHover={{ color: "var(--primary)" }}
+                className="hover:text-primary transition-colors cursor-pointer text-slate-400"
               >
                 Terms of Service
               </motion.a>

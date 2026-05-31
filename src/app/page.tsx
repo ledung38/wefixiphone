@@ -1,10 +1,10 @@
-import OverviewPage from "@/app/components/overview/page";
+import Home from "@/modules/home/index";
 import LayoutComponents from "@/components/layouts/LayoutComponents";
 
 export default function HomePage() {
   return (
-    <LayoutComponents>
-      <OverviewPage />
+    <LayoutComponents fullWidth>
+      <Home />
     </LayoutComponents>
   );
 }
