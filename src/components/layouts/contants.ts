@@ -1,47 +1,26 @@
 import { Routes } from "@/lib/enum/routes";
 
-export const MENU_ITEMS = [
+export interface MenuItem {
+  key: string;
+  label: string;
+  children?: Array<{ key: string; label: string }>;
+}
+
+export const MENU_ITEMS: MenuItem[] = [
   {
     key: Routes.HOME,
     label: "Home",
   },
-
   {
-    key: Routes.SERVICE,
-    label: "Service",
-    children: [
-      {
-        label: "End of Lease Cleaning",
-        key: Routes.SERVICE_END_OF_LEASE_CLEANING,
-      },
-      {
-        label: "Regular Cleaning",
-        key: Routes.SERVICE_REGULAR_CLEANING,
-      },
-      {
-        label: "Deep Cleaning",
-        key: Routes.SERVICE_DEEP_CLEANING,
-      },
-      {
-        label: "Restaurant Cleaning",
-        key: Routes.SERVICE_RESTAURANT_CLEANING,
-      },
-      {
-        label: "Airbnb Cleaning",
-        key: Routes.SERVICE_AIRBNB_CLEANING,
-      },
-      {
-        label: "Mould Cleaning",
-        key: Routes.SERVICE_MOULD_CLEANING,
-      },
-    ],
+    key: "/#services",
+    label: "Services",
   },
   {
     key: Routes.PRICING,
     label: "Pricing",
   },
   {
-    key: Routes.ABOUT_US,
-    label: "About us",
+    key: Routes.BOOKING,
+    label: "Book a Repair",
   },
 ];

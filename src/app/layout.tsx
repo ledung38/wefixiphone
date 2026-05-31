@@ -15,52 +15,50 @@ const geistMono = Geist_Mono({
 });
 
 // Base metadata setting
-const baseUrl = "https://spotless-cleaning-psi.vercel.app";
-const siteName = "Spotless Cleaning";
+const baseUrl = "https://wefixiphone-sydney.com.au";
+const siteName = "WeFixiPhone";
 const description =
-  "Professional cleaning services in Sydney. Deep cleaning, regular maintenance, end of lease cleaning, restaurant and mould cleaning. 2000+ happy clients, 8+ years experience.";
+  "Dịch vụ sửa chữa iPhone tận nơi chuyên nghiệp tại Sydney. Thay màn hình, thay pin lấy ngay trong 20 phút trước mặt khách hàng. Bảo hành 12 tháng, thợ sửa đến tận nơi.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${siteName} - Professional Cleaning Services Sydney`,
+    default: `${siteName} - Sửa chữa iPhone tận nơi tại Sydney`,
     template: `%s | ${siteName}`,
   },
   description,
   keywords: [
-    "cleaning services Sydney",
-    "house cleaning",
-    "deep cleaning",
-    "restaurant cleaning",
-    "end of lease cleaning",
-    "professional cleaners",
-    "residential cleaning",
-    "commercial cleaning",
-    "window cleaning",
-    "regular cleaning",
+    "sửa iphone tận nơi sydney",
+    "thay màn hình iphone sydney",
+    "thay pin iphone sydney",
+    "sửa iphone tại nhà sydney",
+    "iphone screen replacement sydney",
+    "iphone battery replacement sydney",
+    "sửa chữa điện thoại sydney",
+    "wefixiphone sydney",
   ],
   authors: [
     {
-      name: "Spotless Cleaning",
+      name: "WeFixiPhone Sydney",
       url: baseUrl,
     },
   ],
-  creator: "Spotless Cleaning",
-  publisher: "Spotless Cleaning",
+  creator: "WeFixiPhone Sydney",
+  publisher: "WeFixiPhone Sydney",
 
   // Open Graph
   openGraph: {
     type: "website",
     url: baseUrl,
-    title: `${siteName} - Professional Cleaning Services Sydney`,
+    title: `${siteName} - Sửa chữa iPhone tận nơi tại Sydney`,
     description,
     siteName,
     images: [
       {
-        url: `/screenshot-wide.png`,
+        url: `/hero_repair.png`,
         width: 1200,
         height: 630,
-        alt: `${siteName} - Professional Cleaning`,
+        alt: `${siteName} - Sửa iPhone tận nơi`,
       },
     ],
     locale: "en_AU",
@@ -69,10 +67,10 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} - Professional Cleaning Services Sydney`,
+    title: `${siteName} - Sửa chữa iPhone tận nơi tại Sydney`,
     description,
-    images: [`/screenshot-wide.png`],
-    creator: "@spotlesscleaning",
+    images: [`/hero_repair.png`],
+    creator: "@wefixiphone",
   },
 
   // Additional SEO
@@ -99,16 +97,6 @@ export const metadata: Metadata = {
       {
         url: "/favicon.ico",
         sizes: "any",
-      },
-      {
-        url: "/favicon-16x16.png",
-        sizes: "16x16",
-        type: "image/png",
-      },
-      {
-        url: "/favicon-32x32.png",
-        sizes: "32x32",
-        type: "image/png",
       },
     ],
     apple: "/logo-maskable.png",
@@ -151,6 +139,7 @@ export default function RootLayout({
     <html lang="en-AU" suppressHydrationWarning>
       <head>
         {/* Preconnect to external resources */}
+        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -170,12 +159,12 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               "@id": baseUrl,
-              name: "Spotless Cleaning",
-              image: `${baseUrl}/og-image.jpg`,
+              name: "WeFixiPhone Sydney",
+              image: `${baseUrl}/hero_repair.png`,
               description,
               url: baseUrl,
               telephone: "+61-451 210 238",
-              email: "cleaningsydney102@gmail.com",
+              email: "info@wefixiphone.com.au",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Sydney, NSW",
@@ -190,9 +179,8 @@ export default function RootLayout({
                 longitude: "151.2093",
               },
               sameAs: [
-                "https://www.facebook.com/sydney.spotlesscleaning",
-                "https://www.instagram.com/sydney.spotlesscleaning",
-                "https://www.google.com/maps/place/Spotless+Cleaning",
+                "https://www.facebook.com/wefixiphone.sydney",
+                "https://www.instagram.com/wefixiphone.sydney",
               ],
               priceRange: "$$",
               areaServed: "Sydney, NSW, Australia",
@@ -221,14 +209,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Spotless Cleaning",
+              name: "WeFixiPhone Sydney",
               url: baseUrl,
-              logo: `${baseUrl}/logo.png`,
+              logo: `${baseUrl}/hero_repair.png`,
               description,
               sameAs: [
-                "https://www.facebook.com/sydney.spotlesscleaning",
-                "https://www.instagram.com/sydney.spotlesscleaning",
-                "https://www.google.com/maps/place/Spotless+Cleaning",
+                "https://www.facebook.com/wefixiphone.sydney",
+                "https://www.instagram.com/wefixiphone.sydney",
               ],
             }),
           }}
@@ -251,26 +238,14 @@ export default function RootLayout({
                 {
                   "@type": "ListItem",
                   position: 2,
-                  name: "Services",
-                  item: `${baseUrl}/service`,
+                  name: "Pricing",
+                  item: `${baseUrl}/pricing`,
                 },
                 {
                   "@type": "ListItem",
                   position: 3,
                   name: "Booking",
                   item: `${baseUrl}/booking`,
-                },
-                {
-                  "@type": "ListItem",
-                  position: 4,
-                  name: "About Us",
-                  item: `${baseUrl}/about-us`,
-                },
-                {
-                  "@type": "ListItem",
-                  position: 5,
-                  name: "Pricing",
-                  item: `${baseUrl}/pricing`,
                 },
               ],
             }),
@@ -288,7 +263,7 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="data-theme"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

@@ -15,8 +15,8 @@ export const NavLink = ({
     <Link
       {...props}
       className={cn(
-        "relative inline-flex items-center justify-center font-semibold text-white transition-colors duration-300 pb-1 min-w-15",
-        isTextBlack && "text-black",
+        "relative inline-flex items-center justify-center font-semibold text-[#012335] drop-shadow-xl transition-colors duration-300 pb-1 min-w-15",
+        isTextBlack && "text-slate-900 dark:text-white",
         // Underline animation - sophisticated modern look with more spacing
         "after:absolute after:bottom-0 after:left-1/2 after:h-[3px] after:w-0 after:-translate-x-1/2 after:origin-center after:bg-secondary after:transition-all after:duration-500 after:ease-out rounded-sm",
         // Hover state - smooth expand from center
