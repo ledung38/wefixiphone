@@ -173,8 +173,6 @@ export const QuickServices = () => {
         <div className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {popularServices.map((service) => {
-              const IconComponent = service.icon;
-
               return (
                 <div
                   key={service.id}
@@ -215,7 +213,7 @@ export const QuickServices = () => {
                         quality={100}
                         unoptimized
                         height={100}
-                        className="w-full h-full object-center object-cover"
+                        className="w-full h-full object-center object-cover rounded-2xl"
                       />
                     </div>
 

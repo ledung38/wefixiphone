@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Routes } from "@/lib/enum/routes";
 import { Select } from "@/components/ui";
+import { TextGradient } from "@/components/common/TextGradient";
 
 // Define pricing pricing data
 const IPHONE_MODELS = [
@@ -444,9 +445,12 @@ function PricingContent() {
         <div className="max-w-7xl mx-auto space-y-12">
           {/* Header text */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
+            <TextGradient
+              as="h1"
+              className="text-4xl sm:text-5xl font-black tracking-tight leading-tight"
+            >
               Transparent Pricing
-            </h1>
+            </TextGradient>
             <p className="text-slate-500 dark:text-slate-400 text-base sm:text-lg">
               Our all-inclusive pricing covers replacement parts, local
               technician travel costs, and professional on-site installation. No

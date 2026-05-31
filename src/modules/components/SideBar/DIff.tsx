@@ -34,7 +34,7 @@ const DIff = () => {
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
               Drag to See the Difference
             </h2>
-            <p className="text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
+            <p className="text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
               Shattered iPhone screens are replaced and perfectly restored in
               just 20 minutes.
             </p>
