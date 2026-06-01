@@ -189,7 +189,7 @@ const Home = () => {
                   <ArrowCircleRightIcon className="size-6" />
                 </AnimateSpan>
               </Button>
-              <a href="tel:0451210238" className="w-full sm:w-auto flex-1">
+              <a href="tel:0433263105" className="w-full sm:w-auto flex-1">
                 <Button
                   size="lg"
                   variant="outline"

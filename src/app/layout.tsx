@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 // Base metadata setting
-const baseUrl = "https://wefixiphone-sydney.com.au";
+const baseUrl = "https://wefixiphone.com.au";
 const siteName = "WeFixiPhone";
 const description =
   "Professional mobile on-site iPhone repair in Sydney. Screen and battery replacements completed in 20 minutes right in front of you. 12-month warranty, direct doorstep service.";
@@ -163,8 +163,8 @@ export default function RootLayout({
               image: `${baseUrl}/hero_repair.png`,
               description,
               url: baseUrl,
-              telephone: "+61-451 210 238",
-              email: "info@wefixiphone.com.au",
+              telephone: "+61-433 263 105",
+              email: "wefixiphone102@gmail.com",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Sydney, NSW",

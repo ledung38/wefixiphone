@@ -606,7 +606,7 @@ function BookingContent() {
                       </label>
                       <input
                         type="text"
-                        placeholder="e.g., 0451 210 238"
+                        placeholder="e.g., 0433 263 105"
                         className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
