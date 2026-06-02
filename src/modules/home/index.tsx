@@ -79,7 +79,7 @@ const Home = () => {
       {/* 1. HERO SECTION */}
       <section className="relative w-full min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-12 lg:py-24 px-4 md:px-8 lg:px-16 bg-slate-50 dark:bg-slate-950">
         {/* Background Image with overlay gradient */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 ">
           <Image
             src="/hero_repair_2.png"
             quality={100}
@@ -89,11 +89,10 @@ const Home = () => {
             alt="iPhone Repair Technician"
             className="w-full h-full object-cover object-right lg:object-center opacity-85 dark:opacity-75 transition-opacity duration-500"
           />
-          <div className="absolute w-1/2 left-0 top-0 bottom-0">
+          <div className="absolute inset-0 lg:w-1/2 left-0 top-0 bottom-0">
+            <div className="absolute inset-0 bg-slate-950/70 lg:bg-transparent z-10" />
             <div className="absolute inset-0 hero-gradient-overlay z-10" />
           </div>
-
-          {/* Responsive gradient overlay */}
         </div>
 
         <div className="max-w-7xl w-full mx-auto relative z-20 flex flex-col lg:flex-row items-center justify-between gap-8 h-full">

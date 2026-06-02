@@ -20,6 +20,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { motion } from "motion/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils/index";
+import Image from "@/components/ui/Image";
 
 // Mobile Menu Item Component
 const MobileMenuItem = ({
@@ -53,7 +54,7 @@ const MobileMenuItem = ({
         <Link
           href={`${item.key}`}
           onClick={onClose}
-          className="block px-4 py-3.5 text-foreground font-semibold hover:bg-white/15 hover:translate-x-1 rounded-lg transition-all duration-200"
+          className="block px-4 py-3.5 text-white font-semibold hover:bg-white/15 hover:translate-x-1 rounded-lg transition-all duration-200"
         >
           {item.label}
         </Link>
@@ -139,7 +140,36 @@ export const Header = () => {
                 aria-label="Back to home"
                 className="flex items-center gap-3 flex-shrink-0 group"
               >
-                <div className="flex items-center gap-2">
+                <div className="relative py-2 transition-all duration-300 group-hover:scale-110 px-1">
+                  {!isScrolled && isHome && (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0" />
+                    </>
+                  )}
+                  <Image
+                    src="/logo_header2.png"
+                    alt="Logo"
+                    priority
+                    quality={100}
+                    width={120}
+                    height={60}
+                    unoptimized
+                    className="relative h-10 sm:h-15  w-auto"
+                  />
+                </div>
+                {/* <div className="flex items-center gap-2">
+                  <Image
+                    src="/logo_header.png"
+                    width={250}
+                    height={250}
+                    alt="Logo"
+                    className={`transition-all duration-300 ${
+                      !isScrolled && isHome
+                        ? "brightness-200 saturate-150 drop-shadow-[0_0_12px_rgba(255,255,255,1)]"
+                        : "dark:brightness-200 dark:saturate-150 dark:drop-shadow-[0_0_12px_rgba(255,255,255,1)]"
+                    }`}
+                  />
                   <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-white shadow-lg shadow-primary/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-primary/30">
                     <svg
                       className="w-5 h-5"
@@ -185,7 +215,7 @@ export const Header = () => {
                       Sydney Mobile Repair
                     </span>
                   </div>
-                </div>
+                </div> */}
               </Link>
             </motion.div>
 
@@ -260,14 +290,14 @@ export const Header = () => {
             </nav>
 
             {/* Right Actions - Premium Buttons */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 ">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.4 }}
                 className="flex-1 group"
               >
-                <a href="tel:0433263105">
+                <a href="tel:0433263105" className=" hidden sm:flex">
                   <motion.div
                     whileHover="hover"
                     initial="initial"
@@ -344,9 +374,9 @@ export const Header = () => {
                 }
               >
                 {isMobileMenuOpen ? (
-                  <X className="h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white" />
+                  <X className="max-sm:text-white h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white" />
                 ) : (
-                  <Menu className="h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white" />
+                  <Menu className="max-sm:text-white h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white" />
                 )}
               </motion.button>
             </div>
