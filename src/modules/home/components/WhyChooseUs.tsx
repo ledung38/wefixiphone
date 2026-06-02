@@ -53,7 +53,7 @@ export const WhyChooseUs = () => {
         {/* 2-Column Main Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* COLUMN 1: Left Premium Primary-Tinted Card (7/12 Width) */}
-          <div className="lg:col-span-7 rounded-3xl flex flex-col  gap-10 self-center mr-10">
+          <div className="lg:col-span-7 rounded-3xl flex flex-col  gap-10 self-center sm:mr-10">
             <p className="text-base sm:text-lg text-slate-655 dark:text-slate-350 leading-relaxed ">
               We have re-engineered the mobile repair experience in Sydney. By
               combining certified experts, high-grade replacement parts, and
