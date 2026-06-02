@@ -21,16 +21,11 @@ import {
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { REPAIR_PRICES } from "@/lib/data/repairPrices";
+import { toast } from "sonner";
 
 // Models list matching pricing
 const IPHONE_MODELS = [
-  {
-    id: "iphone-8-plus",
-    name: "iPhone 8 Plus",
-    baseScreen: 89,
-    baseBattery: 69,
-    gen: 0,
-  },
   { id: "iphone-x", name: "iPhone X", baseScreen: 99, baseBattery: 79, gen: 1 },
   {
     id: "iphone-xr",
@@ -226,12 +221,6 @@ const BOOKING_PARTS = [
   { id: "software", name: "Software Repair" },
 ];
 
-const TIME_SLOTS = [
-  { id: "slot-1", name: "Morning: 09:00 - 12:00" },
-  { id: "slot-2", name: "Afternoon: 12:00 - 16:00" },
-  { id: "slot-3", name: "Evening: 16:00 - 20:00" },
-];
-
 function BookingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -247,7 +236,8 @@ function BookingContent() {
   const [suburb, setSuburb] = useState("");
   const [address, setAddress] = useState("");
   const [date, setDate] = useState("");
-  const [timeSlot, setTimeSlot] = useState("slot-2");
+  const [selectedHour, setSelectedHour] = useState("12");
+  const [selectedMinute, setSelectedMinute] = useState("00");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -255,6 +245,119 @@ function BookingContent() {
 
   const [priceEstimate, setPriceEstimate] = useState(0);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [bookingId, setBookingId] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const generateBookingEmailHTML = (params: {
+    bookingId: string;
+    name: string;
+    phone: string;
+    email: string;
+    suburb: string;
+    address: string;
+    date: string;
+    time: string;
+    modelName: string;
+    partName: string;
+    quality: string;
+    price: number;
+    notes: string;
+  }) => {
+    return `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 24px; text-align: center; border-bottom: 2px solid #3b82f6;">
+          <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">WeFix <span style="color: #3b82f6;">iPhone</span></h1>
+          <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">Sydney Mobile Repair</p>
+        </div>
+        
+        <!-- Body -->
+        <div style="padding: 24px; background-color: #ffffff;">
+          <h2 style="color: #0f172a; margin-top: 0; font-size: 18px; font-weight: 700; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;">Booking Confirmation</h2>
+          <p style="color: #475569; font-size: 14px; line-height: 1.5; margin-bottom: 20px;">
+            Hi <strong>${params.name}</strong>, thank you for booking with us. We have received your request and will contact you 30 minutes before arrival to confirm.
+          </p>
+
+          <!-- Summary Card -->
+          <div style="background-color: #f8fafc; border: 1px solid #f1f5f9; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600; width: 140px;">Booking ID:</td>
+                <td style="padding: 6px 0; color: #0f172a; font-family: monospace; font-weight: 700;">${params.bookingId}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Customer:</td>
+                <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${params.name}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Phone:</td>
+                <td style="padding: 6px 0; color: #0f172a;">${params.phone}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Email:</td>
+                <td style="padding: 6px 0; color: #0f172a;">${params.email}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Address:</td>
+                <td style="padding: 6px 0; color: #0f172a;">${params.address}, ${params.suburb}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600; border-top: 1px solid #e2e8f0; padding-top: 12px;">Device & Repair:</td>
+                <td style="padding: 6px 0; color: #0f172a; font-weight: 600; border-top: 1px solid #e2e8f0; padding-top: 12px;">${params.modelName} - ${params.partName}</td>
+              </tr>
+              ${
+                params.quality
+                  ? `
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Quality Tier:</td>
+                <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${params.quality}</td>
+              </tr>
+              `
+                  : ""
+              }
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Appointment:</td>
+                <td style="padding: 6px 0; color: #3b82f6; font-weight: 700;">${params.date} at ${params.time}</td>
+              </tr>
+              ${
+                params.notes
+                  ? `
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600; vertical-align: top;">Notes:</td>
+                <td style="padding: 6px 0; color: #475569; font-style: italic;">"${params.notes}"</td>
+              </tr>
+              `
+                  : ""
+              }
+              <tr>
+                <td style="padding: 12px 0 0 0; color: #0f172a; font-weight: bold; font-size: 16px; border-top: 1px solid #e2e8f0;">Total Cost:</td>
+                <td style="padding: 12px 0 0 0; color: #f4601f; font-weight: 800; font-size: 18px; border-top: 1px solid #e2e8f0;">$${params.price} AUD</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Info alert box -->
+          <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px 16px; color: #1e3a8a; font-size: 13px; line-height: 1.4;">
+            <strong>Sydney Mobile On-Site Service Note:</strong> The entire repair will be performed in front of you. Please make sure the technician has access to a safe working area.
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="background-color: #f8fafc; padding: 16px; text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9;">
+          <p style="margin: 0 0 4px 0;">© ${new Date().getFullYear()} WeFixiPhone. All rights reserved.</p>
+          <p style="margin: 0;">Sydney, NSW, Australia | Tel: 0433 263 105</p>
+        </div>
+      </div>
+    `;
+  };
+
+  const getFormattedTime = (hourStr: string, minuteStr: string) => {
+    const hour = parseInt(hourStr);
+    const displayHr =
+      hour > 12 ? `${hour - 12}` : hour === 12 ? "12" : `${hour}`;
+    const ampm = hour >= 12 ? "PM" : "AM";
+    return `${displayHr}:${minuteStr} ${ampm}`;
+  };
 
   // Parse URL query parameters on mount
   useEffect(() => {
@@ -282,39 +385,36 @@ function BookingContent() {
 
   // Recalculate price dynamically when model/part/quality changes (if not explicitly set by query)
   useEffect(() => {
-    const modelData =
-      IPHONE_MODELS.find((m) => m.id === model) || IPHONE_MODELS[0];
-
-    const gen = modelData.gen || 0;
-    const isPro = model.includes("pro") || model.includes("max");
+    const prices = REPAIR_PRICES[model] || REPAIR_PRICES["iphone-x"];
 
     // Custom calculations for parts
     if (part === "screen") {
-      let multiplier = 1.45; // default premium
-      if (quality.includes("Standard")) multiplier = 1.0;
-      if (quality.includes("Genuine")) multiplier = 2.1;
-      setPriceEstimate(Math.round(modelData.baseScreen * multiplier));
+      if (quality.includes("Standard")) setPriceEstimate(prices.screenStandard);
+      else if (quality.includes("Genuine"))
+        setPriceEstimate(prices.screenGenuine);
+      else setPriceEstimate(prices.screenPremium);
     } else if (part === "battery") {
-      let multiplier = 1.3; // default premium
-      if (quality.includes("Standard")) multiplier = 1.0;
-      if (quality.includes("Genuine")) multiplier = 1.8;
-      setPriceEstimate(Math.round(modelData.baseBattery * multiplier));
+      if (quality.includes("Standard"))
+        setPriceEstimate(prices.batteryStandard);
+      else if (quality.includes("Genuine"))
+        setPriceEstimate(prices.batteryGenuine);
+      else setPriceEstimate(prices.batteryPremium);
     } else if (part === "back-glass") {
-      setPriceEstimate(119 + gen * 20 + (isPro ? 20 : 0));
+      setPriceEstimate(prices.backGlass);
     } else if (part === "charging") {
-      setPriceEstimate(89 + gen * 10);
+      setPriceEstimate(prices.chargingPort);
     } else if (part === "rear-camera") {
-      setPriceEstimate(79 + gen * 15 + (isPro ? 25 : 0));
+      setPriceEstimate(prices.camera);
     } else if (part === "camera-lens") {
-      setPriceEstimate(59 + gen * 10);
+      setPriceEstimate(prices.cameraLens);
     } else if (part === "front-camera") {
-      setPriceEstimate(69 + gen * 10);
+      setPriceEstimate(prices.frontCamera);
     } else if (part === "audio") {
-      setPriceEstimate(69 + gen * 10);
+      setPriceEstimate(prices.audio);
     } else if (part === "housing") {
-      setPriceEstimate(149 + gen * 30 + (isPro ? 30 : 0));
+      setPriceEstimate(prices.housing);
     } else if (part === "software") {
-      setPriceEstimate(59);
+      setPriceEstimate(prices.software);
     }
   }, [model, part, quality]);
 
@@ -355,11 +455,56 @@ function BookingContent() {
     window.scrollTo(0, 0);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateStep()) {
-      setStep(3);
-      window.scrollTo(0, 0);
+    if (!validateStep()) return;
+
+    setIsSubmitting(true);
+    try {
+      const generatedId = `WFI-${Math.floor(100000 + Math.random() * 900000)}`;
+      const formattedTime = getFormattedTime(selectedHour, selectedMinute);
+
+      const emailContent = generateBookingEmailHTML({
+        bookingId: generatedId,
+        name,
+        phone,
+        email,
+        suburb,
+        address,
+        date,
+        time: formattedTime,
+        modelName: selectedModelName,
+        partName: selectedPartName.split(" (")[0],
+        quality: part === "screen" || part === "battery" ? quality : "",
+        price: priceEstimate,
+        notes,
+      });
+
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          subject: `📱 WeFixiPhone Booking Confirmed – ${name} (${generatedId})`,
+          message: emailContent,
+        }),
+      });
+
+      const data = await res.json();
+      if (data?.success) {
+        toast.success("Booking confirmed! A confirmation email has been sent.");
+        setBookingId(generatedId);
+        setStep(3);
+        window.scrollTo(0, 0);
+      } else {
+        toast.error(
+          "Something went wrong. Please check your network or try again.",
+        );
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -733,26 +878,62 @@ function BookingContent() {
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
                         <Clock className="w-4 h-4 text-primary" />
-                        Choose Time Slot:
+                        Choose Preferred Time:
                       </label>
-                      <div className="relative">
-                        <select
-                          value={timeSlot}
-                          onChange={(e) => setTimeSlot(e.target.value)}
-                          className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary cursor-pointer appearance-none text-sm transition-colors duration-200"
-                        >
-                          {TIME_SLOTS.map((slot) => (
-                            <option
-                              key={slot.id}
-                              value={slot.id}
-                              className="text-slate-900 dark:text-white dark:bg-slate-950"
-                            >
-                              {slot.name}
-                            </option>
-                          ))}
-                        </select>
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                          ▼
+                      <div className="grid grid-cols-2 gap-3">
+                        {/* Hour Dropdown */}
+                        <div className="relative">
+                          <select
+                            value={selectedHour}
+                            onChange={(e) => setSelectedHour(e.target.value)}
+                            className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary cursor-pointer appearance-none text-sm transition-colors duration-200"
+                          >
+                            {Array.from({ length: 12 }, (_, i) => i + 9).map(
+                              (h) => {
+                                const hrStr = h.toString().padStart(2, "0");
+                                const displayHr =
+                                  h > 12
+                                    ? `${h - 12} PM`
+                                    : h === 12
+                                      ? "12 PM"
+                                      : `${h} AM`;
+                                return (
+                                  <option
+                                    key={hrStr}
+                                    value={hrStr}
+                                    className="text-slate-900 dark:text-white dark:bg-slate-950"
+                                  >
+                                    {displayHr}
+                                  </option>
+                                );
+                              },
+                            )}
+                          </select>
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                            ▼
+                          </div>
+                        </div>
+
+                        {/* Minute Dropdown */}
+                        <div className="relative">
+                          <select
+                            value={selectedMinute}
+                            onChange={(e) => setSelectedMinute(e.target.value)}
+                            className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary cursor-pointer appearance-none text-sm transition-colors duration-200"
+                          >
+                            {["00", "15", "30", "45"].map((m) => (
+                              <option
+                                key={m}
+                                value={m}
+                                className="text-slate-900 dark:text-white dark:bg-slate-950"
+                              >
+                                {m} mins
+                              </option>
+                            ))}
+                          </select>
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                            ▼
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -846,11 +1027,8 @@ function BookingContent() {
                         Appointment:
                       </span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
-                        {date || "-"} (
-                        {TIME_SLOTS.find((t) => t.id === timeSlot)?.name.split(
-                          ": ",
-                        )[1] || "-"}
-                        )
+                        {date || "-"} at{" "}
+                        {getFormattedTime(selectedHour, selectedMinute)}
                       </span>
                     </div>
                     <div className="flex justify-between pt-2 border-t border-slate-200 dark:border-white/5 text-base">
@@ -877,9 +1055,10 @@ function BookingContent() {
                   </Button>
                   <Button
                     type="submit"
-                    className="bg-primary hover:bg-primary/95 text-white font-extrabold px-8 py-5 rounded-xl shadow-lg shadow-primary/20 transform active:scale-95 transition-transform"
+                    disabled={isSubmitting}
+                    className="bg-primary hover:bg-primary/95 text-white font-extrabold px-8 py-5 rounded-xl shadow-lg shadow-primary/20 transform active:scale-95 transition-transform disabled:opacity-50"
                   >
-                    Confirm Booking
+                    {isSubmitting ? "Confirming..." : "Confirm Booking"}
                   </Button>
                 </div>
               </form>
@@ -908,7 +1087,7 @@ function BookingContent() {
                       Appointment ID:
                     </span>
                     <span className="font-mono font-bold text-slate-900 dark:text-white">
-                      WFI-{Math.floor(100000 + Math.random() * 900000)}
+                      {bookingId}
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -956,13 +1135,7 @@ function BookingContent() {
                       Appointment:
                     </span>
                     <span className="font-semibold text-slate-900 dark:text-white">
-                      {date} (
-                      {
-                        TIME_SLOTS.find((t) => t.id === timeSlot)?.name.split(
-                          ": ",
-                        )[1]
-                      }
-                      )
+                      {date} at {getFormattedTime(selectedHour, selectedMinute)}
                     </span>
                   </div>
                   <div className="flex justify-between pt-2 border-t border-slate-200 dark:border-white/5 font-bold">

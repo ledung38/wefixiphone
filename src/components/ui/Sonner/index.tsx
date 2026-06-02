@@ -15,10 +15,16 @@ const toasterVariants = cva("toaster group", {
   },
 });
 
-const Toaster = ({ ...props }: ToasterProps) => {
+const Toaster = ({
+  position = "top-right",
+  richColors = true,
+  ...props
+}: ToasterProps) => {
   return (
     <Sonner
       duration={3000}
+      position={position}
+      richColors={richColors}
       className={toasterVariants()}
       style={
         {

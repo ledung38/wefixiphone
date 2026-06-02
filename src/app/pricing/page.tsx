@@ -16,16 +16,10 @@ import {
 import { Routes } from "@/lib/enum/routes";
 import { Select } from "@/components/ui";
 import { TextGradient } from "@/components/common/TextGradient";
+import { REPAIR_PRICES } from "@/lib/data/repairPrices";
 
 // Define pricing pricing data
 const IPHONE_MODELS = [
-  {
-    id: "iphone-8-plus",
-    name: "iPhone 8 Plus",
-    baseScreen: 89,
-    baseBattery: 69,
-    gen: 0,
-  },
   { id: "iphone-x", name: "iPhone X", baseScreen: 99, baseBattery: 79, gen: 1 },
   {
     id: "iphone-xr",
@@ -303,7 +297,7 @@ function PricingContent() {
   const searchParams = useSearchParams();
 
   // Selected state
-  const [selectedModel, setSelectedModel] = useState("iphone-13");
+  const [selectedModel, setSelectedModel] = useState("iphone-16-pro-max");
   const [selectedPart, setSelectedPart] = useState("screen");
 
   // Read URL query parameters on load
@@ -324,42 +318,37 @@ function PricingContent() {
 
   // Calculate price based on quality tiers
   const getPrices = () => {
+    const prices = REPAIR_PRICES[selectedModel] || REPAIR_PRICES["iphone-x"];
     if (selectedPart === "screen") {
       return {
-        standard: modelData.baseScreen,
-        premium: Math.round(modelData.baseScreen * 1.45),
-        genuine: Math.round(modelData.baseScreen * 2.1),
+        standard: prices.screenStandard,
+        premium: prices.screenPremium,
+        genuine: prices.screenGenuine,
       };
     } else {
       return {
-        standard: modelData.baseBattery,
-        premium: Math.round(modelData.baseBattery * 1.3),
-        genuine: Math.round(modelData.baseBattery * 1.8),
+        standard: prices.batteryStandard,
+        premium: prices.batteryPremium,
+        genuine: prices.batteryGenuine,
       };
     }
   };
 
   const getSingleServicePrice = () => {
-    const modelData =
-      IPHONE_MODELS.find((m) => m.id === selectedModel) || IPHONE_MODELS[0];
-    const gen = modelData.gen || 0;
-
-    const isPro =
-      selectedModel.includes("pro") || selectedModel.includes("max");
-
+    const prices = REPAIR_PRICES[selectedModel] || REPAIR_PRICES["iphone-x"];
     switch (selectedPart) {
       case "back-glass":
-        return 119 + gen * 20 + (isPro ? 20 : 0);
+        return prices.backGlass;
       case "charging":
-        return 89 + gen * 10;
+        return prices.chargingPort;
       case "camera":
-        return 79 + gen * 15 + (isPro ? 25 : 0);
+        return prices.camera;
       case "audio":
-        return 69 + gen * 10;
+        return prices.audio;
       case "housing":
-        return 149 + gen * 30 + (isPro ? 30 : 0);
+        return prices.housing;
       case "software":
-        return 59;
+        return prices.software;
       default:
         return 99;
     }
@@ -537,21 +526,59 @@ function PricingContent() {
                         <span>Maximize your savings</span>
                       </li>
                       <li className="flex items-center gap-2.5">
-                        <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                        <span>Fast doorstep installation</span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <ShieldCheck className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span>3-month repair warranty</span>
-                      </li>
-                      <li className="flex items-center gap-2.5 opacity-40">
                         <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
-                        <span>True Tone / Original synchronization</span>
+                        <span>3-month repair warranty only</span>
                       </li>
+                      {selectedPart === "screen" ? (
+                        <>
+                          <li className="flex items-center gap-2.5">
+                            <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                            <span>
+                              Average colors & display brightness (LCD/IPS)
+                            </span>
+                          </li>
+                          <li className="flex items-center gap-2.5">
+                            <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                            <span>True Tone not supported</span>
+                          </li>
+                          <li className="flex items-center gap-2.5">
+                            <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                            <span>
+                              Displays &quot;Unknown Part&quot; warning message
+                            </span>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li className="flex items-center gap-2.5">
+                            <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                            <span>Standard capacity (third-party cell)</span>
+                          </li>
+                          <li className="flex items-center gap-2.5">
+                            <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                            <span>No Battery Health percentage display</span>
+                          </li>
+                          <li className="flex items-center gap-2.5">
+                            <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                            <span>
+                              Displays &quot;Unknown Part&quot; warning message
+                            </span>
+                          </li>
+                        </>
+                      )}
                     </ul>
                   </div>
 
                   <div className="pt-8">
+                    <div className="max-w-6xl mx-auto py-6 text-center">
+                      <p className="text-sm sm:text-base text-slate-600 dark:text-slate-350 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 py-4 px-6 rounded-2xl shadow-sm inline-flex items-center gap-2.5 justify-center">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+                        <span className="text-sm font-semibold text-slate-800 dark:text-white">
+                          This price includes the part, labor, and travel fee to
+                          your place.
+                        </span>
+                      </p>
+                    </div>
                     <Button
                       onClick={() =>
                         handleBook("Standard Aftermarket", prices.standard)
@@ -575,12 +602,14 @@ function PricingContent() {
                         99% ORIGINAL PERFORMANCE
                       </span>
                       <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-                        Premium OLED / Cell
+                        {selectedPart === "screen"
+                          ? "Premium OLED"
+                          : "Premium Battery"}
                       </h3>
                       <p className="text-xs text-slate-600 dark:text-slate-300">
-                        Top-tier parts manufactured to original specifications.
-                        Perfect touch responsiveness, vibrant colors, and
-                        durability.
+                        {selectedPart === "screen"
+                          ? "Top-tier parts manufactured to original specifications. Perfect touch responsiveness, vibrant colors, and durability."
+                          : "High-quality battery replacements featuring original capacity cells and stable power management."}
                       </p>
                     </div>
 
@@ -597,30 +626,57 @@ function PricingContent() {
                     </div>
 
                     <ul className="space-y-3.5 text-sm text-slate-700 dark:text-slate-200">
+                      {selectedPart === "screen" ? (
+                        <>
+                          <li className="flex items-center gap-2.5">
+                            <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                            <span className="font-semibold text-slate-800 dark:text-white">
+                              Colors & touch responsiveness 99% like original
+                            </span>
+                          </li>
+                          <li className="flex items-center gap-2.5">
+                            <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                            <span>Full True Tone programming supported</span>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li className="flex items-center gap-2.5">
+                            <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                            <span className="font-semibold text-slate-800 dark:text-white">
+                              Original capacity & stable voltage output
+                            </span>
+                          </li>
+                          <li className="flex items-center gap-2.5">
+                            <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                            <span>High-grade imported cells (800+ cycles)</span>
+                          </li>
+                        </>
+                      )}
                       <li className="flex items-center gap-2.5">
                         <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                        <span className="font-semibold text-slate-800 dark:text-white">
-                          Colors & touch responsiveness 99% like original
+                        <span>12-month doorstep warranty</span>
+                      </li>
+                      <li className="flex items-center gap-2.5">
+                        <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                        <span>
+                          Displays &quot;Unknown Part&quot; warning message
                         </span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                        <span>Full True Tone programming supported</span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <ShieldCheck className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span className="font-semibold text-primary">
-                          12-month doorstep warranty
-                        </span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                        <span>Ultra-durable handpicked components</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="pt-8">
+                    <div className="max-w-6xl mx-auto py-6 text-center">
+                      <p className="text-sm sm:text-base text-slate-600 dark:text-slate-350 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 py-4 px-6 rounded-2xl shadow-sm inline-flex items-center gap-2.5 justify-center">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+                        <span className="text-sm font-semibold text-slate-800 dark:text-white">
+                          This price includes the part, labor, and travel fee to
+                          your place.
+                        </span>
+                      </p>
+                    </div>
+
                     <Button
                       onClick={() =>
                         handleBook("Premium Quality", prices.premium)
@@ -662,9 +718,39 @@ function PricingContent() {
                     </div>
 
                     <ul className="space-y-3.5 text-sm text-slate-600 dark:text-slate-300">
+                      {selectedPart === "screen" ? (
+                        <>
+                          <li className="flex items-center gap-2.5">
+                            <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                            <span>
+                              100% genuine Apple display (perfect brightness &
+                              contrast)
+                            </span>
+                          </li>
+                          <li className="flex items-center gap-2.5">
+                            <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                            <span>Official True Tone synchronization</span>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li className="flex items-center gap-2.5">
+                            <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                            <span>
+                              Authentic OEM Apple battery cell (max longevity)
+                            </span>
+                          </li>
+                          <li className="flex items-center gap-2.5">
+                            <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                            <span>
+                              Displays 100% Battery Health percentage natively
+                            </span>
+                          </li>
+                        </>
+                      )}
                       <li className="flex items-center gap-2.5">
                         <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                        <span>100% genuine Apple display/battery</span>
+                        <span>12-month official warranty</span>
                       </li>
                       <li className="flex items-center gap-2.5">
                         <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
@@ -673,17 +759,24 @@ function PricingContent() {
                         </span>
                       </li>
                       <li className="flex items-center gap-2.5">
-                        <ShieldCheck className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span>12-month official warranty</span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                        <span>Full True Tone & Battery Health display</span>
+                        <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                        <span className="text-rose-600 dark:text-rose-400 ">
+                          Premium pricing (most expensive option)
+                        </span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="pt-8">
+                    <div className="max-w-6xl mx-auto py-6 text-center">
+                      <p className="text-sm sm:text-base text-slate-600 dark:text-slate-350 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 py-4 px-6 rounded-2xl shadow-sm inline-flex items-center gap-2.5 justify-center">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+                        <span className="text-sm font-semibold text-slate-800 dark:text-white">
+                          This price includes the part, labor, and travel fee to
+                          your place.
+                        </span>
+                      </p>
+                    </div>
                     <Button
                       onClick={() =>
                         handleBook("Genuine Apple", prices.genuine)
@@ -719,7 +812,7 @@ function PricingContent() {
                             Standard (Aftermarket)
                           </th>
                           <th className="p-4 sm:p-5 text-primary">
-                            Premium (OLED/Cell)
+                            Premium (OLED)
                           </th>
                           <th className="p-4 sm:p-5 text-slate-700 dark:text-slate-300">
                             Genuine Apple
@@ -822,6 +915,15 @@ function PricingContent() {
                       <span className="text-xs text-slate-450 dark:text-slate-500 block">
                         All-inclusive doorstep price
                       </span>
+                      <div className="pt-4 border-t border-slate-150 dark:border-white/5">
+                        <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/5 px-3.5 py-2 rounded-xl border border-emerald-500/20">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+                          <span>
+                            This price includes the part, labor, and travel fee
+                            to your place.
+                          </span>
+                        </div>
+                      </div>
                     </div>
 
                     <Button

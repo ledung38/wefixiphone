@@ -6,6 +6,7 @@ import { Facebook, Instagram, Phone, Mail, MapPin } from "lucide-react";
 import { Routes } from "@/lib/enum/routes";
 import { TikTokIcon } from "@/components/icons";
 import { AnimateLink } from "@/components/common/Animate";
+import Image from "@/components/ui/Image";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -110,28 +111,21 @@ const Footer = () => {
                   href={Routes.HOME}
                   className="flex items-center gap-2.5 flex-shrink-0 group"
                 >
-                  <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-primary text-white shadow-lg shadow-primary/20 transition-all duration-300 group-hover:scale-105">
-                    <svg
-                      className="w-5.5 h-5.5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M11 11l1-1 3 3m-3-3v5"
-                      />
-                    </svg>
+                  <div className="relative py-2 transition-all duration-300 group-hover:scale-110 ">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0" />
+                    <Image
+                      src="/logo_header2.png"
+                      alt="Logo"
+                      priority
+                      quality={100}
+                      width={120}
+                      height={60}
+                      unoptimized
+                      className="relative h-10 sm:h-15  w-auto"
+                    />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-lg font-black text-white leading-none tracking-tight">
+                  {/* <span className="text-lg font-black text-white leading-none tracking-tight">
                       WeFix
                       <span className="text-primary font-extrabold">
                         iPhone
@@ -139,8 +133,7 @@ const Footer = () => {
                     </span>
                     <span className="text-[9px] text-blue-200 font-bold tracking-widest uppercase mt-1">
                       Sydney Mobile Repair
-                    </span>
-                  </div>
+                    </span> */}
                 </Link>
               </div>
 
@@ -150,7 +143,7 @@ const Footer = () => {
                 warranty.
               </p>
               {/* Social links */}
-              <div className="flex gap-4  [&>a:last-child_path]:fill-primary [&>a:last-child:hover_svg_path]:fill-white">
+              {/* <div className="flex gap-4  [&>a:last-child_path]:fill-primary [&>a:last-child:hover_svg_path]:fill-white">
                 {socials.map((social, index) => {
                   const Icon = social.icon;
                   return (
@@ -165,7 +158,7 @@ const Footer = () => {
                     </motion.a>
                   );
                 })}
-              </div>
+              </div> */}
             </motion.div>
 
             {/* Footer links */}
