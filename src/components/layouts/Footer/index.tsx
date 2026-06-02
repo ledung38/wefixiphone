@@ -54,10 +54,10 @@ const Footer = () => {
     {
       title: "Contact Info",
       links: [
-        { label: "0451 210 238", href: "tel:0451210238", icon: Phone },
+        { label: "0433 263 105", href: "tel:0433263105", icon: Phone },
         {
-          label: "info@wefixiphone.com.au",
-          href: "mailto:info@wefixiphone.com.au",
+          label: "wefixiphone102@gmail.com",
+          href: "mailto:wefixiphone102@gmail.com",
           icon: Mail,
         },
         { label: "Sydney, NSW, Australia", href: "#", icon: MapPin },

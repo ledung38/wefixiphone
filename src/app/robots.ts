@@ -22,6 +22,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/"],
       },
     ],
-    sitemap: "https://spotless-cleaning-psi.vercel.app/sitemap.xml",
+    sitemap: "https://wefixiphone.com.au/sitemap.xml",
   };
 }

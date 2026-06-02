@@ -178,10 +178,10 @@ export const WhyFixNow = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 pt-2">
-            <a href="tel:0451210238" className="w-full sm:w-auto">
+            <a href="tel:0433263105" className="w-full sm:w-auto">
               <Button className="w-full bg-primary hover:bg-primary/95 text-white font-extrabold py-5 px-6 rounded-xl flex items-center justify-center gap-2.5 text-sm shadow-lg shadow-primary/20 transform active:scale-95 transition-transform">
                 <Phone className="w-4 h-4" />
-                Call Now: 0451 210 238
+                Call Now: 0433 263 105
               </Button>
             </a>
             <Button

@@ -17,7 +17,7 @@ Disallow: /*?*filter=
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://spotless-cleaning-psi.vercel.app/sitemap.xml
+Sitemap: https://wefixiphone.com.au/sitemap.xml
 
 # Specific rules for different crawlers
 User-agent: Googlebot
