@@ -5,13 +5,13 @@ import React from "react";
 import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const containerVariants = cva("w-full h-full mx-auto p-4 max-w-full", {
+const containerVariants = cva("w-full h-full mx-auto py-4 max-w-full", {
   variants: {
     size: {
-      medium: "xl:max-w-[calc(1200px+4rem)]",
-      large: "xl:max-w-[calc(1366px+4rem)]",
-      xl: "xl:max-w-[calc(1536px+4rem)]",
-      "2xl": "xl:max-w-[calc(1700px+4rem)]",
+      medium: "max-w-7xl px-4 sm:px-6 lg:px-8",
+      large: "max-w-7xl px-4 sm:px-6 lg:px-8",
+      xl: "max-w-[1536px] px-4 sm:px-6 lg:px-8",
+      "2xl": "max-w-[1700px] px-4 sm:px-6 lg:px-8",
     },
   },
   defaultVariants: {

@@ -515,653 +515,679 @@ function BookingContent() {
 
   return (
     <LayoutComponents fullWidth>
-      <div className="w-full min-h-screen bg-primary/20 dark:bg-slate-950 text-slate-900 dark:text-white py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-        <div className="max-w-3xl mx-auto">
-          {/* Wizard step indicator */}
-          {step <= 3 && (
-            <div className="mb-12">
-              <div className="flex items-center justify-between max-w-md mx-auto">
-                {/* Step 1 */}
-                <div className="flex flex-col items-center space-y-2">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
-                      step >= 1
-                        ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20"
-                        : "bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-transparent"
-                    }`}
-                  >
-                    {step > 1 ? <Check className="w-4 h-4 text-white" /> : "1"}
-                  </div>
-                  <span
-                    className={`text-[10px] uppercase font-bold tracking-wider ${step >= 1 ? "text-primary" : "text-slate-600 dark:text-slate-400"}`}
-                  >
-                    Device
-                  </span>
-                </div>
-
-                <div
-                  className={`flex-1 h-0.5 mx-4 transition-all duration-300 ${step >= 2 ? "bg-primary" : "bg-slate-300 dark:bg-slate-800"}`}
-                />
-
-                {/* Step 2 */}
-                <div className="flex flex-col items-center space-y-2">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
-                      step >= 2
-                        ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20"
-                        : "bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-transparent"
-                    }`}
-                  >
-                    {step > 2 ? <Check className="w-4 h-4 text-white" /> : "2"}
-                  </div>
-                  <span
-                    className={`text-[10px] uppercase font-bold tracking-wider ${step >= 2 ? "text-primary" : "text-slate-600 dark:text-slate-400"}`}
-                  >
-                    Confirm
-                  </span>
-                </div>
-
-                <div
-                  className={`flex-1 h-0.5 mx-4 transition-all duration-300 ${step >= 3 ? "bg-primary" : "bg-slate-300 dark:bg-slate-800"}`}
-                />
-
-                {/* Step 3 */}
-                <div className="flex flex-col items-center space-y-2">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
-                      step >= 3
-                        ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20"
-                        : "bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-transparent"
-                    }`}
-                  >
-                    {step >= 3 ? <Check className="w-4 h-4 text-white" /> : "3"}
-                  </div>
-                  <span
-                    className={`text-[10px] uppercase font-bold tracking-wider ${step >= 3 ? "text-primary" : "text-slate-600 dark:text-slate-400"}`}
-                  >
-                    Complete
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Form Content container */}
-          <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden text-slate-900 dark:text-white">
-            {/* Step 1: Device and Repair Selection */}
-            {step === 1 && (
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <h2 className="text-2xl font-black text-slate-900 dark:text-white">
-                    Select Device & Repair
-                  </h2>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Choose your exact iPhone model and the component that needs
-                    repair.
-                  </p>
-                </div>
-
-                {/* Model selection */}
-                <div className="space-y-3">
-                  <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                    <Smartphone className="w-4 h-4 text-primary" />
-                    1. Choose iPhone Model:
-                  </label>
-                  <div className="max-w-md">
-                    <Select
-                      value={model}
-                      onChange={setModel}
-                      options={IPHONE_MODELS.map((m) => ({
-                        label: m.name,
-                        value: m.id,
-                      }))}
-                      triggerClassName="!w-full !rounded-xl !h-12 bg-white border border-slate-200 dark:bg-slate-950 dark:border-white/10 text-slate-900 dark:text-white px-4 py-3 flex items-center justify-between"
-                    />
-                  </div>
-                </div>
-
-                {/* Part selection */}
-                <div className="space-y-3 pt-3">
-                  <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                    <Settings className="w-4 h-4 text-primary" />
-                    2. Choose Repair Service:
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {BOOKING_PARTS.map((p) => (
-                      <div
-                        key={p.id}
-                        onClick={() => {
-                          setPart(p.id);
-                          if (p.id !== "screen" && p.id !== "battery") {
-                            setQuality("Premium Quality"); // reset quality if not battery/screen
-                          }
-                        }}
-                        className={`cursor-pointer p-4 rounded-xl border flex items-center justify-between transition-all duration-200 hover:bg-slate-100 dark:hover:bg-white/5 ${
-                          part === p.id
-                            ? "border-primary bg-primary/10 font-bold text-primary dark:text-white shadow-lg"
-                            : "border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300"
-                        }`}
-                      >
-                        <span className="text-sm">{p.name.split(" (")[0]}</span>
-                        {part === p.id && (
-                          <Check className="w-4 h-4 text-primary" />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Quality tier selection (visible only for screen or battery replacement) */}
-                {(part === "screen" || part === "battery") && (
-                  <div className="space-y-3 pt-3">
-                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                      <Check className="w-4 h-4 text-primary" />
-                      3. Choose Component Quality Tier:
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      {[
-                        "Standard Aftermarket",
-                        "Premium Quality",
-                        "Genuine Apple",
-                      ].map((q) => (
-                        <div
-                          key={q}
-                          onClick={() => setQuality(q)}
-                          className={`cursor-pointer p-4 rounded-xl border text-center transition-all duration-200 hover:bg-slate-100 dark:hover:bg-white/5 ${
-                            quality === q
-                              ? "border-primary bg-primary/10 font-bold text-primary dark:text-white shadow-lg"
-                              : "border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300"
-                          }`}
-                        >
-                          <span className="text-xs sm:text-sm block">{q}</span>
-                        </div>
-                      ))}
+      <div className="w-full min-h-screen bg-primary/20 dark:bg-slate-950 text-slate-900 dark:text-white py-16 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            {/* Wizard step indicator */}
+            {step <= 3 && (
+              <div className="mb-12">
+                <div className="flex items-center justify-between max-w-md mx-auto">
+                  {/* Step 1 */}
+                  <div className="flex flex-col items-center space-y-2">
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                        step >= 1
+                          ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20"
+                          : "bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-transparent"
+                      }`}
+                    >
+                      {step > 1 ? (
+                        <Check className="w-4 h-4 text-white" />
+                      ) : (
+                        "1"
+                      )}
                     </div>
-                  </div>
-                )}
-
-                {/* Estimation box */}
-                <div className="pt-6 border-t border-slate-200 dark:border-white/5 flex justify-between items-center bg-slate-100 dark:bg-slate-950/60 p-4 rounded-xl">
-                  <div>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">
-                      Estimated cost (All-inclusive):
-                    </span>
-                    <p className="text-slate-550 dark:text-slate-400 text-xs mt-0.5">
-                      Includes mobile doorstep service fee
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-black text-primary">
-                      ${priceEstimate} AUD
+                    <span
+                      className={`text-[10px] uppercase font-bold tracking-wider ${step >= 1 ? "text-primary" : "text-slate-600 dark:text-slate-400"}`}
+                    >
+                      Device
                     </span>
                   </div>
-                </div>
 
-                <div className="flex justify-end pt-4">
-                  <Button
-                    onClick={handleNext}
-                    className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-5 rounded-xl flex items-center gap-2"
-                  >
-                    Continue
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
+                  <div
+                    className={`flex-1 h-0.5 mx-4 transition-all duration-300 ${step >= 2 ? "bg-primary" : "bg-slate-300 dark:bg-slate-800"}`}
+                  />
+
+                  {/* Step 2 */}
+                  <div className="flex flex-col items-center space-y-2">
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                        step >= 2
+                          ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20"
+                          : "bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-transparent"
+                      }`}
+                    >
+                      {step > 2 ? (
+                        <Check className="w-4 h-4 text-white" />
+                      ) : (
+                        "2"
+                      )}
+                    </div>
+                    <span
+                      className={`text-[10px] uppercase font-bold tracking-wider ${step >= 2 ? "text-primary" : "text-slate-600 dark:text-slate-400"}`}
+                    >
+                      Confirm
+                    </span>
+                  </div>
+
+                  <div
+                    className={`flex-1 h-0.5 mx-4 transition-all duration-300 ${step >= 3 ? "bg-primary" : "bg-slate-300 dark:bg-slate-800"}`}
+                  />
+
+                  {/* Step 3 */}
+                  <div className="flex flex-col items-center space-y-2">
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                        step >= 3
+                          ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20"
+                          : "bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-transparent"
+                      }`}
+                    >
+                      {step >= 3 ? (
+                        <Check className="w-4 h-4 text-white" />
+                      ) : (
+                        "3"
+                      )}
+                    </div>
+                    <span
+                      className={`text-[10px] uppercase font-bold tracking-wider ${step >= 3 ? "text-primary" : "text-slate-600 dark:text-slate-400"}`}
+                    >
+                      Complete
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* Step 2: Location, Timing, and Contact Info */}
-            {step === 2 && (
-              <form onSubmit={handleSubmit} className="space-y-8">
-                {/* 1. Contact Information */}
-                <div className="space-y-4">
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-bold text-slate-950 dark:text-white flex items-center gap-2">
-                      <User className="w-5 h-5 text-primary" />
-                      1. Contact Information
-                    </h3>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">
-                      Please enter your contact details.
+            {/* Form Content container */}
+            <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden text-slate-900 dark:text-white">
+              {/* Step 1: Device and Repair Selection */}
+              {step === 1 && (
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                      Select Device & Repair
+                    </h2>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                      Choose your exact iPhone model and the component that
+                      needs repair.
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Name */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                        Full Name:
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g., John Doe"
-                        className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                  {/* Model selection */}
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                      <Smartphone className="w-4 h-4 text-primary" />
+                      1. Choose iPhone Model:
+                    </label>
+                    <div className="max-w-md">
+                      <Select
+                        value={model}
+                        onChange={setModel}
+                        options={IPHONE_MODELS.map((m) => ({
+                          label: m.name,
+                          value: m.id,
+                        }))}
+                        triggerClassName="!w-full !rounded-xl !h-12 bg-white border border-slate-200 dark:bg-slate-950 dark:border-white/10 text-slate-900 dark:text-white px-4 py-3 flex items-center justify-between"
                       />
-                      {errors.name && (
-                        <p className="text-xs text-rose-500 flex items-center gap-1">
-                          <AlertCircle className="w-3.5 h-3.5" /> {errors.name}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Phone */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                        Phone Number:
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g., 0433 263 105"
-                        className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                      />
-                      {errors.phone && (
-                        <p className="text-xs text-rose-500 flex items-center gap-1">
-                          <AlertCircle className="w-3.5 h-3.5" /> {errors.phone}
-                        </p>
-                      )}
                     </div>
                   </div>
 
-                  {/* Email */}
-                  <div className="space-y-2">
+                  {/* Part selection */}
+                  <div className="space-y-3 pt-3">
                     <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-primary" />
-                      Email Address:
+                      <Settings className="w-4 h-4 text-primary" />
+                      2. Choose Repair Service:
                     </label>
-                    <input
-                      type="email"
-                      placeholder="e.g., john.doe@example.com"
-                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    {errors.email && (
-                      <p className="text-xs text-rose-500 flex items-center gap-1">
-                        <AlertCircle className="w-3.5 h-3.5" /> {errors.email}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {BOOKING_PARTS.map((p) => (
+                        <div
+                          key={p.id}
+                          onClick={() => {
+                            setPart(p.id);
+                            if (p.id !== "screen" && p.id !== "battery") {
+                              setQuality("Premium Quality"); // reset quality if not battery/screen
+                            }
+                          }}
+                          className={`cursor-pointer p-4 rounded-xl border flex items-center justify-between transition-all duration-200 hover:bg-slate-100 dark:hover:bg-white/5 ${
+                            part === p.id
+                              ? "border-primary bg-primary/10 font-bold text-primary dark:text-white shadow-lg"
+                              : "border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300"
+                          }`}
+                        >
+                          <span className="text-sm">
+                            {p.name.split(" (")[0]}
+                          </span>
+                          {part === p.id && (
+                            <Check className="w-4 h-4 text-primary" />
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Quality tier selection (visible only for screen or battery replacement) */}
+                  {(part === "screen" || part === "battery") && (
+                    <div className="space-y-3 pt-3">
+                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                        <Check className="w-4 h-4 text-primary" />
+                        3. Choose Component Quality Tier:
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {[
+                          "Standard Aftermarket",
+                          "Premium Quality",
+                          "Genuine Apple",
+                        ].map((q) => (
+                          <div
+                            key={q}
+                            onClick={() => setQuality(q)}
+                            className={`cursor-pointer p-4 rounded-xl border text-center transition-all duration-200 hover:bg-slate-100 dark:hover:bg-white/5 ${
+                              quality === q
+                                ? "border-primary bg-primary/10 font-bold text-primary dark:text-white shadow-lg"
+                                : "border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300"
+                            }`}
+                          >
+                            <span className="text-xs sm:text-sm block">
+                              {q}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Estimation box */}
+                  <div className="pt-6 border-t border-slate-200 dark:border-white/5 flex justify-between items-center bg-slate-100 dark:bg-slate-950/60 p-4 rounded-xl">
+                    <div>
+                      <span className="text-xs text-slate-500 dark:text-slate-400">
+                        Estimated cost (All-inclusive):
+                      </span>
+                      <p className="text-slate-550 dark:text-slate-400 text-xs mt-0.5">
+                        Includes mobile doorstep service fee
                       </p>
-                    )}
+                    </div>
+                    <div className="text-right">
+                      <span className="text-2xl font-black text-primary">
+                        ${priceEstimate} AUD
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-end pt-4">
+                    <Button
+                      onClick={handleNext}
+                      className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-5 rounded-xl flex items-center gap-2"
+                    >
+                      Continue
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
                   </div>
                 </div>
+              )}
 
-                <hr className="border-slate-200 dark:border-white/5" />
-
-                {/* 2. Service Method & Address */}
-                <div className="space-y-4">
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-bold text-slate-950 dark:text-white flex items-center gap-2">
-                      <MapPin className="w-5 h-5 text-primary" />
-                      2. Service Location & Schedule
-                    </h3>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">
-                      Our doorstep technician repairs the device live at your
-                      location.
-                    </p>
-                  </div>
-
-                  {/* Service Method Badge */}
-                  <div className="p-4 rounded-xl border border-primary bg-primary/10 text-slate-900 dark:text-white flex gap-4 items-center">
-                    <Truck className="w-5 h-5 text-primary flex-shrink-0" />
-                    <div>
-                      <h4 className="font-bold text-xs">
-                        Doorstep Service (Mobile)
-                      </h4>
-                      <p className="text-[11px] text-slate-600 dark:text-slate-400">
-                        Technician drives to you in Sydney and repairs on-site.
+              {/* Step 2: Location, Timing, and Contact Info */}
+              {step === 2 && (
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  {/* 1. Contact Information */}
+                  <div className="space-y-4">
+                    <div className="space-y-1">
+                      <h3 className="text-lg font-bold text-slate-950 dark:text-white flex items-center gap-2">
+                        <User className="w-5 h-5 text-primary" />
+                        1. Contact Information
+                      </h3>
+                      <p className="text-xs text-slate-600 dark:text-slate-400">
+                        Please enter your contact details.
                       </p>
                     </div>
-                  </div>
 
-                  {/* Address fields */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                        Sydney Suburb:
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g., Chatswood, CBD..."
-                        className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
-                        value={suburb}
-                        onChange={(e) => setSuburb(e.target.value)}
-                      />
-                      {errors.suburb && (
-                        <p className="text-xs text-rose-500 flex items-center gap-1">
-                          <AlertCircle className="w-3.5 h-3.5" />{" "}
-                          {errors.suburb}
-                        </p>
-                      )}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Name */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                          Full Name:
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g., John Doe"
+                          className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                        {errors.name && (
+                          <p className="text-xs text-rose-500 flex items-center gap-1">
+                            <AlertCircle className="w-3.5 h-3.5" />{" "}
+                            {errors.name}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Phone */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                          Phone Number:
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g., 0433 263 105"
+                          className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                        />
+                        {errors.phone && (
+                          <p className="text-xs text-rose-500 flex items-center gap-1">
+                            <AlertCircle className="w-3.5 h-3.5" />{" "}
+                            {errors.phone}
+                          </p>
+                        )}
+                      </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                        Street Address (Street name, unit/house number):
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g., 12/345 George St"
-                        className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                      />
-                      {errors.address && (
-                        <p className="text-xs text-rose-500 flex items-center gap-1">
-                          <AlertCircle className="w-3.5 h-3.5" />{" "}
-                          {errors.address}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Timing selectors */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Email */}
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-primary" />
-                        Choose Repair Date:
+                        <Mail className="w-4 h-4 text-primary" />
+                        Email Address:
                       </label>
                       <input
-                        type="date"
+                        type="email"
+                        placeholder="e.g., john.doe@example.com"
                         className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        min={new Date().toISOString().split("T")[0]}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
-                      {errors.date && (
+                      {errors.email && (
                         <p className="text-xs text-rose-500 flex items-center gap-1">
-                          <AlertCircle className="w-3.5 h-3.5" /> {errors.date}
+                          <AlertCircle className="w-3.5 h-3.5" /> {errors.email}
                         </p>
                       )}
                     </div>
+                  </div>
 
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-primary" />
-                        Choose Preferred Time:
-                      </label>
-                      <div className="grid grid-cols-2 gap-3">
-                        {/* Hour Dropdown */}
-                        <div className="relative">
-                          <select
-                            value={selectedHour}
-                            onChange={(e) => setSelectedHour(e.target.value)}
-                            className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary cursor-pointer appearance-none text-sm transition-colors duration-200"
-                          >
-                            {Array.from({ length: 12 }, (_, i) => i + 9).map(
-                              (h) => {
-                                const hrStr = h.toString().padStart(2, "0");
-                                const displayHr =
-                                  h > 12
-                                    ? `${h - 12} PM`
-                                    : h === 12
-                                      ? "12 PM"
-                                      : `${h} AM`;
-                                return (
-                                  <option
-                                    key={hrStr}
-                                    value={hrStr}
-                                    className="text-slate-900 dark:text-white dark:bg-slate-950"
-                                  >
-                                    {displayHr}
-                                  </option>
-                                );
-                              },
-                            )}
-                          </select>
-                          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                            ▼
+                  <hr className="border-slate-200 dark:border-white/5" />
+
+                  {/* 2. Service Method & Address */}
+                  <div className="space-y-4">
+                    <div className="space-y-1">
+                      <h3 className="text-lg font-bold text-slate-950 dark:text-white flex items-center gap-2">
+                        <MapPin className="w-5 h-5 text-primary" />
+                        2. Service Location & Schedule
+                      </h3>
+                      <p className="text-xs text-slate-600 dark:text-slate-400">
+                        Our doorstep technician repairs the device live at your
+                        location.
+                      </p>
+                    </div>
+
+                    {/* Service Method Badge */}
+                    <div className="p-4 rounded-xl border border-primary bg-primary/10 text-slate-900 dark:text-white flex gap-4 items-center">
+                      <Truck className="w-5 h-5 text-primary flex-shrink-0" />
+                      <div>
+                        <h4 className="font-bold text-xs">
+                          Doorstep Service (Mobile)
+                        </h4>
+                        <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                          Technician drives to you in Sydney and repairs
+                          on-site.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Address fields */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                          Sydney Suburb:
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g., Chatswood, CBD..."
+                          className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
+                          value={suburb}
+                          onChange={(e) => setSuburb(e.target.value)}
+                        />
+                        {errors.suburb && (
+                          <p className="text-xs text-rose-500 flex items-center gap-1">
+                            <AlertCircle className="w-3.5 h-3.5" />{" "}
+                            {errors.suburb}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                          Street Address (Street name, unit/house number):
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g., 12/345 George St"
+                          className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
+                          value={address}
+                          onChange={(e) => setAddress(e.target.value)}
+                        />
+                        {errors.address && (
+                          <p className="text-xs text-rose-500 flex items-center gap-1">
+                            <AlertCircle className="w-3.5 h-3.5" />{" "}
+                            {errors.address}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Timing selectors */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                          <Calendar className="w-4 h-4 text-primary" />
+                          Choose Repair Date:
+                        </label>
+                        <input
+                          type="date"
+                          className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
+                          value={date}
+                          onChange={(e) => setDate(e.target.value)}
+                          min={new Date().toISOString().split("T")[0]}
+                        />
+                        {errors.date && (
+                          <p className="text-xs text-rose-500 flex items-center gap-1">
+                            <AlertCircle className="w-3.5 h-3.5" />{" "}
+                            {errors.date}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                          <Clock className="w-4 h-4 text-primary" />
+                          Choose Preferred Time:
+                        </label>
+                        <div className="grid grid-cols-2 gap-3">
+                          {/* Hour Dropdown */}
+                          <div className="relative">
+                            <select
+                              value={selectedHour}
+                              onChange={(e) => setSelectedHour(e.target.value)}
+                              className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary cursor-pointer appearance-none text-sm transition-colors duration-200"
+                            >
+                              {Array.from({ length: 12 }, (_, i) => i + 9).map(
+                                (h) => {
+                                  const hrStr = h.toString().padStart(2, "0");
+                                  const displayHr =
+                                    h > 12
+                                      ? `${h - 12} PM`
+                                      : h === 12
+                                        ? "12 PM"
+                                        : `${h} AM`;
+                                  return (
+                                    <option
+                                      key={hrStr}
+                                      value={hrStr}
+                                      className="text-slate-900 dark:text-white dark:bg-slate-950"
+                                    >
+                                      {displayHr}
+                                    </option>
+                                  );
+                                },
+                              )}
+                            </select>
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                              ▼
+                            </div>
                           </div>
-                        </div>
 
-                        {/* Minute Dropdown */}
-                        <div className="relative">
-                          <select
-                            value={selectedMinute}
-                            onChange={(e) => setSelectedMinute(e.target.value)}
-                            className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary cursor-pointer appearance-none text-sm transition-colors duration-200"
-                          >
-                            {["00", "15", "30", "45"].map((m) => (
-                              <option
-                                key={m}
-                                value={m}
-                                className="text-slate-900 dark:text-white dark:bg-slate-950"
-                              >
-                                {m} mins
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                            ▼
+                          {/* Minute Dropdown */}
+                          <div className="relative">
+                            <select
+                              value={selectedMinute}
+                              onChange={(e) =>
+                                setSelectedMinute(e.target.value)
+                              }
+                              className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary cursor-pointer appearance-none text-sm transition-colors duration-200"
+                            >
+                              {["00", "15", "30", "45"].map((m) => (
+                                <option
+                                  key={m}
+                                  value={m}
+                                  className="text-slate-900 dark:text-white dark:bg-slate-950"
+                                >
+                                  {m} mins
+                                </option>
+                              ))}
+                            </select>
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                              ▼
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <hr className="border-slate-200 dark:border-white/5" />
+                  <hr className="border-slate-200 dark:border-white/5" />
 
-                {/* 3. Notes & Summary */}
-                <div className="space-y-4">
-                  {/* Notes */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                      Additional Notes (Device color, symptoms):
-                    </label>
-                    <textarea
-                      placeholder="e.g., Gold color, screen has green line. Security access required..."
-                      rows={3}
-                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
-                      value={notes}
-                      onChange={(e) => setNotes(e.target.value)}
-                    />
+                  {/* 3. Notes & Summary */}
+                  <div className="space-y-4">
+                    {/* Notes */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                        Additional Notes (Device color, symptoms):
+                      </label>
+                      <textarea
+                        placeholder="e.g., Gold color, screen has green line. Security access required..."
+                        rows={3}
+                        className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                      />
+                    </div>
+
+                    {/* Summary bill */}
+                    <div className="p-5 bg-slate-100 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-white/5 space-y-3.5 text-sm">
+                      <h4 className="font-bold text-slate-800 dark:text-slate-200 border-b border-slate-200 dark:border-white/5 pb-2">
+                        Booking Summary:
+                      </h4>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-400">
+                          Customer Name:
+                        </span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          {name || "-"}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-400">
+                          Phone Number:
+                        </span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          {phone || "-"}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-400">
+                          Email Address:
+                        </span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          {email || "-"}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-400">
+                          Service Location:
+                        </span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200 text-right">
+                          {address ? `${address}, ` : ""}
+                          {suburb || "-"}
+                        </span>
+                      </div>
+                      <div className="flex justify-between border-t border-slate-200 dark:border-white/5 pt-2">
+                        <span className="text-slate-600 dark:text-slate-400">
+                          Device & Service:
+                        </span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          {selectedModelName} -{" "}
+                          {selectedPartName.split(" (")[0]}
+                        </span>
+                      </div>
+                      {(part === "screen" || part === "battery") && (
+                        <div className="flex justify-between">
+                          <span className="text-slate-600 dark:text-slate-400">
+                            Component Quality:
+                          </span>
+                          <span className="font-semibold text-slate-800 dark:text-slate-200">
+                            {quality}
+                          </span>
+                        </div>
+                      )}
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-400">
+                          Method:
+                        </span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          Doorstep Service (Mobile)
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-400">
+                          Appointment:
+                        </span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          {date || "-"} at{" "}
+                          {getFormattedTime(selectedHour, selectedMinute)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t border-slate-200 dark:border-white/5 text-base">
+                        <span className="font-bold text-slate-800 dark:text-slate-200">
+                          Total Estimated Cost:
+                        </span>
+                        <span className="font-black text-primary">
+                          ${priceEstimate} AUD
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Summary bill */}
-                  <div className="p-5 bg-slate-100 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-white/5 space-y-3.5 text-sm">
-                    <h4 className="font-bold text-slate-800 dark:text-slate-200 border-b border-slate-200 dark:border-white/5 pb-2">
-                      Booking Summary:
-                    </h4>
+                  {/* Back / Confirm buttons */}
+                  <div className="flex justify-between pt-4">
+                    <Button
+                      type="button"
+                      onClick={handleBack}
+                      variant="outline"
+                      className="border-slate-200 dark:border-white/10 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 px-6 py-5 rounded-xl flex items-center gap-2"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      Back
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="bg-primary hover:bg-primary/95 text-white font-extrabold px-8 py-5 rounded-xl shadow-lg shadow-primary/20 transform active:scale-95 transition-transform disabled:opacity-50"
+                    >
+                      {isSubmitting ? "Confirming..." : "Confirm Booking"}
+                    </Button>
+                  </div>
+                </form>
+              )}
+
+              {/* Step 3: Success confirmation screen */}
+              {step === 3 && (
+                <div className="text-center py-10 space-y-6">
+                  <div className="mx-auto w-20 h-20 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center border-2 border-emerald-500/30">
+                    <CheckCircle className="w-12 h-12" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <h2 className="text-3xl font-black text-slate-900 dark:text-white">
+                      Booking Successful!
+                    </h2>
+                    <p className="text-slate-650 dark:text-slate-400 text-sm max-w-md mx-auto">
+                      Thank you for choosing WeFixiPhone. We have successfully
+                      received your repair request.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-100 dark:bg-slate-950 p-6 rounded-2xl border border-slate-200 dark:border-white/5 text-left max-w-md mx-auto space-y-3 text-sm text-slate-800 dark:text-slate-200">
+                    <div className="flex justify-between">
+                      <span className="text-slate-600 dark:text-slate-400">
+                        Appointment ID:
+                      </span>
+                      <span className="font-mono font-bold text-slate-900 dark:text-white">
+                        {bookingId}
+                      </span>
+                    </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600 dark:text-slate-400">
                         Customer Name:
                       </span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">
-                        {name || "-"}
+                      <span className="font-semibold text-slate-900 dark:text-white">
+                        {name}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600 dark:text-slate-400">
                         Phone Number:
                       </span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">
-                        {phone || "-"}
+                      <span className="font-semibold text-slate-900 dark:text-white">
+                        {phone}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600 dark:text-slate-400">
                         Email Address:
                       </span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">
-                        {email || "-"}
+                      <span className="font-semibold text-slate-900 dark:text-white">
+                        {email}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600 dark:text-slate-400">
                         Service Location:
                       </span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-right">
-                        {address ? `${address}, ` : ""}
-                        {suburb || "-"}
+                      <span className="font-semibold text-slate-900 dark:text-white text-right">
+                        {address}, {suburb}
                       </span>
                     </div>
-                    <div className="flex justify-between border-t border-slate-200 dark:border-white/5 pt-2">
-                      <span className="text-slate-600 dark:text-slate-400">
-                        Device & Service:
-                      </span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">
-                        {selectedModelName} - {selectedPartName.split(" (")[0]}
-                      </span>
-                    </div>
-                    {(part === "screen" || part === "battery") && (
-                      <div className="flex justify-between">
-                        <span className="text-slate-600 dark:text-slate-400">
-                          Component Quality:
-                        </span>
-                        <span className="font-semibold text-slate-800 dark:text-slate-200">
-                          {quality}
-                        </span>
-                      </div>
-                    )}
                     <div className="flex justify-between">
                       <span className="text-slate-600 dark:text-slate-400">
-                        Method:
+                        Repair Service:
                       </span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">
-                        Doorstep Service (Mobile)
+                      <span className="font-semibold text-slate-900 dark:text-white">
+                        {selectedModelName} ({selectedPartName.split(" (")[0]})
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600 dark:text-slate-400">
                         Appointment:
                       </span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">
-                        {date || "-"} at{" "}
+                      <span className="font-semibold text-slate-900 dark:text-white">
+                        {date} at{" "}
                         {getFormattedTime(selectedHour, selectedMinute)}
                       </span>
                     </div>
-                    <div className="flex justify-between pt-2 border-t border-slate-200 dark:border-white/5 text-base">
-                      <span className="font-bold text-slate-800 dark:text-slate-200">
-                        Total Estimated Cost:
+                    <div className="flex justify-between pt-2 border-t border-slate-200 dark:border-white/5 font-bold">
+                      <span className="text-slate-600 dark:text-slate-400">
+                        Estimated Cost:
                       </span>
-                      <span className="font-black text-primary">
-                        ${priceEstimate} AUD
-                      </span>
+                      <span className="text-primary">${priceEstimate} AUD</span>
                     </div>
                   </div>
-                </div>
 
-                {/* Back / Confirm buttons */}
-                <div className="flex justify-between pt-4">
-                  <Button
-                    type="button"
-                    onClick={handleBack}
-                    variant="outline"
-                    className="border-slate-200 dark:border-white/10 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 px-6 py-5 rounded-xl flex items-center gap-2"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                    Back
-                  </Button>
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="bg-primary hover:bg-primary/95 text-white font-extrabold px-8 py-5 rounded-xl shadow-lg shadow-primary/20 transform active:scale-95 transition-transform disabled:opacity-50"
-                  >
-                    {isSubmitting ? "Confirming..." : "Confirm Booking"}
-                  </Button>
-                </div>
-              </form>
-            )}
+                  <div className="p-4 bg-primary/10 border border-primary/20 text-primary rounded-xl max-w-md mx-auto text-xs leading-relaxed">
+                    ✓ Our mobile technician will contact you at{" "}
+                    <strong>{phone}</strong> 30 minutes before arrival to
+                    confirm your location and components.
+                  </div>
 
-            {/* Step 3: Success confirmation screen */}
-            {step === 3 && (
-              <div className="text-center py-10 space-y-6">
-                <div className="mx-auto w-20 h-20 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center border-2 border-emerald-500/30">
-                  <CheckCircle className="w-12 h-12" />
-                </div>
-
-                <div className="space-y-2">
-                  <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-                    Booking Successful!
-                  </h2>
-                  <p className="text-slate-650 dark:text-slate-400 text-sm max-w-md mx-auto">
-                    Thank you for choosing WeFixiPhone. We have successfully
-                    received your repair request.
-                  </p>
-                </div>
-
-                <div className="bg-slate-100 dark:bg-slate-950 p-6 rounded-2xl border border-slate-200 dark:border-white/5 text-left max-w-md mx-auto space-y-3 text-sm text-slate-800 dark:text-slate-200">
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">
-                      Appointment ID:
-                    </span>
-                    <span className="font-mono font-bold text-slate-900 dark:text-white">
-                      {bookingId}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">
-                      Customer Name:
-                    </span>
-                    <span className="font-semibold text-slate-900 dark:text-white">
-                      {name}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">
-                      Phone Number:
-                    </span>
-                    <span className="font-semibold text-slate-900 dark:text-white">
-                      {phone}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">
-                      Email Address:
-                    </span>
-                    <span className="font-semibold text-slate-900 dark:text-white">
-                      {email}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">
-                      Service Location:
-                    </span>
-                    <span className="font-semibold text-slate-900 dark:text-white text-right">
-                      {address}, {suburb}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">
-                      Repair Service:
-                    </span>
-                    <span className="font-semibold text-slate-900 dark:text-white">
-                      {selectedModelName} ({selectedPartName.split(" (")[0]})
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">
-                      Appointment:
-                    </span>
-                    <span className="font-semibold text-slate-900 dark:text-white">
-                      {date} at {getFormattedTime(selectedHour, selectedMinute)}
-                    </span>
-                  </div>
-                  <div className="flex justify-between pt-2 border-t border-slate-200 dark:border-white/5 font-bold">
-                    <span className="text-slate-600 dark:text-slate-400">
-                      Estimated Cost:
-                    </span>
-                    <span className="text-primary">${priceEstimate} AUD</span>
+                  <div className="pt-6">
+                    <Button
+                      onClick={() => router.push(Routes.HOME)}
+                      className="bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-bold px-8 py-4 rounded-xl"
+                    >
+                      Back to Home
+                    </Button>
                   </div>
                 </div>
-
-                <div className="p-4 bg-primary/10 border border-primary/20 text-primary rounded-xl max-w-md mx-auto text-xs leading-relaxed">
-                  ✓ Our mobile technician will contact you at{" "}
-                  <strong>{phone}</strong> 30 minutes before arrival to confirm
-                  your location and components.
-                </div>
-
-                <div className="pt-6">
-                  <Button
-                    onClick={() => router.push(Routes.HOME)}
-                    className="bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-bold px-8 py-4 rounded-xl"
-                  >
-                    Back to Home
-                  </Button>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
