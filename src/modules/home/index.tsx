@@ -77,7 +77,7 @@ const Home = () => {
   return (
     <div className="w-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
       {/* 1. HERO SECTION */}
-      <section className="relative w-full min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-12 lg:py-24 px-4 md:px-8 lg:px-16 bg-slate-50 dark:bg-slate-950">
+      <section className="relative w-full min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-12 lg:py-24 bg-slate-50 dark:bg-slate-950">
         {/* Background Image with overlay gradient */}
         <div className="absolute inset-0 z-0 ">
           <Image
@@ -95,7 +95,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl w-full mx-auto relative z-20 flex flex-col lg:flex-row items-center justify-between gap-8 h-full">
+        <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-20 flex flex-col lg:flex-row items-center justify-between gap-8 h-full">
           {/* Left side (48% width): Content Area */}
           <div className="w-full lg:w-[48%]  flex flex-col items-start text-left space-y-6">
             {/* Headline Lockup */}

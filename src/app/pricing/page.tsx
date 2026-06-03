@@ -430,8 +430,8 @@ function PricingContent() {
 
   return (
     <LayoutComponents fullWidth>
-      <div className="w-full min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto space-y-12">
+      <div className="w-full min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white py-16 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Header text */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <TextGradient

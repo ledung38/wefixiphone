@@ -95,9 +95,9 @@ export const WhyFixNow = () => {
   return (
     <section
       id="why-fix-now"
-      className="w-full py-24 px-4 md:px-8 lg:px-16 bg-white dark:bg-slate-950 relative"
+      className="w-full py-24 bg-white dark:bg-slate-950 relative"
     >
-      <div className="max-w-7xl mx-auto space-y-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
         {/* Section Header */}
         <div className="text-center w-full">
           <TextGradient className="text-3xl sm:text-4xl font-bold">
@@ -116,11 +116,11 @@ export const WhyFixNow = () => {
           {/* Column 1: Left - Kept phone error warning image (4 Cols) */}
           <div className="lg:col-span-5 flex justify-center lg:sticky lg:top-24 mb-8 lg:mb-0">
             <Image
-              src={"/phone_error_v2.png"}
+              src={"/phone_error.png"}
               alt="iOS Warning Screen"
               width={600}
               height={600}
-              className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-full h-auto"
+              className="w-full max-w-[280px]  lg:max-w-full h-auto"
             />
           </div>
 

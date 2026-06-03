@@ -142,7 +142,7 @@ export const QuickServices = () => {
   return (
     <section
       id="services"
-      className="w-full py-24 px-4 md:px-8 lg:px-16 bg-slate-100/30 dark:bg-slate-900/10 relative"
+      className="w-full py-24 bg-slate-100/30 dark:bg-slate-900/10 relative"
     >
       <div className="absolute top-0 z-0 left-0 w-full h-50 bg-linear-to-b from-primary/80 to-background  ">
         {/* <svg
@@ -157,7 +157,7 @@ export const QuickServices = () => {
           ></path>
         </svg> */}
       </div>
-      <div className="max-w-7xl mx-auto space-y-8 relative z-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-1">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-4">
           <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">

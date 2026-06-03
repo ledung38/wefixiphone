@@ -17,7 +17,9 @@ const LayoutComponents = ({
       {fullWidth ? (
         <main className="flex-1 w-full">{children}</main>
       ) : (
-        <div className="flex gap-10 px-40 mt-20 pt-5">{children}</div>
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 pt-5 flex gap-10">
+          {children}
+        </div>
       )}
       <Footer />
     </div>
