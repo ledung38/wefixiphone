@@ -38,7 +38,10 @@ export const WhyChooseUs = () => {
   ];
 
   return (
-    <section id="why-choose-us" className="w-full py-24 bg-primary/20">
+    <section
+      id="why-choose-us"
+      className="w-full py-12  sm:py-24 bg-primary/20"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 relative">
         {/* Section Header */}
         <div className="text-left w-full">

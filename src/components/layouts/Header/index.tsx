@@ -19,7 +19,6 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { motion } from "motion/react";
 import React, { useCallback, useEffect, useState } from "react";
-import { cn } from "@/lib/utils/index";
 import Image from "@/components/ui/Image";
 
 // Mobile Menu Item Component
@@ -374,9 +373,17 @@ export const Header = () => {
                 }
               >
                 {isMobileMenuOpen ? (
-                  <X className="max-sm:text-white h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white" />
+                  <X
+                    className={` max-sm:text-slate-400  h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white ${
+                      isHome && !isScrolled && "max-sm:text-white "
+                    }`}
+                  />
                 ) : (
-                  <Menu className="max-sm:text-white h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white" />
+                  <Menu
+                    className={`max-sm:text-slate-400 h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white ${
+                      isHome && !isScrolled && "max-sm:text-white "
+                    }`}
+                  />
                 )}
               </motion.button>
             </div>
