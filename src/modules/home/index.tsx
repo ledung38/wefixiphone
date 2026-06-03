@@ -10,13 +10,13 @@ import { CheckCircle, Clock, Eye, Phone, ShieldCheck } from "lucide-react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import DIff from "../components/SideBar/DIff";
 import { QuickServices } from "./components/QuickServices";
 import { FreeConsultationBanner } from "./components/FreeConsultationBanner";
 import { RepairProcess } from "./components/RepairProcess";
 import { WhyChooseUs } from "./components/WhyChooseUs";
 import { WhyFixNow } from "./components/WhyFixNow";
 import { Routes } from "@/lib/enum/routes";
+import DIff from "@/modules/home/components/DIff";
 
 // List of Sydney Suburbs covered for interactive checking
 const SYDNEY_SUBURBS = [
@@ -81,7 +81,7 @@ const Home = () => {
         {/* Background Image with overlay gradient */}
         <div className="absolute inset-0 z-0 ">
           <Image
-            src="/hero_repair_2.png"
+            src="/hero_repair.png"
             quality={100}
             unoptimized
             width={1920}
