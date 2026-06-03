@@ -286,9 +286,9 @@ export const RepairProcess = () => {
   return (
     <section
       id="repair-process"
-      className="w-full py-24 px-4 md:px-8 lg:px-16 bg-white dark:bg-slate-950 relative overflow-hidden"
+      className="w-full py-24 bg-white dark:bg-slate-950 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto space-y-3">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white truncate"></h2>

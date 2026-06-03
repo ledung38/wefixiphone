@@ -28,8 +28,8 @@ const DIff = () => {
     <div>
       {" "}
       {/* 3. BEFORE / AFTER SECTION */}
-      <section className="w-full py-24 px-4 md:px-8 lg:px-16 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto space-y-12 text-center">
+      <section className="w-full py-24 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-center">
           <div className="space-y-4">
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
               Drag to See the Difference
@@ -43,7 +43,7 @@ const DIff = () => {
           {/* Interactive Drag Slider */}
           <div
             ref={beforeAfterContainerRef}
-            className="relative w-full h-[300px] sm:h-[450px] rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-2xl cursor-ew-resize select-none"
+            className="relative w-full max-w-4xl mx-auto h-[300px] sm:h-[450px] rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-2xl cursor-ew-resize select-none"
             onMouseMove={handleMouseMove}
             onTouchMove={handleTouchMove}
             onMouseDown={(e) => handleBeforeAfterMove(e.clientX)}
