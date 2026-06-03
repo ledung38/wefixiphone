@@ -47,7 +47,7 @@ const HomeAreas = () => {
   };
 
   return (
-    <section className="relative w-full py-8 md:py-16 bg-[#c8e1f5] z-10 overflow-hidden">
+    <section className="relative w-full py-12 md:py-16 bg-[#c8e1f5] z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 5">
         {/* Section header */}
         <AnimateDiv
