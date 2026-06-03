@@ -199,7 +199,7 @@ const PARTS = [
   { id: "camera", name: "Camera Repair" },
   { id: "audio", name: "Speaker & Audio Repair" },
   { id: "housing", name: "Housing Replacement" },
-  { id: "software", name: "Software Repair" },
+  // { id: "software", name: "Software Repair" },
 ];
 
 const SERVICE_DETAILS: Record<
@@ -277,19 +277,19 @@ const SERVICE_DETAILS: Record<
       "Restores phone appearance to like-new condition",
     ],
   },
-  software: {
-    title: "Software Repair",
-    duration: "30 mins",
-    warranty: "30-Day Warranty",
-    description:
-      "Troubleshooting for bootloops, stuck at Apple logo, recovery mode errors, forgotten passcodes, or failing system updates. Restores operating system stability.",
-    benefits: [
-      "iOS operating system flashing & update optimization",
-      "Data preservation and recovery attempt included",
-      "Resolves boot loop error codes (Error 9, 14, 4013)",
-      "System security and performance tuning",
-    ],
-  },
+  // software: {
+  //   title: "Software Repair",
+  //   duration: "30 mins",
+  //   warranty: "30-Day Warranty",
+  //   description:
+  //     "Troubleshooting for bootloops, stuck at Apple logo, recovery mode errors, forgotten passcodes, or failing system updates. Restores operating system stability.",
+  //   benefits: [
+  //     "iOS operating system flashing & update optimization",
+  //     "Data preservation and recovery attempt included",
+  //     "Resolves boot loop error codes (Error 9, 14, 4013)",
+  //     "System security and performance tuning",
+  //   ],
+  // },
 };
 
 function PricingContent() {

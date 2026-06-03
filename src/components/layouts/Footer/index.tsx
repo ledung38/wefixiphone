@@ -44,12 +44,29 @@ const Footer = () => {
     {
       title: "Services",
       links: [
-        { label: "Screen Replacement", href: "/#services" },
-        { label: "Battery Replacement", href: "/#services" },
-        { label: "Face ID Repair", href: "/#services" },
-        { label: "Camera Repair", href: "/#services" },
-        { label: "Water Damage Repair", href: "/#services" },
-        { label: "Charging Port Repair", href: "/#services" },
+        { label: "Screen Replacement", href: `${Routes.PRICING}?part=screen` },
+        {
+          label: "Battery Replacement",
+          href: `${Routes.PRICING}?part=battery`,
+        },
+        {
+          label: "Back Glass Replacement",
+          href: `${Routes.PRICING}?part=back-glass`,
+        },
+        {
+          label: "Charging Port Repair",
+          href: `${Routes.PRICING}?part=charging`,
+        },
+        { label: "Camera Repair", href: `${Routes.PRICING}?part=camera` },
+        {
+          label: "Speaker & Audio Repair",
+          href: `${Routes.PRICING}?part=audio`,
+        },
+        {
+          label: "Housing Replacement",
+          href: `${Routes.PRICING}?part=housing`,
+        },
+        // { label: "Software Repair", href: `${Routes.PRICING}?part=software` },
       ],
     },
     {

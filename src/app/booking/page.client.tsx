@@ -204,11 +204,11 @@ const BOOKING_PARTS = [
   { id: "back-glass", name: "Back Glass Replacement" },
   { id: "charging", name: "Charging Port Repair" },
   { id: "rear-camera", name: "Rear Camera Issue" },
-  { id: "camera-lens", name: "Rear Camera Lens Replacement" },
+  // { id: "camera-lens", name: "Rear Camera Lens Replacement" },
   { id: "front-camera", name: "Front Camera Issue" },
   { id: "audio", name: "Speaker & Audio Repair" },
   { id: "housing", name: "Housing Replacement" },
-  { id: "software", name: "Software Repair" },
+  { id: "other", name: "Other / Unsure (Describe below)" },
 ];
 
 export function BookingContent() {
@@ -299,8 +299,8 @@ export function BookingContent() {
       setPriceEstimate(prices.audio);
     } else if (part === "housing") {
       setPriceEstimate(prices.housing);
-    } else if (part === "software") {
-      setPriceEstimate(prices.software);
+    } else if (part === "other") {
+      setPriceEstimate(0);
     }
   }, [model, part, quality]);
 
@@ -322,6 +322,9 @@ export function BookingContent() {
       if (!email.trim()) newErrors.email = "Please enter your email address";
       else if (!/\S+@\S+\.\S+/.test(email)) {
         newErrors.email = "Invalid email address";
+      }
+      if (part === "other" && !notes.trim()) {
+        newErrors.notes = "Please describe your device issue or symptoms";
       }
     }
 
@@ -590,12 +593,15 @@ export function BookingContent() {
                         Estimated cost (All-inclusive):
                       </span>
                       <p className="text-slate-550 dark:text-slate-400 text-xs mt-0.5">
-                        Includes mobile doorstep service fee
+                        This price includes the part, labor, and travel fee to
+                        your place.
                       </p>
                     </div>
                     <div className="text-right">
                       <span className="text-2xl font-black text-primary">
-                        ${priceEstimate} AUD
+                        {part === "other"
+                          ? "Free Diagnosis"
+                          : `$${priceEstimate} AUD`}
                       </span>
                     </div>
                   </div>
@@ -615,6 +621,30 @@ export function BookingContent() {
               {/* Step 2: Location, Timing, and Contact Info */}
               {step === 2 && (
                 <form onSubmit={handleSubmit} className="space-y-8">
+                  {part === "other" && (
+                    <div className="p-5 sm:p-6 rounded-2xl bg-amber-500/10 dark:bg-amber-500/5 border-2 border-amber-500/30 dark:border-amber-500/20 space-y-3">
+                      <label className="text-sm font-extrabold text-amber-600 dark:text-amber-400 flex items-center gap-2">
+                        <AlertCircle className="w-5 h-5 flex-shrink-0 animate-bounce" />
+                        Device Symptoms & Issue Description (Required):
+                      </label>
+                      <textarea
+                        placeholder="Please describe the issue in detail (e.g. won't turn on after drop, screen flashing, no sound, etc.) so our technician can prepare appropriate tools."
+                        rows={4}
+                        className={`w-full bg-white dark:bg-slate-950 border rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 text-sm transition-colors duration-200 ${
+                          errors.notes
+                            ? "border-rose-500 focus:border-rose-500 animate-shake"
+                            : "border-slate-200 dark:border-white/10"
+                        }`}
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                      />
+                      {errors.notes && (
+                        <p className="text-xs text-rose-500 flex items-center gap-1 font-semibold">
+                          <AlertCircle className="w-3.5 h-3.5" /> {errors.notes}
+                        </p>
+                      )}
+                    </div>
+                  )}
                   {/* 1. Contact Information */}
                   <div className="space-y-4">
                     <div className="space-y-1">
@@ -854,18 +884,20 @@ export function BookingContent() {
                   {/* 3. Notes & Summary */}
                   <div className="space-y-4">
                     {/* Notes */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                        Additional Notes (Device color, symptoms):
-                      </label>
-                      <textarea
-                        placeholder="e.g., Gold color, screen has green line. Security access required..."
-                        rows={3}
-                        className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
-                        value={notes}
-                        onChange={(e) => setNotes(e.target.value)}
-                      />
-                    </div>
+                    {part !== "other" && (
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                          Additional Notes (Device color, symptoms):
+                        </label>
+                        <textarea
+                          placeholder="e.g., Gold color, screen has green line. Security access required..."
+                          rows={3}
+                          className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:border-primary text-sm transition-colors duration-200"
+                          value={notes}
+                          onChange={(e) => setNotes(e.target.value)}
+                        />
+                      </div>
+                    )}
 
                     {/* Summary bill */}
                     <div className="p-5 bg-slate-100 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-white/5 space-y-3.5 text-sm">
@@ -946,7 +978,9 @@ export function BookingContent() {
                           Total Estimated Cost:
                         </span>
                         <span className="font-black text-primary">
-                          ${priceEstimate} AUD
+                          {part === "other"
+                            ? "Free Diagnosis (Quote on arrival)"
+                            : `$${priceEstimate} AUD`}
                         </span>
                       </div>
                     </div>
@@ -1053,7 +1087,11 @@ export function BookingContent() {
                       <span className="text-slate-600 dark:text-slate-400">
                         Estimated Cost:
                       </span>
-                      <span className="text-primary">${priceEstimate} AUD</span>
+                      <span className="text-primary">
+                        {part === "other"
+                          ? "Free Diagnosis"
+                          : `$${priceEstimate} AUD`}
+                      </span>
                     </div>
                   </div>
 

@@ -61,7 +61,7 @@ export const QuickServices = () => {
         "border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-lg dark:hover:shadow-primary/5",
       description:
         "High-quality battery cell replacement for health status capacity below 80%, rapid drainage, sudden auto-shutdowns at 20-30%, device overheating during charge, or physical swelling that lifts the glass screen.",
-      icon: "/battery2.png",
+      icon: "/battery.png",
       link: `${Routes.PRICING}?part=battery`,
     },
     {
@@ -125,17 +125,17 @@ export const QuickServices = () => {
       icon: Shield,
       link: `${Routes.PRICING}?part=housing`,
     },
-    {
-      id: "software",
-      title: "Software Repair",
-      price: "$59",
-      duration: "30 mins",
-      borderClass: "gradient-border-premium",
-      description:
-        "Solve iOS boot loops, forgotten passcode locks, stuck recovery mode logos, failing system updates, or iTunes errors.",
-      icon: Cpu,
-      link: `${Routes.PRICING}?part=software`,
-    },
+    // {
+    //   id: "software",
+    //   title: "Software Repair",
+    //   price: "$59",
+    //   duration: "30 mins",
+    //   borderClass: "gradient-border-premium",
+    //   description:
+    //     "Solve iOS boot loops, forgotten passcode locks, stuck recovery mode logos, failing system updates, or iTunes errors.",
+    //   icon: Cpu,
+    //   link: `${Routes.PRICING}?part=software`,
+    // },
   ];
 
   return (
@@ -175,7 +175,8 @@ export const QuickServices = () => {
               return (
                 <div
                   key={service.id}
-                  className={`flex flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 transition-all duration-300 ${service.borderClass}`}
+                  onClick={() => router.push(service.link)}
+                  className={`flex flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 transition-all duration-300 cursor-pointer ${service.borderClass}`}
                 >
                   <div className="space-y-5">
                     <div className="flex items-center justify-between gap-3 min-h-[28px]">
@@ -229,15 +230,10 @@ export const QuickServices = () => {
 
                   {/* Bottom Button Action */}
                   <div className="pt-6 mt-6 border-t border-slate-200/50 dark:border-white/5">
-                    <Button
-                      onClick={() => router.push(service.link)}
-                      variant={"outline"}
-                      color="primary"
-                      className="w-full  hover:bg-primary hover:text-white dark:bg-slate-850 dark:hover:bg-primary text-primary hover:dark:text-white  dark:border-white/10 hover:border-primary dark:hover:border-primary rounded-xl py-3.5 cursor-pointer flex items-center justify-center gap-2 font-extrabold text-sm transition-all duration-300 shadow-sm"
-                    >
+                    <div className="w-full hover:bg-primary hover:text-white dark:bg-slate-850 dark:hover:bg-primary text-primary hover:dark:text-white dark:border-white/10 hover:border-primary dark:hover:border-primary rounded-xl py-3.5 flex items-center justify-center gap-2 font-extrabold text-sm transition-all duration-300 shadow-sm">
                       <span>Compare Types & Pricing</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    </div>
                   </div>
                 </div>
               );
@@ -255,14 +251,15 @@ export const QuickServices = () => {
             <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent lg:via-primary/20" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {otherServices.map((service) => {
               const IconComponent = service.icon;
 
               return (
                 <div
                   key={service.id}
-                  className="relative group overflow-hidden rounded-2xl p-6 border  shadow-md border-[#0858c3] dark:border-white/10 bg-white dark:bg-slate-900/60 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/20 flex flex-col justify-between h-48"
+                  onClick={() => router.push(service.link)}
+                  className="relative group overflow-hidden rounded-2xl p-6 border shadow-md border-[#0858c3] dark:border-white/10 bg-white dark:bg-slate-900/60 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/20 flex flex-col justify-between h-48 cursor-pointer"
                 >
                   {/* Default State content */}
                   <div className="space-y-4 flex flex-col items-center text-center justify-center h-full pb-2">
@@ -275,12 +272,9 @@ export const QuickServices = () => {
                   </div>
 
                   {/* Tiny redirect indicator */}
-                  <button
-                    onClick={() => router.push(service.link)}
-                    className="absolute bottom-4 right-4 h-8 w-8 rounded-full  flex items-center justify-center transition-all duration-300 cursor-pointer"
-                  >
+                  <div className="absolute bottom-4 right-4 h-8 w-8 rounded-full flex items-center justify-center transition-all duration-300">
                     <ArrowCircleRightIcon className="size-8 text-primary" />
-                  </button>
+                  </div>
 
                   {/* Hover Slide-up Panel for Description */}
                   <div className="absolute inset-0 bg-white dark:bg-slate-950 p-4 flex flex-col justify-between transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-20 border border-primary rounded-2xl shadow-lg shadow-primary/10">
@@ -298,13 +292,10 @@ export const QuickServices = () => {
                         <span>From {service.price}</span>
                         <span>{service.duration}</span>
                       </div>
-                      <button
-                        onClick={() => router.push(service.link)}
-                        className="h-8 px-3 rounded-lg bg-primary hover:bg-primary/95 text-white hover:text-white text-xs font-bold flex items-center gap-1 border border-primary transition-all duration-200 cursor-pointer shadow-sm"
-                      >
+                      <div className="h-8 px-3 rounded-lg bg-primary hover:bg-primary/95 text-white hover:text-white text-xs font-bold flex items-center gap-1 border border-primary transition-all duration-200 shadow-sm">
                         <span>Learn more</span>
                         <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
+                      </div>
                     </div>
                   </div>
                 </div>

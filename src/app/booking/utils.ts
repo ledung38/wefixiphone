@@ -81,7 +81,9 @@ export const generateBookingEmailHTML = (params: {
               }
               <tr>
                 <td style="padding: 12px 0 0 0; color: #0f172a; font-weight: bold; font-size: 16px; border-top: 1px solid #e2e8f0;">Total Cost:</td>
-                <td style="padding: 12px 0 0 0; color: #f4601f; font-weight: 800; font-size: 18px; border-top: 1px solid #e2e8f0;">$${params.price} AUD</td>
+                <td style="padding: 12px 0 0 0; color: #f4601f; font-weight: 800; font-size: 18px; border-top: 1px solid #e2e8f0;">
+                  ${params.price === 0 ? "Free Diagnosis (Quote on arrival)" : `$${params.price} AUD`}
+                </td>
               </tr>
             </table>
           </div>
