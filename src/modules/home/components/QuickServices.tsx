@@ -6,7 +6,6 @@ import {
   Camera,
   Clock,
   Cpu,
-  Phone,
   Shield,
   ShieldCheck,
   Volume2,
@@ -48,7 +47,7 @@ export const QuickServices = () => {
         "border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-lg dark:hover:shadow-primary/5",
       description:
         "Professional replacement for cracked glass, unresponsive touch screens, vertical green lines, bleeding LCD/OLED black spots, or completely dead display panels. Includes True Tone calibration to restore authentic system colors.",
-      icon: "/screen.png",
+      icon: "/fix_screen_car.png",
       link: `${Routes.PRICING}?part=screen`,
     },
     {
@@ -142,7 +141,7 @@ export const QuickServices = () => {
   return (
     <section
       id="services"
-      className="w-full py-24 bg-slate-100/30 dark:bg-slate-900/10 relative"
+      className="w-full py-16 sm:py-24 bg-slate-100/30 dark:bg-slate-900/10 relative"
     >
       <div className="absolute top-0 z-0 left-0 w-full h-50 bg-linear-to-b from-primary/80 to-background  ">
         {/* <svg

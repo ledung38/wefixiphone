@@ -1,3 +1,4 @@
+import { TextGradient } from "@/components/common/TextGradient";
 import React, { useState, useRef, useEffect } from "react";
 
 const DIff = () => {
@@ -28,12 +29,17 @@ const DIff = () => {
     <div>
       {" "}
       {/* 3. BEFORE / AFTER SECTION */}
-      <section className="w-full py-24 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
+      <section className="w-full py-12 sm:py-24 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-center">
           <div className="space-y-4">
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            <TextGradient
+              className={
+                "text-3xl sm:text-4xl font-extrabold tracking-tight  dark:text-white"
+              }
+            >
               Drag to See the Difference
-            </h2>
+            </TextGradient>
+
             <p className="text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
               Shattered iPhone screens are replaced and perfectly restored in
               just 20 minutes.

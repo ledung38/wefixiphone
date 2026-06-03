@@ -95,7 +95,7 @@ export const WhyFixNow = () => {
   return (
     <section
       id="why-fix-now"
-      className="w-full py-24 bg-white dark:bg-slate-950 relative"
+      className="w-full py-12 sm:py-24 bg-white dark:bg-slate-950 relative"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
         {/* Section Header */}

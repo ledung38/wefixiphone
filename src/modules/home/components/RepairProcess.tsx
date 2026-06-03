@@ -286,7 +286,7 @@ export const RepairProcess = () => {
   return (
     <section
       id="repair-process"
-      className="w-full py-24 bg-white dark:bg-slate-950 relative overflow-hidden"
+      className="w-full py-12 sm:py-24 bg-white dark:bg-slate-950 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
         {/* Section Header */}
