@@ -25,7 +25,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Copy env variable with higher priority override (.env.production)
-COPY .env.$ENVIROMENT .env.production
+COPY .env.$ENVIROMENT .env.local
 # Disable telemetry during next build
 ENV NEXT_TELEMETRY_DISABLED=1
 
