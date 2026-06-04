@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 // Base metadata setting
-const baseUrl = "https://wefixiphone.com.au";
+const baseUrl = "https://www.wefixiphone.com.au";
 const siteName = "WeFixiPhone";
 const description =
   "Professional mobile on-site iPhone repair in Sydney. Screen and battery replacements completed in 20 minutes right in front of you. 12-month warranty, direct doorstep service.";
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     siteName,
     images: [
       {
-        url: `/hero_repair.png`,
+        url: `/logo_1200x630.png`,
         width: 1200,
         height: 630,
         alt: `${siteName} - On-Site iPhone Repair`,
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteName} - On-Site iPhone Repair in Sydney`,
     description,
-    images: [`/hero_repair.png`],
+    images: [`/logo_1200x630.png`],
     creator: "@wefixiphone",
   },
 
@@ -171,7 +171,7 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               "@id": baseUrl,
               name: "WeFixiPhone Sydney",
-              image: `${baseUrl}/hero_repair.png`,
+              image: `${baseUrl}/logo_1200x630.png`,
               description,
               url: baseUrl,
               telephone: "+61-433 263 105",

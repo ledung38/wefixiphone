@@ -2,7 +2,7 @@ import { BookingContent } from "@/app/booking/page.client";
 import React from "react";
 import { Metadata } from "next";
 
-const url = "https://wefixiphone.com.au/booking";
+const url = "https://www.wefixiphone.com.au/booking";
 const title = "Book an On-Site iPhone Repair";
 const description =
   "Schedule your mobile iPhone screen or battery replacement on-site in Sydney. Choose your location, date, and time, and our technician will come to you.";
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "WeFixiPhone",
     images: [
       {
-        url: "/hero_repair.png",
+        url: "/logo_1200x630.png",
         width: 1200,
         height: 630,
         alt: "Book an On-Site iPhone Repair - WeFixiPhone",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/hero_repair.png"],
+    images: ["/logo_1200x630.png"],
     creator: "@wefixiphone",
   },
 };
