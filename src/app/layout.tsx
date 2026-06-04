@@ -125,7 +125,7 @@ export const metadata: Metadata = {
 
   // Verification
   verification: {
-    google: "your-google-search-console-id",
+    google: "3Xa-dmqbOguKwSdaIQreaUQEJFoelDE0qtndSRF8D-M",
   },
 };
 
@@ -157,7 +157,7 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-
+        {/* <meta name="google-site-verification" content="3Xa-dmqbOguKwSdaIQreaUQEJFoelDE0qtndSRF8D-M" /> */}
         {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
