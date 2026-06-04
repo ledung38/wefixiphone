@@ -1,0 +1,9 @@
+{
+  "git": {
+    "deploymentEnabled": {
+      "master": true,
+      "feature/*": false,
+      "main": false
+    }
+  }
+}
