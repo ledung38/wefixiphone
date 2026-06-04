@@ -14,6 +14,19 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     key: "/#services",
     label: "Services",
+    children: [
+      { key: `${Routes.PRICING}?part=screen`, label: "Screen Replacement" },
+      { key: `${Routes.PRICING}?part=battery`, label: "Battery Replacement" },
+      {
+        key: `${Routes.PRICING}?part=back-glass`,
+        label: "Back Glass Replacement",
+      },
+      { key: `${Routes.PRICING}?part=charging`, label: "Charging Port Repair" },
+      { key: `${Routes.PRICING}?part=camera`, label: "Camera Repair" },
+      { key: `${Routes.PRICING}?part=audio`, label: "Speaker & Audio Repair" },
+      { key: `${Routes.PRICING}?part=housing`, label: "Housing Replacement" },
+      // { key: `${Routes.PRICING}?part=software`, label: "Software Repair" },
+    ],
   },
   {
     key: Routes.PRICING,

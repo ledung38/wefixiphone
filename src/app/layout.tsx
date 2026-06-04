@@ -99,8 +99,18 @@ export const metadata: Metadata = {
         url: "/favicon.ico",
         sizes: "any",
       },
+      {
+        url: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
     ],
-    apple: "/logo-maskable.png",
+    apple: "/logo_500x500.png",
   },
 
   // Manifest
@@ -197,7 +207,7 @@ export default function RootLayout({
               aggregateRating: {
                 "@type": "AggregateRating",
                 ratingValue: "4.9",
-                reviewCount: "2000",
+                reviewCount: "50",
               },
             }),
           }}
@@ -212,7 +222,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "WeFixiPhone Sydney",
               url: baseUrl,
-              logo: `${baseUrl}/hero_repair.png`,
+              logo: `${baseUrl}/logo_500x500.png`,
               description,
               sameAs: [
                 "https://www.facebook.com/wefixiphone.sydney",
