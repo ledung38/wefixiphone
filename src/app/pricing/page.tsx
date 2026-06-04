@@ -1,7 +1,7 @@
 import PricingPage from "@/app/pricing/page.client";
 import { Metadata } from "next";
 
-const url = "https://wefixiphone.com.au/pricing";
+const url = "https://www.wefixiphone.com.au/pricing";
 const title = "Transparent iPhone Repair Pricing";
 const description =
   "Check pricing for screen replacements, battery replacements, and other repairs for all iPhone models (iPhone X to iPhone 17 series) on-site in Sydney.";
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "WeFixiPhone",
     images: [
       {
-        url: "/hero_repair.png",
+        url: "/logo_1200x630.png",
         width: 1200,
         height: 630,
         alt: "Transparent iPhone Repair Pricing - WeFixiPhone",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/hero_repair.png"],
+    images: ["/logo_1200x630.png"],
     creator: "@wefixiphone",
   },
 };

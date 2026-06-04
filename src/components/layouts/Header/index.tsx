@@ -140,12 +140,12 @@ export const Header = () => {
                 className="flex items-center gap-3 flex-shrink-0 group"
               >
                 <div className="relative py-2 transition-all duration-300 group-hover:scale-110 px-1">
-                  {!isScrolled && isHome && (
-                    <>
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0" />
-                    </>
-                  )}
+                  <div
+                    className={` absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
+                  />
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
+                  />
                   <Image
                     src="/logo_header2.png"
                     alt="Logo"
