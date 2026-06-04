@@ -22,6 +22,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/"],
       },
     ],
-    sitemap: "https://wefixiphone.com.au/sitemap.xml",
+    sitemap: "https://www.wefixiphone.com.au/sitemap.xml",
   };
 }

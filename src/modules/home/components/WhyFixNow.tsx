@@ -112,7 +112,7 @@ export const WhyFixNow = () => {
         </div>
 
         {/* 2-Column Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12  items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 dark:gap-6 items-start">
           {/* Column 1: Left - Kept phone error warning image (4 Cols) */}
           <div className="lg:col-span-5 flex justify-center lg:sticky lg:top-24 mb-8 lg:mb-0">
             <Image
@@ -125,7 +125,7 @@ export const WhyFixNow = () => {
           </div>
 
           {/* Column 2: Right - Grid of all 5 warning items fully displayed (8 Cols) */}
-          <div className="lg:col-span-7 grid grid-cols-1 gap-2 self-center">
+          <div className="lg:col-span-7 grid grid-cols-1  self-center">
             {issues.map((issue) => {
               const IconComponent = issue.icon;
 
