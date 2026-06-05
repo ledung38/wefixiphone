@@ -19,8 +19,7 @@ const Home = () => {
         <div className="absolute inset-0 z-0 ">
           <Image
             src="/hero_repair.png"
-            quality={100}
-            unoptimized
+            priority
             width={1920}
             height={1080}
             alt="iPhone Repair Technician"
