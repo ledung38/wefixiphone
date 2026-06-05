@@ -1,11 +1,7 @@
-"use client";
-
-import { Button } from "@/components/ui/Button";
 import {
   ArrowRight,
   Camera,
   Clock,
-  Cpu,
   Shield,
   ShieldCheck,
   Volume2,
@@ -16,7 +12,7 @@ import React from "react";
 import { ArrowCircleRightIcon } from "@/components/icons";
 import Image from "@/components/ui/Image";
 import { Routes } from "@/lib/enum/routes";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface ServiceItem {
   id: string;
@@ -32,8 +28,6 @@ interface ServiceItem {
 }
 
 export const QuickServices = () => {
-  const router = useRouter();
-
   // 3 Most Popular Services (Screen, Battery, Back Glass)
   const popularServices: ServiceItem[] = [
     {
@@ -173,9 +167,9 @@ export const QuickServices = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {popularServices.map((service) => {
               return (
-                <div
+                <Link
                   key={service.id}
-                  onClick={() => router.push(service.link)}
+                  href={service.link}
                   className={`flex flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 transition-all duration-300 cursor-pointer ${service.borderClass}`}
                 >
                   <div className="space-y-5">
@@ -235,7 +229,7 @@ export const QuickServices = () => {
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
@@ -256,9 +250,9 @@ export const QuickServices = () => {
               const IconComponent = service.icon;
 
               return (
-                <div
+                <Link
                   key={service.id}
-                  onClick={() => router.push(service.link)}
+                  href={service.link}
                   className="relative group overflow-hidden rounded-2xl p-6 border shadow-md border-[#0858c3] dark:border-white/10 bg-white dark:bg-slate-900/60 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/20 flex flex-col justify-between h-48 cursor-pointer"
                 >
                   {/* Default State content */}
@@ -298,7 +292,7 @@ export const QuickServices = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

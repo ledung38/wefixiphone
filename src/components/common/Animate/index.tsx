@@ -1,4 +1,5 @@
 "use client";
+
 import { Container, Text } from "@/components/ui";
 import Flex from "@/components/ui/Flex";
 import { motion } from "motion/react";
@@ -11,8 +12,17 @@ export const AnimateLink = motion(Link);
 export const AnimateDiv = motion(`div`);
 export const AnimateSpan = motion(`span`);
 export const AnimateButton = motion(`button`);
+export const AnimateLabel = motion(`label`);
 export const AnimateP = motion(`p`);
 export const AnimateUl = motion(`ul`);
 export const AnimateLi = motion(`li`);
 export const AnimateTr = motion(`tr`);
 export const AnimateTd = motion(`td`);
+export const AnimateNav = motion(`nav`);
+export const AnimateH1 = motion(`h1`);
+export const AnimateH2 = motion(`h2`);
+export const AnimateH3 = motion(`h3`);
+export const AnimateH4 = motion(`h4`);
+export const AnimateH5 = motion(`h5`);
+export const AnimateH6 = motion(`h6`);
+export const AnimateA = motion(`a`);

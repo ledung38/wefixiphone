@@ -1,9 +1,6 @@
-"use client";
-
 import { TextGradient } from "@/components/common/TextGradient";
 import Image from "@/components/ui/Image";
 import { Camera, Droplet, Smartphone, Wrench, Zap } from "lucide-react";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 interface WarningIssue {
@@ -19,8 +16,6 @@ interface WarningIssue {
 }
 
 export const WhyFixNow = () => {
-  const router = useRouter();
-
   const issues: WarningIssue[] = [
     {
       id: "screen",

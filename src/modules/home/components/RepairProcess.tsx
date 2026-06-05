@@ -1,10 +1,7 @@
-"use client";
-
-import React from "react";
-import { MapPin, Truck, Eye, CheckCircle } from "lucide-react";
-import Image from "@/components/ui/Image";
 import { TextGradient } from "@/components/common/TextGradient";
-import { CommentStar } from "@/components/icons/home";
+import Image from "@/components/ui/Image";
+import { MapPin, Truck } from "lucide-react";
+import React from "react";
 
 interface ProcessStep {
   id: string;
