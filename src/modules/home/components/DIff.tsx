@@ -1,3 +1,5 @@
+"use client";
+
 import { TextGradient } from "@/components/common/TextGradient";
 import React, { useState, useRef, useEffect } from "react";
 

@@ -21,7 +21,6 @@ export * from "./Form";
 // export * from "./FullCalendar";
 export * from "./HoverCard";
 export * from "./Image";
-export * from "./index";
 export * from "./Input";
 export * from "./Label";
 export * from "./List";

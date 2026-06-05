@@ -1,5 +1,3 @@
-"use client";
-
 import { TickIcon } from "@/components/icons";
 import Image from "@/components/ui/Image";
 
