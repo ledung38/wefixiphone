@@ -202,11 +202,9 @@ export const QuickServices = () => {
                         src={
                           typeof service.icon === "string" ? service.icon : ""
                         }
-                        alt="hero"
-                        width={100}
-                        quality={100}
-                        unoptimized
-                        height={100}
+                        alt={service.title}
+                        width={400}
+                        height={250}
                         className="w-full h-full object-center object-cover rounded-2xl"
                       />
                     </div>

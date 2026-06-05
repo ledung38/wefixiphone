@@ -135,7 +135,6 @@ const Footer = () => {
                       src="/logo_header2.png"
                       alt="Logo"
                       priority
-                      quality={100}
                       width={120}
                       height={60}
                       unoptimized
