@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "spotlesscleaningsydney.com",
+        hostname: "wefixiphone.com.au",
       },
       {
         protocol: "https",
@@ -87,45 +87,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Redirects for SEO
-  async redirects() {
-    return [
-      // 1️⃣ Redirect non-www → www
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "spotlesscleaningsydney.com",
-          },
-        ],
-        destination: "https://www.spotlesscleaningsydney.com/:path*",
-        permanent: true,
-      },
-
-      // 2️⃣ Redirect HTTP → HTTPS
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "header",
-            key: "x-forwarded-proto",
-            value: "http",
-          },
-        ],
-        destination: "https://www.spotlesscleaningsydney.com/:path*",
-        permanent: true,
-      },
-
-      // 3️⃣ Remove trailing slash
-      {
-        source: "/:path+/",
-        destination: "/:path+",
-        permanent: true,
-      },
-    ];
-  },
-
   // Rewrites
   async rewrites() {
     return {
@@ -156,8 +117,7 @@ const nextConfig: NextConfig = {
   // Environment variables
   env: {
     NEXT_PUBLIC_SITE_URL:
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      "https://www.spotlesscleaningsydney.com",
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.wefixiphone.com.au",
   },
 
   // Turbopack for faster builds
