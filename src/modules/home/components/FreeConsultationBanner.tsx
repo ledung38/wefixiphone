@@ -130,8 +130,6 @@ export const FreeConsultationBanner = () => {
           alt="Premium iPhone Models Showcase"
           width={1920}
           height={500}
-          quality={100}
-          unoptimized
           className="w-full h-full object-cover object-[center_right] md:object-[top_right] opacity-40 md:opacity-85"
         />
       </div>
