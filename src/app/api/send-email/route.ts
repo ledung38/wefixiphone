@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
-    const { to, subject, message } = await req.json();
+    const { to, subject, message, deviceImage } = await req.json();
     if (!subject || !message) {
       return Response.json({ success: false }, { status: 400 });
     }
@@ -18,12 +18,22 @@ export async function POST(req: Request) {
       },
     });
 
+    const attachments: any[] = [];
+    if (deviceImage) {
+      attachments.push({
+        filename: "device-photo.jpg",
+        path: deviceImage,
+        cid: "devicePhoto",
+      });
+    }
+
     // 2. Gửi mail
     await transporter.sendMail({
       from: process.env.NEXT_PUBLIC_MAIL_USER,
       to: `${to}, wefixiphone102@gmail.com`,
       subject,
       html: message,
+      attachments,
     });
 
     return Response.json({ success: true });
