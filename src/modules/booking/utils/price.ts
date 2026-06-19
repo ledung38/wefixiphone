@@ -33,8 +33,14 @@ export const calculatePrice = (
       return prices.frontCamera;
     case "audio":
       return prices.audio;
+    case "power-button":
+      return prices.powerButtonFlex;
+    case "wifi-bluetooth":
+      return prices.wifiBluetooth;
+    case "microphone":
+      return prices.microphone;
     case "housing":
-      return prices.housing;
+      return prices.housing || 0;
     case "software":
       return prices.software;
     case "other":

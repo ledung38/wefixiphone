@@ -2,7 +2,14 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { Phone, ArrowRight, Loader2 } from "lucide-react";
+import {
+  Phone,
+  ArrowRight,
+  Loader2,
+  Upload,
+  Trash2,
+  Image as ImageIcon,
+} from "lucide-react";
 import Image from "@/components/ui/Image";
 import { Routes } from "@/lib/enum/routes";
 import { useRouter } from "next/navigation";
@@ -13,6 +20,7 @@ const generateDiagnosticEmailHTML = (params: {
   phone: string;
   email: string;
   description: string;
+  deviceImage?: string;
 }) => {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
@@ -48,6 +56,18 @@ const generateDiagnosticEmailHTML = (params: {
               <td style="padding: 12px 0 0 0; color: #64748b; font-weight: 600; vertical-align: top; border-top: 1px solid #e2e8f0;">Issue Description:</td>
               <td style="padding: 12px 0 0 0; color: #0f172a; border-top: 1px solid #e2e8f0; line-height: 1.5;">${params.description.replace(/\n/g, "<br/>")}</td>
             </tr>
+            ${
+              params.deviceImage
+                ? `
+            <tr>
+              <td style="padding: 12px 0 0 0; color: #64748b; font-weight: 600; vertical-align: top; border-top: 1px solid #e2e8f0;">Device Photo:</td>
+              <td style="padding: 12px 0 0 0; border-top: 1px solid #e2e8f0;">
+                <img src="cid:devicePhoto" alt="Uploaded Device Image" style="max-width: 100%; max-height: 240px; border-radius: 8px; border: 1px solid #e2e8f0; display: block; margin-top: 6px;" />
+              </td>
+            </tr>
+            `
+                : ""
+            }
           </table>
         </div>
 
@@ -65,6 +85,46 @@ const generateDiagnosticEmailHTML = (params: {
   `;
 };
 
+const compressImage = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new window.Image();
+      img.src = event.target?.result as string;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 800;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0, width, height);
+
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.7);
+        resolve(dataUrl);
+      };
+      img.onerror = (err) => reject(err);
+    };
+    reader.onerror = (err) => reject(err);
+  });
+};
+
 export const FreeConsultationBanner = () => {
   const router = useRouter();
 
@@ -73,6 +133,8 @@ export const FreeConsultationBanner = () => {
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bannerImage, setBannerImage] = useState("");
+  const [isCompressing, setIsCompressing] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,6 +151,7 @@ export const FreeConsultationBanner = () => {
         phone,
         email,
         description,
+        deviceImage: bannerImage || undefined,
       });
 
       const res = await fetch("/api/send-email", {
@@ -98,6 +161,7 @@ export const FreeConsultationBanner = () => {
           to: email,
           subject: `🔍 Free Diagnostic Inquiry – ${name}`,
           message: emailContent,
+          deviceImage: bannerImage || undefined,
         }),
       });
 
@@ -108,6 +172,7 @@ export const FreeConsultationBanner = () => {
         setPhone("");
         setEmail("");
         setDescription("");
+        setBannerImage("");
       } else {
         toast.error(
           "Failed to send request. Please check your network or try again.",
@@ -234,6 +299,86 @@ export const FreeConsultationBanner = () => {
                     rows={3}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-slate-500 focus:outline-none focus:border-primary text-xs transition-colors duration-200 resize-none"
                   />
+                </div>
+
+                {/* Image Upload Option */}
+                <div className="space-y-1.5 text-left">
+                  <label className="text-[10px] font-bold text-slate-300 flex items-center gap-1">
+                    <ImageIcon className="w-3.5 h-3.5 text-amber-400" />
+                    Upload Phone Photo (Optional):
+                  </label>
+
+                  {bannerImage ? (
+                    <div className="relative inline-block rounded-xl overflow-hidden border border-white/10 bg-slate-950">
+                      <img
+                        src={bannerImage}
+                        alt="Device Preview"
+                        className="max-h-36 object-contain rounded-xl"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setBannerImage("")}
+                        className="absolute top-1 right-1 bg-rose-500 hover:bg-rose-600 text-white rounded-full p-1 shadow-lg transition-colors duration-150 cursor-pointer"
+                        title="Remove image"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        id="banner-photo-upload"
+                        className="hidden"
+                        disabled={isCompressing}
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+
+                          if (file.size > 10 * 1024 * 1024) {
+                            toast.error("Image file must be under 10MB");
+                            return;
+                          }
+
+                          setIsCompressing(true);
+                          try {
+                            const compressedBase64 = await compressImage(file);
+                            setBannerImage(compressedBase64);
+                          } catch (err) {
+                            console.error(err);
+                            toast.error(
+                              "Failed to process image. Please try another one.",
+                            );
+                          } finally {
+                            setIsCompressing(false);
+                          }
+                        }}
+                      />
+                      <label
+                        htmlFor="banner-photo-upload"
+                        className={`flex flex-col items-center justify-center border border-dashed border-white/10 hover:border-primary bg-slate-950/60 rounded-xl p-3.5 text-center cursor-pointer transition-all duration-200 ${
+                          isCompressing ? "opacity-60 pointer-events-none" : ""
+                        }`}
+                      >
+                        {isCompressing ? (
+                          <>
+                            <Loader2 className="w-4 h-4 text-primary animate-spin mb-1" />
+                            <span className="text-[10px] text-slate-400">
+                              Compressing image...
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <Upload className="w-4 h-4 text-slate-400 mb-1" />
+                            <span className="text-[10px] font-semibold text-slate-300">
+                              Click to upload phone photo
+                            </span>
+                          </>
+                        )}
+                      </label>
+                    </div>
+                  )}
                 </div>
 
                 <Button

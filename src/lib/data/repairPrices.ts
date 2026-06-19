@@ -9,10 +9,13 @@ export interface RepairPrices {
   chargingPort: number;
   camera: number;
   audio: number;
-  housing: number;
+  housing?: number; // Optional to support commenting it out for specific models
   software: number;
   cameraLens: number;
   frontCamera: number;
+  powerButtonFlex: number;
+  wifiBluetooth: number;
+  microphone: number;
 }
 
 export const REPAIR_PRICES: Record<string, RepairPrices> = {
@@ -31,6 +34,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 110,
     frontCamera: 110,
+    powerButtonFlex: 110,
+    wifiBluetooth: 120,
+    microphone: 110,
   },
   "iphone-xr": {
     screenStandard: 120,
@@ -47,6 +53,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 110,
     frontCamera: 110,
+    powerButtonFlex: 110,
+    wifiBluetooth: 120,
+    microphone: 110,
   },
   "iphone-xs": {
     screenStandard: 130,
@@ -63,6 +72,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 110,
     frontCamera: 110,
+    powerButtonFlex: 110,
+    wifiBluetooth: 120,
+    microphone: 110,
   },
   "iphone-xs-max": {
     screenStandard: 130,
@@ -79,6 +91,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 120,
     frontCamera: 120,
+    powerButtonFlex: 120,
+    wifiBluetooth: 120,
+    microphone: 120,
   },
   "iphone-11": {
     screenStandard: 120,
@@ -95,6 +110,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 110,
     frontCamera: 120,
+    powerButtonFlex: 110,
+    wifiBluetooth: 120,
+    microphone: 110,
   },
   "iphone-11-pro": {
     screenStandard: 130,
@@ -111,6 +129,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 110,
     frontCamera: 120,
+    powerButtonFlex: 120,
+    wifiBluetooth: 130,
+    microphone: 120,
   },
   "iphone-11-pro-max": {
     screenStandard: 130,
@@ -127,6 +148,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 120,
     frontCamera: 120,
+    powerButtonFlex: 125,
+    wifiBluetooth: 135,
+    microphone: 125,
   },
   "iphone-12": {
     screenStandard: 130,
@@ -143,6 +167,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 120,
     frontCamera: 110,
+    powerButtonFlex: 120,
+    wifiBluetooth: 130,
+    microphone: 120,
   },
   "iphone-12-pro": {
     screenStandard: 130,
@@ -159,6 +186,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 120,
     frontCamera: 120,
+    powerButtonFlex: 130,
+    wifiBluetooth: 140,
+    microphone: 130,
   },
   "iphone-12-pro-max": {
     screenStandard: 140,
@@ -175,6 +205,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 120,
     frontCamera: 120,
+    powerButtonFlex: 130,
+    wifiBluetooth: 140,
+    microphone: 130,
   },
   "iphone-13": {
     screenStandard: 130,
@@ -191,6 +224,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 120,
     frontCamera: 110,
+    powerButtonFlex: 120,
+    wifiBluetooth: 130,
+    microphone: 120,
   },
   "iphone-13-pro": {
     screenStandard: 130,
@@ -207,6 +243,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 120,
     frontCamera: 120,
+    powerButtonFlex: 130,
+    wifiBluetooth: 140,
+    microphone: 130,
   },
   "iphone-13-pro-max": {
     screenStandard: 140,
@@ -223,6 +262,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 110,
     frontCamera: 120,
+    powerButtonFlex: 130,
+    wifiBluetooth: 140,
+    microphone: 130,
   },
   "iphone-14": {
     screenStandard: 130,
@@ -235,10 +277,32 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     chargingPort: 130,
     camera: 170,
     audio: 120,
-    housing: 170,
+    // housing: 170, // Commented out to hide housing for iPhone 14 per new business logic
     software: 60,
     cameraLens: 110,
     frontCamera: 120,
+    powerButtonFlex: 130,
+    wifiBluetooth: 140,
+    microphone: 130,
+  },
+  "iphone-14-plus": {
+    screenStandard: 140,
+    screenPremium: 180,
+    screenGenuine: 320,
+    batteryStandard: 120,
+    batteryPremium: 175,
+    batteryGenuine: 260,
+    backGlass: 140,
+    chargingPort: 130,
+    camera: 175,
+    audio: 120,
+    // housing: 180, // Commented out to hide housing for iPhone 14 Plus per new business logic
+    software: 60,
+    cameraLens: 110,
+    frontCamera: 120,
+    powerButtonFlex: 130,
+    wifiBluetooth: 140,
+    microphone: 130,
   },
   "iphone-14-pro": {
     screenStandard: 140,
@@ -255,6 +319,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 130,
     frontCamera: 130,
+    powerButtonFlex: 140,
+    wifiBluetooth: 150,
+    microphone: 140,
   },
   "iphone-14-pro-max": {
     screenStandard: 150,
@@ -271,6 +338,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 130,
     frontCamera: 130,
+    powerButtonFlex: 140,
+    wifiBluetooth: 155,
+    microphone: 140,
   },
   "iphone-15": {
     screenStandard: 140,
@@ -287,6 +357,28 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 130,
     frontCamera: 130,
+    powerButtonFlex: 140,
+    wifiBluetooth: 150,
+    microphone: 140,
+  },
+  "iphone-15-plus": {
+    screenStandard: 150,
+    screenPremium: 190,
+    screenGenuine: 580,
+    batteryStandard: 130,
+    batteryPremium: 165,
+    batteryGenuine: 260,
+    backGlass: 150,
+    chargingPort: 120,
+    camera: 160,
+    audio: 130,
+    housing: 280,
+    software: 60,
+    cameraLens: 130,
+    frontCamera: 130,
+    powerButtonFlex: 140,
+    wifiBluetooth: 150,
+    microphone: 140,
   },
   "iphone-15-pro": {
     screenStandard: 140,
@@ -303,6 +395,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 130,
     frontCamera: 130,
+    powerButtonFlex: 150,
+    wifiBluetooth: 160,
+    microphone: 150,
   },
   "iphone-15-pro-max": {
     screenStandard: 150,
@@ -319,6 +414,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 140,
     frontCamera: 140,
+    powerButtonFlex: 150,
+    wifiBluetooth: 160,
+    microphone: 150,
   },
   "iphone-16": {
     screenStandard: 140,
@@ -335,6 +433,28 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 130,
     frontCamera: 130,
+    powerButtonFlex: 140,
+    wifiBluetooth: 150,
+    microphone: 140,
+  },
+  "iphone-16-plus": {
+    screenStandard: 150,
+    screenPremium: 200,
+    screenGenuine: 380,
+    batteryStandard: 135,
+    batteryPremium: 175,
+    batteryGenuine: 260,
+    backGlass: 140,
+    chargingPort: 130,
+    camera: 170,
+    audio: 130,
+    housing: 310,
+    software: 60,
+    cameraLens: 130,
+    frontCamera: 130,
+    powerButtonFlex: 140,
+    wifiBluetooth: 150,
+    microphone: 140,
   },
   "iphone-16-pro": {
     screenStandard: 150,
@@ -351,6 +471,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 130,
     frontCamera: 130,
+    powerButtonFlex: 150,
+    wifiBluetooth: 160,
+    microphone: 150,
   },
   "iphone-16-pro-max": {
     screenStandard: 160,
@@ -367,6 +490,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 130,
     frontCamera: 130,
+    powerButtonFlex: 150,
+    wifiBluetooth: 165,
+    microphone: 150,
   },
   "iphone-17": {
     screenStandard: 160,
@@ -383,6 +509,28 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 130,
     frontCamera: 150,
+    powerButtonFlex: 150,
+    wifiBluetooth: 160,
+    microphone: 150,
+  },
+  "iphone-17-plus": {
+    screenStandard: 170,
+    screenPremium: 220,
+    screenGenuine: 580,
+    batteryStandard: 150,
+    batteryPremium: 210,
+    batteryGenuine: 280,
+    backGlass: 140,
+    chargingPort: 140,
+    camera: 210,
+    audio: 140,
+    housing: 330,
+    software: 60,
+    cameraLens: 130,
+    frontCamera: 150,
+    powerButtonFlex: 150,
+    wifiBluetooth: 160,
+    microphone: 150,
   },
   "iphone-17-pro": {
     screenStandard: 170,
@@ -399,6 +547,9 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 120,
     frontCamera: 130,
+    powerButtonFlex: 160,
+    wifiBluetooth: 170,
+    microphone: 160,
   },
   "iphone-17-pro-max": {
     screenStandard: 170,
@@ -415,5 +566,8 @@ export const REPAIR_PRICES: Record<string, RepairPrices> = {
     software: 60,
     cameraLens: 130,
     frontCamera: 130,
+    powerButtonFlex: 160,
+    wifiBluetooth: 170,
+    microphone: 160,
   },
 };

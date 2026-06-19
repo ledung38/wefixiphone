@@ -4,6 +4,7 @@ export interface PhoneModel {
   baseScreen: number;
   baseBattery: number;
   gen: number;
+  isBackGlassRemovable?: boolean;
 }
 
 export const IPHONE_MODELS: PhoneModel[] = [
@@ -98,6 +99,15 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 179,
     baseBattery: 129,
     gen: 5,
+    isBackGlassRemovable: true,
+  },
+  {
+    id: "iphone-14-plus",
+    name: "iPhone 14 Plus",
+    baseScreen: 189,
+    baseBattery: 129,
+    gen: 5,
+    isBackGlassRemovable: true,
   },
   {
     id: "iphone-14-pro",
@@ -105,6 +115,7 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 199,
     baseBattery: 139,
     gen: 5,
+    isBackGlassRemovable: false,
   },
   {
     id: "iphone-14-pro-max",
@@ -112,6 +123,7 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 219,
     baseBattery: 149,
     gen: 5,
+    isBackGlassRemovable: false,
   },
   {
     id: "iphone-15",
@@ -119,6 +131,15 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 220,
     baseBattery: 149,
     gen: 6,
+    isBackGlassRemovable: true,
+  },
+  {
+    id: "iphone-15-plus",
+    name: "iPhone 15 Plus",
+    baseScreen: 240,
+    baseBattery: 149,
+    gen: 6,
+    isBackGlassRemovable: true,
   },
   {
     id: "iphone-15-pro",
@@ -126,6 +147,7 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 250,
     baseBattery: 159,
     gen: 6,
+    isBackGlassRemovable: true,
   },
   {
     id: "iphone-15-pro-max",
@@ -133,6 +155,7 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 290,
     baseBattery: 169,
     gen: 6,
+    isBackGlassRemovable: true,
   },
   {
     id: "iphone-16",
@@ -140,6 +163,15 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 260,
     baseBattery: 159,
     gen: 7,
+    isBackGlassRemovable: true,
+  },
+  {
+    id: "iphone-16-plus",
+    name: "iPhone 16 Plus",
+    baseScreen: 280,
+    baseBattery: 159,
+    gen: 7,
+    isBackGlassRemovable: true,
   },
   {
     id: "iphone-16-pro",
@@ -147,6 +179,7 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 290,
     baseBattery: 169,
     gen: 7,
+    isBackGlassRemovable: true,
   },
   {
     id: "iphone-16-pro-max",
@@ -154,6 +187,7 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 330,
     baseBattery: 179,
     gen: 7,
+    isBackGlassRemovable: true,
   },
   {
     id: "iphone-17",
@@ -161,6 +195,15 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 290,
     baseBattery: 169,
     gen: 8,
+    isBackGlassRemovable: true,
+  },
+  {
+    id: "iphone-17-plus",
+    name: "iPhone 17 Plus",
+    baseScreen: 310,
+    baseBattery: 169,
+    gen: 8,
+    isBackGlassRemovable: true,
   },
   {
     id: "iphone-17-pro",
@@ -168,6 +211,7 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 340,
     baseBattery: 179,
     gen: 8,
+    isBackGlassRemovable: true,
   },
   {
     id: "iphone-17-pro-max",
@@ -175,6 +219,7 @@ export const IPHONE_MODELS: PhoneModel[] = [
     baseScreen: 390,
     baseBattery: 189,
     gen: 8,
+    isBackGlassRemovable: true,
   },
 ];
 
@@ -189,8 +234,14 @@ export const PARTS: RepairPart[] = [
   { id: "back-glass", name: "Back Glass Replacement" },
   { id: "charging", name: "Charging Port Repair" },
   { id: "camera", name: "Camera Repair" },
+  { id: "camera-lens", name: "Rear Camera Lens Replacement" },
   { id: "audio", name: "Speaker & Audio Repair" },
+  { id: "power-button", name: "Power Button FLEX Repair" },
+  { id: "wifi-bluetooth", name: "Wifi/Bluetooth (Antenna Flex) Repair" },
+  { id: "microphone", name: "Microphone Issue Repair" },
   { id: "housing", name: "Housing Replacement" },
+  { id: "other", name: "Other / Unsure (Describe issue)" },
+  // { id: "software", name: "Software Repair" },
 ];
 
 export const BOOKING_PARTS: RepairPart[] = [
@@ -199,8 +250,12 @@ export const BOOKING_PARTS: RepairPart[] = [
   { id: "back-glass", name: "Back Glass Replacement" },
   { id: "charging", name: "Charging Port Repair" },
   { id: "rear-camera", name: "Rear Camera Issue" },
+  { id: "camera-lens", name: "Rear Camera Lens Replacement" },
   { id: "front-camera", name: "Front Camera Issue" },
   { id: "audio", name: "Speaker & Audio Repair" },
+  { id: "power-button", name: "Power Button FLEX Repair" },
+  { id: "wifi-bluetooth", name: "Wifi/Bluetooth (Antenna Flex) Repair" },
+  { id: "microphone", name: "Microphone Issue Repair" },
   { id: "housing", name: "Housing Replacement" },
   { id: "other", name: "Other / Unsure (Describe below)" },
 ];
@@ -253,6 +308,19 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
       "Tested on-site for all zoom and portrait modes",
     ],
   },
+  "camera-lens": {
+    title: "Rear Camera Lens Replacement",
+    duration: "20 mins",
+    warranty: "12-Month Warranty",
+    description:
+      "Professional replacement of cracked, shattered, or scratched rear camera protective glass covers. Keeps dust, water droplets, and moisture out of your delicate camera sensor chamber.",
+    benefits: [
+      "OEM high-transmission replacement glass",
+      "Debris & dust cleaning under professional chamber",
+      "Restores clear photo capture without blurry spots",
+      "Completed in under 20 minutes on-site",
+    ],
+  },
   audio: {
     title: "Speaker & Audio Repair",
     duration: "25 mins",
@@ -264,6 +332,45 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
       "Mesh dust filter cleaning and replacement",
       "Clear voice call transmission restored",
       "Stereo audio output fully tested",
+    ],
+  },
+  "power-button": {
+    title: "Power Button FLEX Repair",
+    duration: "30 mins",
+    warranty: "12-Month Warranty",
+    description:
+      "Full replacement of the internal power button / sleep-wake flex cable assembly. Restores crisp tactile click feedback and solves issues with unresponsive buttons.",
+    benefits: [
+      "Premium tactile click action restoration",
+      "Brand new power button flex assembly",
+      "Tested on-site for immediate wake/sleep response",
+      "Doesn't impact logic board components",
+    ],
+  },
+  "wifi-bluetooth": {
+    title: "Wifi/Bluetooth (Antenna Flex) Repair",
+    duration: "35 mins",
+    warranty: "12-Month Warranty",
+    description:
+      "Resolves weak Wi-Fi signal reception, grayed-out settings toggles, failing AirDrop connections, or constant Bluetooth audio dropouts by replacing the high-frequency antenna assembly.",
+    benefits: [
+      "High-gain OEM spec antenna replacement",
+      "Restores maximum range and transfer speeds",
+      "Fixes settings slider connectivity errors",
+      "Thorough testing with active networks",
+    ],
+  },
+  microphone: {
+    title: "Microphone Issue Repair",
+    duration: "25 mins",
+    warranty: "12-Month Warranty",
+    description:
+      "Replaces the failing microphone module. Solves problems where callers can't hear you, FaceTime audio cuts out, or video recordings sound muffled and static.",
+    benefits: [
+      "Ultra-clear sound capturing capability",
+      "Brand new lower microphone port array",
+      "Cleans and clears dust grids during installation",
+      "Fully tested with voice memo and phone applications",
     ],
   },
   housing: {
