@@ -12,6 +12,7 @@ import { PricingCards } from "@/modules/pricing/components/PricingCards";
 import { SingleServiceCard } from "@/modules/pricing/components/SingleServiceCard";
 import { TechComparison } from "@/modules/pricing/components/TechComparison";
 import { ServiceDetails } from "@/modules/pricing/components/ServiceDetails";
+import { OtherIssueForm } from "@/modules/pricing/components/OtherIssueForm";
 import { Metadata } from "next";
 
 interface PageProps {
@@ -81,6 +82,7 @@ export default async function Page({ searchParams }: PageProps) {
     IPHONE_MODELS.find((m) => m.id === model) || IPHONE_MODELS[0];
   const prices = REPAIR_PRICES[model] || REPAIR_PRICES["iphone-x"];
 
+  const isOther = part === "other";
   const isTiered = part === "screen" || part === "battery";
 
   const tierPrices =
@@ -104,10 +106,18 @@ export default async function Page({ searchParams }: PageProps) {
         return prices.chargingPort;
       case "camera":
         return prices.camera;
+      case "camera-lens":
+        return prices.cameraLens;
       case "audio":
         return prices.audio;
+      case "power-button":
+        return prices.powerButtonFlex;
+      case "wifi-bluetooth":
+        return prices.wifiBluetooth;
+      case "microphone":
+        return prices.microphone;
       case "housing":
-        return prices.housing;
+        return prices.housing || 0;
       case "software":
         return prices.software;
       default:
@@ -140,7 +150,9 @@ export default async function Page({ searchParams }: PageProps) {
           <SearchFilters selectedModel={model} selectedPart={part} />
 
           {/* Pricing cards grid */}
-          {isTiered ? (
+          {isOther ? (
+            <OtherIssueForm />
+          ) : isTiered ? (
             <>
               <PricingCards
                 selectedModel={model}

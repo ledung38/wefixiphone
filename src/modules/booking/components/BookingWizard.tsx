@@ -37,6 +37,7 @@ export const BookingWizard = ({
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
+  const [deviceImage, setDeviceImage] = useState("");
 
   const [priceEstimate, setPriceEstimate] = useState(initialPrice);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -120,14 +121,17 @@ export const BookingWizard = ({
         quality: part === "screen" || part === "battery" ? quality : "",
         price: priceEstimate,
         notes,
+        deviceImage,
       });
 
       const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          to: email,
           subject: `📱 WeFixiPhone Booking Confirmed – ${name} (${generatedId})`,
           message: emailContent,
+          deviceImage: deviceImage || undefined,
         }),
       });
 
@@ -167,6 +171,8 @@ export const BookingWizard = ({
           setQuality={setQuality}
           priceEstimate={priceEstimate}
           onNext={handleNext}
+          deviceImage={deviceImage}
+          setDeviceImage={setDeviceImage}
         />
       )}
 

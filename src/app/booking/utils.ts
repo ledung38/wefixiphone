@@ -12,6 +12,7 @@ export const generateBookingEmailHTML = (params: {
   quality: string;
   price: number;
   notes: string;
+  deviceImage?: string;
 }) => {
   return `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
@@ -75,6 +76,18 @@ export const generateBookingEmailHTML = (params: {
               <tr>
                 <td style="padding: 6px 0; color: #64748b; font-weight: 600; vertical-align: top;">Notes:</td>
                 <td style="padding: 6px 0; color: #475569; font-style: italic;">"${params.notes}"</td>
+              </tr>
+              `
+                  : ""
+              }
+              ${
+                params.deviceImage
+                  ? `
+              <tr>
+                <td style="padding: 6px 0; color: #64748b; font-weight: 600; vertical-align: top;">Device Image:</td>
+                <td style="padding: 6px 0; color: #475569;">
+                  <img src="cid:devicePhoto" alt="Uploaded Device Image" style="max-width: 100%; max-height: 250px; border-radius: 8px; border: 1px solid #e2e8f0; display: block; margin-top: 6px;" />
+                </td>
               </tr>
               `
                   : ""

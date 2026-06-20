@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowRight,
   Camera,
@@ -6,8 +8,14 @@ import {
   ShieldCheck,
   Volume2,
   Wrench,
+  Power,
+  Wifi,
+  Mic,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import { ArrowCircleRightIcon } from "@/components/icons";
 import Image from "@/components/ui/Image";
@@ -26,8 +34,243 @@ interface ServiceItem {
   icon: React.ComponentType<any> | string;
   link: string;
 }
+// 5 Remaining Services (1-row grid layout)
+const otherServices: ServiceItem[] = [
+  {
+    id: "charging",
+    title: "Charging Port Repair",
+    price: "$89",
+    duration: "20 mins",
+    borderClass: "gradient-border-premium",
+    description:
+      "Fix loose Lightning/USB-C connectors that won't hold cables, require wiggling to charge, or show moisture warning screens.",
+    icon: Wrench,
+    link: `${Routes.PRICING}?part=charging`,
+  },
+  {
+    id: "camera",
+    title: "Camera Repair",
+    price: "$79",
+    duration: "20 mins",
+    borderClass: "gradient-border-premium",
+    description:
+      "Fix blurry lenses, autofocus failures, cracked protective glass covers, camera sensor dark spots, or shaky image OIS failures.",
+    icon: Camera,
+    link: `${Routes.PRICING}?part=camera`,
+  },
+  {
+    id: "audio",
+    title: "Speaker & Audio Repair",
+    price: "$69",
+    duration: "25 mins",
+    borderClass: "gradient-border-premium",
+    description:
+      "Fix low or muffled ear speaker volume during phone calls, microphone issues, or crackling static audio sounds.",
+    icon: Volume2,
+    link: `${Routes.PRICING}?part=audio`,
+  },
+  {
+    id: "power-button",
+    title: "Power Button FLEX",
+    price: "$110",
+    duration: "30 mins",
+    borderClass: "gradient-border-premium",
+    description:
+      "Fix sticky, unresponsive, or double-clicking sleep/wake power buttons and restore crisp click tactile response.",
+    icon: Power,
+    link: `${Routes.PRICING}?part=power-button`,
+  },
+  {
+    id: "wifi-bluetooth",
+    title: "Wifi/Bluetooth (Antenna Flex)",
+    price: "$120",
+    duration: "35 mins",
+    borderClass: "gradient-border-premium",
+    description:
+      "Fix weak Wi-Fi signal, frequent Bluetooth disconnections, grayed-out settings, or failure to find nearby networks.",
+    icon: Wifi,
+    link: `${Routes.PRICING}?part=wifi-bluetooth`,
+  },
+  {
+    id: "microphone",
+    title: "Microphone issue",
+    price: "$110",
+    duration: "25 mins",
+    borderClass: "gradient-border-premium",
+    description:
+      "Fix low volume or muffled voice during phone calls, FaceTime, or video recording where the other party cannot hear you.",
+    icon: Mic,
+    link: `${Routes.PRICING}?part=microphone`,
+  },
+  {
+    id: "housing",
+    title: "Housing Replacement",
+    price: "$149",
+    duration: "60 mins",
+    borderClass: "gradient-border-premium",
+    description:
+      "Replace entire bent metal frames, structural chassis corners with deep scratches/dents, or restore stuck hardware buttons.",
+    icon: Shield,
+    link: `${Routes.PRICING}?part=housing`,
+  },
+  // {
+  //   id: "software",
+  //   title: "Software Repair",
+  //   price: "$59",
+  //   duration: "30 mins",
+  //   borderClass: "gradient-border-premium",
+  //   description:
+  //     "Solve iOS boot loops, forgotten passcode locks, stuck recovery mode logos, failing system updates, or iTunes errors.",
+  //   icon: Cpu,
+  //   link: `${Routes.PRICING}?part=software`,
+  // },
+];
 
 export const QuickServices = () => {
+  const router = useRouter();
+
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const requestRef = React.useRef<number | null>(null);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const [startX, setStartX] = React.useState(0);
+  const [scrollLeftStart, setScrollLeftStart] = React.useState(0);
+  const [hasDragged, setHasDragged] = React.useState(false);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setHasDragged(false);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeftStart(scrollRef.current.scrollLeft);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setHasDragged(false);
+    setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
+    setScrollLeftStart(scrollRef.current.scrollLeft);
+  };
+
+  const endDrag = () => {
+    setIsDragging(false);
+    setIsHovered(false);
+    if (!scrollRef.current) return;
+
+    if (hasDragged) {
+      const container = scrollRef.current;
+      const diff = container.scrollLeft - scrollLeftStart;
+      const itemWidth = 304;
+      const currentIdx = Math.round(scrollLeftStart / itemWidth);
+
+      let targetIdx = currentIdx;
+      if (diff > 50) {
+        targetIdx = currentIdx + 1;
+      } else if (diff < -50) {
+        targetIdx = currentIdx - 1;
+      }
+
+      container.scrollTo({ left: targetIdx * itemWidth, behavior: "smooth" });
+      setHasDragged(false);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    endDrag();
+  };
+
+  const handleMouseUp = () => {
+    endDrag();
+  };
+
+  const handleTouchEnd = () => {
+    endDrag();
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    setHasDragged(true);
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeftStart - walk;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    setHasDragged(true);
+    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeftStart - walk;
+  };
+
+  const handleScroll = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const L = otherServices.length;
+    const itemWidth = 304; // 280px card + 24px gap
+    const totalWidth = L * itemWidth;
+
+    if (container.scrollLeft < 50) {
+      container.scrollLeft += totalWidth;
+    } else if (container.scrollLeft > totalWidth * 2 - 50) {
+      container.scrollLeft -= totalWidth;
+    }
+  };
+
+  const handleCardClick = (e: React.MouseEvent, link: string) => {
+    if (hasDragged) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      router.push(link);
+    }
+  };
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const container = scrollRef.current;
+    if (!container) return;
+    container.scrollBy({ left: -304, behavior: "smooth" });
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const container = scrollRef.current;
+    if (!container) return;
+    container.scrollBy({ left: 304, behavior: "smooth" });
+  };
+
+  // Set initial scroll position to middle (start of second copy)
+  React.useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const L = otherServices.length;
+    const itemWidth = 304;
+    container.scrollLeft = L * itemWidth;
+  }, [otherServices.length]);
+
+  // Continuous auto scroll (elevator effect) using requestAnimationFrame
+  const animate = () => {
+    const container = scrollRef.current;
+    if (container && !isDragging && !isHovered) {
+      container.scrollLeft += 0.8; // Smooth pixel-by-pixel scrolling
+    }
+    requestRef.current = requestAnimationFrame(animate);
+  };
+
+  React.useEffect(() => {
+    requestRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    };
+  }, [isDragging, isHovered]);
+
   // 3 Most Popular Services (Screen, Battery, Back Glass)
   const popularServices: ServiceItem[] = [
     {
@@ -71,65 +314,6 @@ export const QuickServices = () => {
       icon: "/back-glass.png",
       link: `${Routes.PRICING}?part=back-glass`,
     },
-  ];
-
-  // 5 Remaining Services (1-row grid layout)
-  const otherServices: ServiceItem[] = [
-    {
-      id: "charging",
-      title: "Charging Port Repair",
-      price: "$89",
-      duration: "20 mins",
-      borderClass: "gradient-border-premium",
-      description:
-        "Fix loose Lightning/USB-C connectors that won't hold cables, require wiggling to charge, or show moisture warning screens.",
-      icon: Wrench,
-      link: `${Routes.PRICING}?part=charging`,
-    },
-    {
-      id: "camera",
-      title: "Camera Repair",
-      price: "$79",
-      duration: "20 mins",
-      borderClass: "gradient-border-premium",
-      description:
-        "Fix blurry lenses, autofocus failures, cracked protective glass covers, camera sensor dark spots, or shaky image OIS failures.",
-      icon: Camera,
-      link: `${Routes.PRICING}?part=camera`,
-    },
-    {
-      id: "audio",
-      title: "Speaker & Audio Repair",
-      price: "$69",
-      duration: "25 mins",
-      borderClass: "gradient-border-premium",
-      description:
-        "Fix low or muffled ear speaker volume during phone calls, microphone issues, or crackling static audio sounds.",
-      icon: Volume2,
-      link: `${Routes.PRICING}?part=audio`,
-    },
-    {
-      id: "housing",
-      title: "Housing Replacement",
-      price: "$149",
-      duration: "60 mins",
-      borderClass: "gradient-border-premium",
-      description:
-        "Replace entire bent metal frames, structural chassis corners with deep scratches/dents, or restore stuck hardware buttons.",
-      icon: Shield,
-      link: `${Routes.PRICING}?part=housing`,
-    },
-    // {
-    //   id: "software",
-    //   title: "Software Repair",
-    //   price: "$59",
-    //   duration: "30 mins",
-    //   borderClass: "gradient-border-premium",
-    //   description:
-    //     "Solve iOS boot loops, forgotten passcode locks, stuck recovery mode logos, failing system updates, or iTunes errors.",
-    //   icon: Cpu,
-    //   link: `${Routes.PRICING}?part=software`,
-    // },
   ];
 
   return (
@@ -233,8 +417,8 @@ export const QuickServices = () => {
           </div>
         </div>
 
-        {/* 2. Other Services (1-Row Grid, Icon/Title/Redirect default, hover slides up description with border-primary and shadow) */}
-        <div className="space-y-8 ">
+        {/* 2. Other Services (Draggable Infinite Auto-Sliding Loop Carousel) */}
+        <div className="space-y-8">
           <div className="flex items-center gap-3">
             <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent lg:via-primary/20" />
             <h3 className="text-xs font-bold tracking-widest uppercase text-slate-450 dark:text-slate-500 text-center px-4">
@@ -243,57 +427,115 @@ export const QuickServices = () => {
             <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent lg:via-primary/20" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {otherServices.map((service) => {
-              const IconComponent = service.icon;
+          <div className="w-full overflow-hidden relative py-4">
+            {/* Left & Right gradient overlays for smooth fade edges */}
+            <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-slate-100/30 to-transparent dark:from-slate-950 pointer-events-none z-10" />
+            <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-slate-100/30 to-transparent dark:from-slate-950 pointer-events-none z-10" />
 
-              return (
-                <Link
-                  key={service.id}
-                  href={service.link}
-                  className="relative group overflow-hidden rounded-2xl p-6 border shadow-md border-[#0858c3] dark:border-white/10 bg-white dark:bg-slate-900/60 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/20 flex flex-col justify-between h-48 cursor-pointer"
-                >
-                  {/* Default State content */}
-                  <div className="space-y-4 flex flex-col items-center text-center justify-center h-full pb-2">
-                    <div className="h-12 w-12 rounded-2xl bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 shadow-inner">
-                      <IconComponent className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <h4 className="font-black text-lg text-slate-900 dark:text-white leading-tight">
-                      {service.title}
-                    </h4>
-                  </div>
+            {/* Left Nav Arrow */}
+            <button
+              onClick={handlePrev}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-100 h-12 w-12 rounded-full border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xs flex items-center justify-center text-slate-700 dark:text-slate-350 shadow-md hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white hover:border-primary transition-all duration-300 focus:outline-none"
+              aria-label="Previous service"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
 
-                  {/* Tiny redirect indicator */}
-                  <div className="absolute bottom-4 right-4 h-8 w-8 rounded-full flex items-center justify-center transition-all duration-300">
-                    <ArrowCircleRightIcon className="size-8 text-primary" />
-                  </div>
+            {/* Right Nav Arrow */}
+            <button
+              onClick={handleNext}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-100 h-12 w-12 rounded-full border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xs flex items-center justify-center text-slate-700 dark:text-slate-350 shadow-md hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white hover:border-primary transition-all duration-300 focus:outline-none"
+              aria-label="Next service"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
 
-                  {/* Hover Slide-up Panel for Description */}
-                  <div className="absolute inset-0 bg-white dark:bg-slate-950 p-4 flex flex-col justify-between transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-20 border border-primary rounded-2xl shadow-lg shadow-primary/10">
-                    <div className="space-y-2">
-                      <h5 className="font-black text-base text-primary">
-                        {service.title}
-                      </h5>
-                      <p className="text-xs text-slate-650 dark:text-slate-350 leading-relaxed text-justify">
-                        {service.description}
-                      </p>
-                    </div>
+            <div
+              ref={scrollRef}
+              onScroll={handleScroll}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onTouchMove={handleTouchMove}
+              onMouseEnter={() => setIsHovered(true)}
+              className={`flex gap-6 overflow-x-auto scrollbar-none py-2 px-1 select-none ${
+                isDragging ? "cursor-grabbing" : "cursor-grab"
+              }`}
+            >
+              {[...otherServices, ...otherServices, ...otherServices].map(
+                (service, index) => {
+                  const IconComponent = service.icon;
 
-                    <div className="flex justify-between items-end border-t border-slate-200/60 dark:border-white/10 pt-2 mt-2">
-                      <div className="text-[10px] text-slate-500 font-bold flex flex-col leading-tight">
-                        <span>From {service.price}</span>
-                        <span>{service.duration}</span>
+                  return (
+                    <div
+                      key={`${service.id}-${index}`}
+                      onClick={(e) => handleCardClick(e, service.link)}
+                      className="relative group overflow-hidden rounded-2xl p-6 border shadow-md border-[#0858c3] dark:border-white/10 bg-white dark:bg-slate-900/60 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/20 flex flex-col justify-between h-48 cursor-pointer w-[280px] flex-shrink-0 animate-none"
+                    >
+                      {/* Default State content */}
+                      <div className="space-y-4 flex flex-col items-center text-center justify-center h-full pb-2">
+                        <div className="h-12 w-12 rounded-2xl bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 shadow-inner">
+                          <IconComponent className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                        </div>
+                        <h4 className="font-black text-lg text-slate-900 dark:text-white leading-tight">
+                          {service.title}
+                        </h4>
                       </div>
-                      <div className="h-8 px-3 rounded-lg bg-primary hover:bg-primary/95 text-white hover:text-white text-xs font-bold flex items-center gap-1 border border-primary transition-all duration-200 shadow-sm">
-                        <span>Learn more</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
+
+                      {/* Tiny redirect indicator */}
+                      <div className="absolute bottom-4 right-4 h-8 w-8 rounded-full flex items-center justify-center transition-all duration-300">
+                        <ArrowCircleRightIcon className="size-8 text-primary" />
+                      </div>
+
+                      {/* Hover Slide-up Panel for Description */}
+                      <div className="absolute inset-0 bg-white dark:bg-slate-950 p-4 flex flex-col justify-between transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-20 border border-primary rounded-2xl shadow-lg shadow-primary/10">
+                        <div className="space-y-2 text-left">
+                          <h5 className="font-black text-base text-primary">
+                            {service.title}
+                          </h5>
+                          <p className="text-xs text-slate-650 dark:text-slate-350 leading-relaxed text-justify">
+                            {service.description}
+                          </p>
+                        </div>
+
+                        <div className="flex justify-between items-end border-t border-slate-200/60 dark:border-white/10 pt-2 mt-2">
+                          <div className="text-[10px] text-slate-500 font-bold flex flex-col leading-tight text-left">
+                            <span>From {service.price}</span>
+                            <span>{service.duration}</span>
+                          </div>
+                          <div className="h-8 px-3 rounded-lg bg-primary hover:bg-primary/95 text-white hover:text-white text-xs font-bold flex items-center gap-1 border border-primary transition-all duration-200 shadow-sm">
+                            <span>Learn more</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
+                  );
+                },
+              )}
+            </div>
           </div>
+
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+            .scrollbar-none::-webkit-scrollbar {
+              display: none;
+            }
+            .scrollbar-none {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+            }
+          `,
+            }}
+          />
         </div>
       </div>
     </section>

@@ -1,8 +1,59 @@
 import React from "react";
-import { Smartphone, Settings, Check, ChevronRight } from "lucide-react";
+import {
+  Smartphone,
+  Settings,
+  Check,
+  ChevronRight,
+  Upload,
+  Trash2,
+  Image as ImageIcon,
+  Loader2,
+} from "lucide-react";
+import { toast } from "sonner";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { IPHONE_MODELS, BOOKING_PARTS } from "../../pricing/constants/data";
+import { REPAIR_PRICES } from "@/lib/data/repairPrices";
+
+const compressImage = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new window.Image();
+      img.src = event.target?.result as string;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 800;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0, width, height);
+
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.7);
+        resolve(dataUrl);
+      };
+      img.onerror = (err) => reject(err);
+    };
+    reader.onerror = (err) => reject(err);
+  });
+};
 
 interface DeviceStepProps {
   model: string;
@@ -13,6 +64,8 @@ interface DeviceStepProps {
   setQuality: (val: string) => void;
   priceEstimate: number;
   onNext: () => void;
+  deviceImage: string;
+  setDeviceImage: (val: string) => void;
 }
 
 export const DeviceStep = ({
@@ -24,7 +77,41 @@ export const DeviceStep = ({
   setQuality,
   priceEstimate,
   onNext,
+  deviceImage,
+  setDeviceImage,
 }: DeviceStepProps) => {
+  const [isCompressing, setIsCompressing] = React.useState(false);
+
+  // Find active data & prices
+  const activeModel =
+    IPHONE_MODELS.find((m) => m.id === model) || IPHONE_MODELS[0];
+  const activeModelPrices = REPAIR_PRICES[model];
+
+  // Filter available repair services based on device classification rules
+  const filteredBookingParts = BOOKING_PARTS.filter((p) => {
+    // 1. Hide Rear Camera Lens for Group 1 models (removable back glass)
+    if (p.id === "camera-lens" && activeModel.isBackGlassRemovable) {
+      return false;
+    }
+
+    // 2. Hide Housing Replacement if housing price is undefined for this model
+    if (
+      p.id === "housing" &&
+      (!activeModelPrices || activeModelPrices.housing === undefined)
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
+  // Reset selected part if it's not available in the filtered list for the current model
+  React.useEffect(() => {
+    if (!filteredBookingParts.some((p) => p.id === part)) {
+      setPart("screen");
+    }
+  }, [model, part, filteredBookingParts]);
+
   return (
     <div className="space-y-6">
       <div className="space-y-2">
@@ -62,7 +149,7 @@ export const DeviceStep = ({
           2. Choose Repair Service:
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {BOOKING_PARTS.map((p) => (
+          {filteredBookingParts.map((p) => (
             <div
               key={p.id}
               onClick={() => {
@@ -110,6 +197,89 @@ export const DeviceStep = ({
           </div>
         </div>
       )}
+
+      {/* Image Upload Option */}
+      <div className="space-y-2 pt-2 text-left">
+        <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+          <ImageIcon className="w-4 h-4 text-amber-500" />
+          Upload Phone Photo (Optional):
+        </label>
+
+        {deviceImage ? (
+          <div className="relative inline-block rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-950">
+            <img
+              src={deviceImage}
+              alt="Device Preview"
+              className="max-h-48 object-contain rounded-xl"
+            />
+            <button
+              type="button"
+              onClick={() => setDeviceImage("")}
+              className="absolute top-2 right-2 bg-rose-500 hover:bg-rose-600 text-white rounded-full p-1.5 shadow-lg transition-colors duration-150 cursor-pointer"
+              title="Remove image"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        ) : (
+          <div className="relative">
+            <input
+              type="file"
+              accept="image/*"
+              id="device-photo-upload"
+              className="hidden"
+              disabled={isCompressing}
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+
+                if (file.size > 10 * 1024 * 1024) {
+                  toast.error("Image file must be under 10MB");
+                  return;
+                }
+
+                setIsCompressing(true);
+                try {
+                  const compressedBase64 = await compressImage(file);
+                  setDeviceImage(compressedBase64);
+                } catch (err) {
+                  console.error(err);
+                  toast.error(
+                    "Failed to process image. Please try another one.",
+                  );
+                } finally {
+                  setIsCompressing(false);
+                }
+              }}
+            />
+            <label
+              htmlFor="device-photo-upload"
+              className={`flex flex-col items-center justify-center border-2 border-dashed border-slate-300 dark:border-white/10 hover:border-primary dark:hover:border-primary/50 bg-white dark:bg-slate-950/40 rounded-xl p-5 text-center cursor-pointer transition-all duration-200 ${
+                isCompressing ? "opacity-60 pointer-events-none" : ""
+              }`}
+            >
+              {isCompressing ? (
+                <>
+                  <Loader2 className="w-6 h-6 text-primary animate-spin mb-2" />
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
+                    Processing & compressing image...
+                  </span>
+                </>
+              ) : (
+                <>
+                  <Upload className="w-6 h-6 text-slate-400 dark:text-slate-500 mb-2" />
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-350">
+                    Click to upload phone photo
+                  </span>
+                  <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">
+                    Supports JPG, PNG (Max 10MB - auto compressed)
+                  </span>
+                </>
+              )}
+            </label>
+          </div>
+        )}
+      </div>
 
       {/* Estimation box */}
       <div className="pt-6 border-t border-slate-200 dark:border-white/5 flex justify-between items-center bg-slate-100 dark:bg-slate-950/60 p-4 rounded-xl">
