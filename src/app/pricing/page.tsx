@@ -24,11 +24,27 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const resolvedSearchParams = await searchParams;
   const model = (resolvedSearchParams.model as string) || "iphone-16-pro-max";
-  const part = (resolvedSearchParams.part as string) || "screen";
+  let part = (resolvedSearchParams.part as string) || "screen";
 
   const modelData =
     IPHONE_MODELS.find((m) => m.id === model) || IPHONE_MODELS[0];
-  const partData = PARTS.find((p) => p.id === part) || PARTS[0];
+  const prices = REPAIR_PRICES[model] || REPAIR_PRICES["iphone-x"];
+
+  const filteredParts = PARTS.filter((p) => {
+    if (p.id === "camera-lens" && modelData.isBackGlassRemovable) {
+      return false;
+    }
+    if (p.id === "housing" && (!prices || prices.housing === undefined)) {
+      return false;
+    }
+    return true;
+  });
+
+  if (!filteredParts.some((p) => p.id === part)) {
+    part = "screen";
+  }
+
+  const partData = filteredParts.find((p) => p.id === part) || PARTS[0];
 
   const modelName = modelData.name;
   const partName = partData.name;
@@ -76,11 +92,25 @@ export async function generateMetadata({
 export default async function Page({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
   const model = (resolvedSearchParams.model as string) || "iphone-16-pro-max";
-  const part = (resolvedSearchParams.part as string) || "screen";
+  let part = (resolvedSearchParams.part as string) || "screen";
 
   const modelData =
     IPHONE_MODELS.find((m) => m.id === model) || IPHONE_MODELS[0];
   const prices = REPAIR_PRICES[model] || REPAIR_PRICES["iphone-x"];
+
+  const filteredParts = PARTS.filter((p) => {
+    if (p.id === "camera-lens" && modelData.isBackGlassRemovable) {
+      return false;
+    }
+    if (p.id === "housing" && (!prices || prices.housing === undefined)) {
+      return false;
+    }
+    return true;
+  });
+
+  if (!filteredParts.some((p) => p.id === part)) {
+    part = "screen";
+  }
 
   const isOther = part === "other";
   const isTiered = part === "screen" || part === "battery";
