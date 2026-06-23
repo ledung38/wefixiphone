@@ -233,7 +233,8 @@ export const PARTS: RepairPart[] = [
   { id: "battery", name: "Battery Replacement" },
   { id: "back-glass", name: "Back Glass Replacement" },
   { id: "charging", name: "Charging Port Repair" },
-  { id: "camera", name: "Camera Repair" },
+  { id: "camera", name: "Rear Camera Repair" },
+  { id: "front-camera", name: "Front Camera Repair" },
   { id: "camera-lens", name: "Rear Camera Lens Replacement" },
   { id: "audio", name: "Speaker & Audio Repair" },
   { id: "power-button", name: "Power Button FLEX Repair" },
@@ -296,7 +297,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
     ],
   },
   camera: {
-    title: "Camera Repair",
+    title: "Back Camera Repair",
     duration: "20 mins",
     warranty: "12-Month Warranty",
     description:
@@ -306,6 +307,19 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
       "Dust-free chamber cleaning during installation",
       "Cracked protective glass lens replaced",
       "Tested on-site for all zoom and portrait modes",
+    ],
+  },
+  "front-camera": {
+    title: "Front Camera Repair",
+    duration: "25 mins",
+    warranty: "12-Month Warranty",
+    description:
+      "Replaces the front-facing camera assembly to resolve issues with blurry selfies, Face ID component misalignment, or cracked lens glass affecting the front sensor.",
+    benefits: [
+      "OEM-grade front camera sensor replacement",
+      "Face ID functionality preserved and calibrated",
+      "Selfie portrait mode focus fully restored",
+      "Completed on-site by experienced technicians",
     ],
   },
   "camera-lens": {

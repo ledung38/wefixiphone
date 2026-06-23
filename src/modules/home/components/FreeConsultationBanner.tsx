@@ -203,12 +203,12 @@ export const FreeConsultationBanner = () => {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Side: CTA Content & Buttons */}
-          <div className="lg:col-span-7 space-y-5 text-left">
+          <div className="lg:col-span-7 space-y-10 text-left">
             <div className="space-y-2">
               <span className="inline-flex px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-[11px] font-bold uppercase tracking-wider border border-amber-500/20">
                 Special Offer
               </span>
-              <h3 className="text-2xl md:text-4xl font-black tracking-tight text-white leading-tight">
+              <h3 className="text-2xl md:text-4xl font-black mb-6 tracking-tight text-white leading-tight">
                 Free Consultation & Diagnostic
               </h3>
               <p className="text-sm md:text-base leading-relaxed text-slate-300 max-w-xl">
@@ -224,7 +224,7 @@ export const FreeConsultationBanner = () => {
               <div>
                 <Button
                   onClick={() => router.push(Routes.BOOKING)}
-                  className="w-full bg-primary hover:bg-primary/95 text-white font-extrabold rounded-xl py-3.5 px-6 flex items-center justify-center gap-2 text-xs transition-transform hover:scale-[1.02] cursor-pointer"
+                  className="w-full bg-primary hover:bg-primary/95 text-white font-extrabold rounded-xl py-5 px-6 flex items-center justify-center gap-2 text-sm transition-transform hover:scale-[1.02] cursor-pointer"
                 >
                   <span>Book Diagnostic Online</span>
                   <ArrowRight className="w-4 h-4 ml-1" />
@@ -233,7 +233,7 @@ export const FreeConsultationBanner = () => {
               <a href="tel:0433263105" className="w-full sm:w-auto">
                 <Button
                   variant="outline"
-                  className="w-full sm:w-auto border-white/20 text-white hover:bg-white/10 rounded-xl py-3.5 px-6 text-xs font-bold transition-transform hover:scale-[1.02] cursor-pointer"
+                  className="w-full sm:w-auto border-white/20 text-white hover:bg-white/10 rounded-xl py-5 px-6 text-sm font-bold transition-transform hover:scale-[1.02] cursor-pointer"
                 >
                   <Phone className="w-4 h-4 animate-pulse" />
                   <span>Call 0433 263 105</span>
