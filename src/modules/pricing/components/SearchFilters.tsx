@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Select } from "@/components/ui/Select";
 import { Smartphone, Settings } from "lucide-react";
 import { IPHONE_MODELS, PARTS } from "../constants/data";
+import { REPAIR_PRICES } from "@/lib/data/repairPrices";
 
 interface SearchFiltersProps {
   selectedModel: string;
@@ -19,11 +20,59 @@ export const SearchFilters = ({
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
+  const activeModel =
+    IPHONE_MODELS.find((m) => m.id === selectedModel) || IPHONE_MODELS[0];
+  const activeModelPrices = REPAIR_PRICES[selectedModel];
+
+  // Filter available repair services based on device classification rules
+  const filteredParts = PARTS.filter((p) => {
+    // 1. Hide Rear Camera Lens for Group 1 models (removable back glass)
+    if (p.id === "camera-lens" && activeModel.isBackGlassRemovable) {
+      return false;
+    }
+
+    // 2. Hide Housing Replacement if housing price is undefined for this model
+    if (
+      p.id === "housing" &&
+      (!activeModelPrices || activeModelPrices.housing === undefined)
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
   const handleSelectionChange = (newModel: string, newPart: string) => {
+    const newModelData =
+      IPHONE_MODELS.find((m) => m.id === newModel) || IPHONE_MODELS[0];
+    const newModelPrices = REPAIR_PRICES[newModel];
+
+    const newFilteredParts = PARTS.filter((p) => {
+      // 1. Hide Rear Camera Lens for Group 1 models (removable back glass)
+      if (p.id === "camera-lens" && newModelData.isBackGlassRemovable) {
+        return false;
+      }
+
+      // 2. Hide Housing Replacement if housing price is undefined for this model
+      if (
+        p.id === "housing" &&
+        (!newModelPrices || newModelPrices.housing === undefined)
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+
+    let targetPart = newPart;
+    if (!newFilteredParts.some((p) => p.id === targetPart)) {
+      targetPart = "screen";
+    }
+
     startTransition(() => {
       const params = new URLSearchParams(searchParams.toString());
       params.set("model", newModel);
-      params.set("part", newPart);
+      params.set("part", targetPart);
       router.replace(`/pricing?${params.toString()}`, { scroll: false });
     });
   };
@@ -62,7 +111,7 @@ export const SearchFilters = ({
             value={selectedPart}
             onChange={(val) => handleSelectionChange(selectedModel, val)}
             isLoading={isPending}
-            options={PARTS.map((part) => ({
+            options={filteredParts.map((part) => ({
               label: part.name,
               value: part.id,
             }))}
