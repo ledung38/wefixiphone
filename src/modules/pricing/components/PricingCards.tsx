@@ -159,6 +159,12 @@ export const PricingCards = ({
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                  <span className="font-semibold text-slate-800 dark:text-white">
+                    Colors & touch responsiveness 90% like original
+                  </span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
                   <span>Original thin bezels & 120Hz refresh rate</span>
                 </li>
                 <li className="flex items-center gap-2.5">
@@ -245,7 +251,7 @@ export const PricingCards = ({
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
                   <span>
-                    Official Apple Service Pack OLED display (OEM standard)
+                    100% genuine Apple display (perfect brightness & contrast)
                   </span>
                 </li>
                 <li className="flex items-center gap-2.5">
