@@ -49,7 +49,7 @@ const otherServices: ServiceItem[] = [
   },
   {
     id: "camera",
-    title: "Camera Repair",
+    title: "Rear Camera Repair",
     price: "$79",
     duration: "20 mins",
     borderClass: "gradient-border-premium",
@@ -57,6 +57,17 @@ const otherServices: ServiceItem[] = [
       "Fix blurry lenses, autofocus failures, cracked protective glass covers, camera sensor dark spots, or shaky image OIS failures.",
     icon: Camera,
     link: `${Routes.PRICING}?part=camera`,
+  },
+  {
+    id: "front-camera",
+    title: "Front Camera Repair",
+    price: "$110",
+    duration: "25 mins",
+    borderClass: "gradient-border-premium",
+    description:
+      "Fix blurry selfies, Face ID component misalignments, failing front camera focus, or cracked glass affecting the front sensor.",
+    icon: Camera,
+    link: `${Routes.PRICING}?part=front-camera`,
   },
   {
     id: "audio",
@@ -283,7 +294,7 @@ export const QuickServices = () => {
       borderClass:
         "border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-lg dark:hover:shadow-primary/5",
       description:
-        "Professional replacement for cracked glass, unresponsive touch screens, vertical green lines, bleeding LCD/OLED black spots, or completely dead display panels. Includes True Tone calibration to restore authentic system colors.",
+        "Professional replacement for cracked glass, unresponsive touch screens, vertical green lines, bleeding LCD/OLED black spots, or completely dead display panels. Includes Ambient Light Sensor calibration to restore authentic auto-brightness functions.",
       icon: "/fix_screen_car.png",
       link: `${Routes.PRICING}?part=screen`,
     },

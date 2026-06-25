@@ -23,7 +23,7 @@ export async function generateMetadata({
   searchParams,
 }: PageProps): Promise<Metadata> {
   const resolvedSearchParams = await searchParams;
-  const model = (resolvedSearchParams.model as string) || "iphone-16-pro-max";
+  const model = (resolvedSearchParams.model as string) || "iphone-15-pro-max";
   let part = (resolvedSearchParams.part as string) || "screen";
 
   const modelData =
@@ -91,7 +91,7 @@ export async function generateMetadata({
 
 export default async function Page({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
-  const model = (resolvedSearchParams.model as string) || "iphone-16-pro-max";
+  const model = (resolvedSearchParams.model as string) || "iphone-15-pro-max";
   let part = (resolvedSearchParams.part as string) || "screen";
 
   const modelData =
@@ -136,6 +136,8 @@ export default async function Page({ searchParams }: PageProps) {
         return prices.chargingPort;
       case "camera":
         return prices.camera;
+      case "front-camera":
+        return prices.frontCamera;
       case "camera-lens":
         return prices.cameraLens;
       case "audio":
