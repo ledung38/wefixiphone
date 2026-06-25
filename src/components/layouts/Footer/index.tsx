@@ -57,7 +57,11 @@ const Footer = () => {
           label: "Charging Port Repair",
           href: `${Routes.PRICING}?part=charging`,
         },
-        { label: "Camera Repair", href: `${Routes.PRICING}?part=camera` },
+        { label: "Rear Camera Repair", href: `${Routes.PRICING}?part=camera` },
+        {
+          label: "Front Camera Repair",
+          href: `${Routes.PRICING}?part=front-camera`,
+        },
         {
           label: "Speaker & Audio Repair",
           href: `${Routes.PRICING}?part=audio`,

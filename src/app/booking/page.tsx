@@ -50,7 +50,7 @@ interface BookingPageProps {
 export default async function BookingPage({ searchParams }: BookingPageProps) {
   const resolvedSearchParams = await searchParams;
 
-  const model = (resolvedSearchParams.model as string) || "iphone-16-pro-max";
+  const model = (resolvedSearchParams.model as string) || "iphone-15-pro-max";
   const part = (resolvedSearchParams.part as string) || "screen";
   const quality = (resolvedSearchParams.quality as string) || "Premium Quality";
   const price = resolvedSearchParams.price
