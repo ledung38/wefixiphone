@@ -159,9 +159,7 @@ export const PricingCards = ({
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                  <span className="font-semibold text-slate-800 dark:text-white">
-                    Colors & touch responsiveness 90% like original
-                  </span>
+                  <span>Colors & touch responsiveness 90% like original</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
