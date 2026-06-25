@@ -54,6 +54,12 @@ export const PricingCards = ({
               <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
               <span>Maximize your savings</span>
             </li>
+            {selectedPart === "screen" && (
+              <li className="flex items-center gap-2.5">
+                <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                <span>Supports 120Hz refresh rate (Prime Incell)</span>
+              </li>
+            )}
             <li className="flex items-center gap-2.5">
               <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
               <span>3-month repair warranty only</span>
@@ -62,11 +68,7 @@ export const PricingCards = ({
               <>
                 <li className="flex items-center gap-2.5">
                   <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
-                  <span>Average colors & display brightness (LCD/IPS)</span>
-                </li>
-                <li className="flex items-center gap-2.5">
-                  <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
-                  <span>True Tone not supported</span>
+                  <span>Auto-Brightness not supported</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <X className="w-4 h-4 text-rose-500 flex-shrink-0" />
@@ -106,7 +108,7 @@ export const PricingCards = ({
             href={`${Routes.BOOKING}?model=${selectedModel}&part=${selectedPart}&quality=Standard Aftermarket&price=${prices.standard}`}
             className="w-full block"
           >
-            <Button className="w-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white py-6 rounded-xl font-bold text-sm transform active:scale-95 transition-transform cursor-pointer">
+            <Button className="w-full bg-slate-100 hover:text-primary hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white py-6 rounded-xl font-bold text-sm transform active:scale-95 transition-transform cursor-pointer">
               Book Standard Repair
             </Button>
           </Link>
@@ -152,12 +154,16 @@ export const PricingCards = ({
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
                   <span className="font-semibold text-slate-800 dark:text-white">
-                    Colors & touch responsiveness 99% like original
+                    Soft OLED flexible substrate (highly drop resistant)
                   </span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                  <span>Full True Tone programming supported</span>
+                  <span>Original thin bezels & 120Hz refresh rate</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                  <span>Full sensor programming supported</span>
                 </li>
               </>
             ) : (
@@ -239,12 +245,12 @@ export const PricingCards = ({
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
                   <span>
-                    100% genuine Apple display (perfect brightness & contrast)
+                    Official Apple Service Pack OLED display (OEM standard)
                   </span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                  <span>Official True Tone synchronization</span>
+                  <span>Official sensor synchronization</span>
                 </li>
               </>
             ) : (
@@ -290,7 +296,7 @@ export const PricingCards = ({
             href={`${Routes.BOOKING}?model=${selectedModel}&part=${selectedPart}&quality=Genuine Apple&price=${prices.genuine}`}
             className="w-full block"
           >
-            <Button className="w-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white py-6 rounded-xl font-bold text-sm transform active:scale-95 transition-transform cursor-pointer">
+            <Button className="w-full bg-slate-100 hover:text-primary hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white py-6 rounded-xl font-bold text-sm transform active:scale-95 transition-transform cursor-pointer">
               Book Genuine Repair
             </Button>
           </Link>

@@ -294,7 +294,7 @@ export const QuickServices = () => {
       borderClass:
         "border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-lg dark:hover:shadow-primary/5",
       description:
-        "Professional replacement for cracked glass, unresponsive touch screens, vertical green lines, bleeding LCD/OLED black spots, or completely dead display panels. Includes True Tone calibration to restore authentic system colors.",
+        "Professional replacement for cracked glass, unresponsive touch screens, vertical green lines, bleeding LCD/OLED black spots, or completely dead display panels. Includes Ambient Light Sensor calibration to restore authentic auto-brightness functions.",
       icon: "/fix_screen_car.png",
       link: `${Routes.PRICING}?part=screen`,
     },

@@ -13,15 +13,17 @@ export const TechComparison = ({
     screen: [
       {
         feature: "Display Panel Technology",
-        standard: "LCD / IPS (Decent colors, thicker bezels)",
-        premium: "High-Contrast OLED (Vibrant colors, thin bezels)",
-        genuine: "Original Apple OLED (OEM standard, 100% sharp)",
+        standard:
+          "Incell LCD (120Hz support, slightly thicker bezels & power usage)",
+        premium: "Soft OLED (Flexible substrate, 120Hz, original thin bezels)",
+        genuine:
+          "Original Apple Service Pack OLED (120Hz, OEM standard, 100% sharp)",
       },
       {
-        feature: "True Tone & Touch Feedback",
+        feature: "Auto-Brightness & Light Sensor",
         standard: "Not supported / May be disabled",
-        premium: "Full True Tone programming supported",
-        genuine: "Official True Tone synchronization",
+        premium: "Full sensor programming supported",
+        genuine: "Official sensor synchronization",
       },
       {
         feature: "Touch Sensitivity & Response",
