@@ -129,7 +129,7 @@ export const BookingWizard = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           to: email,
-          subject: `📱 WeFixiPhone Booking Confirmed – ${name} (${generatedId})`,
+          subject: `📱 House Phone Tech Booking Confirmed – ${name} (${generatedId})`,
           message: emailContent,
           deviceImage: deviceImage || undefined,
         }),

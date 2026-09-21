@@ -44,7 +44,7 @@ export const WhyChooseUs = () => {
         {/* Section Header */}
         <div className="text-left w-full">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white truncate">
-            Why Choose WeFixiPhone?
+            Why Choose House Phone Tech?
           </h2>
         </div>
 
@@ -89,7 +89,7 @@ export const WhyChooseUs = () => {
             <div className="relative w-full aspect-[1/1] max-w-[500px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-slate-900">
               <Image
                 src="/why_choose_us.png"
-                alt="WeFixiPhone Mobile On-Site Repair Service"
+                alt="House Phone Tech Mobile On-Site Repair Service"
                 width={500}
                 height={625}
                 className="w-full h-full object-cover"

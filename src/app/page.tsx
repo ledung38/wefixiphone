@@ -2,15 +2,15 @@ import Home from "@/modules/home/index";
 import LayoutComponents from "@/components/layouts/LayoutComponents";
 import { Metadata } from "next";
 
-const url = "https://www.wefixiphone.com.au";
-const title = "WeFixiPhone - Mobile On-Site iPhone Repair Sydney";
+const url = "https://www.housephonetech.com.au";
+const title = "House Phone Tech - Mobile On-Site iPhone Repair Sydney";
 const description =
   "Professional on-site iPhone screen & battery replacements in Sydney. Done in 20 minutes in front of you. 12-month warranty, direct doorstep service.";
 
 export const metadata: Metadata = {
   title,
   description,
-  applicationName: "WeFixiPhone",
+  applicationName: "HousePhoneTech",
   alternates: {
     canonical: url,
     languages: {
@@ -21,13 +21,13 @@ export const metadata: Metadata = {
     title,
     description,
     url,
-    siteName: "WeFixiPhone",
+    siteName: "HousePhoneTech",
     images: [
       {
         url: "/logo_1200x630.png",
         width: 1200,
         height: 630,
-        alt: "WeFixiPhone - On-Site iPhone Repair",
+        alt: "House Phone Tech - On-Site iPhone Repair",
       },
     ],
     locale: "en_AU",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title,
     description,
     images: ["/logo_1200x630.png"],
-    creator: "@wefixiphone",
+    creator: "@housephonetech",
   },
 };
 

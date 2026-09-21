@@ -10,7 +10,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "wefixiphone.com.au",
+        hostname: "housephonetech.com.au",
+      },
+      {
+        protocol: "https",
+        hostname: "www.housephonetech.com.au",
       },
       {
         protocol: "https",
@@ -117,7 +121,7 @@ const nextConfig: NextConfig = {
   // Environment variables
   env: {
     NEXT_PUBLIC_SITE_URL:
-      process.env.NEXT_PUBLIC_SITE_URL || "https://www.wefixiphone.com.au",
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.housephonetech.com.au",
   },
 
   // Turbopack for faster builds
