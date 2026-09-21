@@ -16,16 +16,16 @@ const geistMono = Geist_Mono({
 });
 
 // Base metadata setting
-const baseUrl = "https://www.wefixiphone.com.au";
-const siteName = "WeFixiPhone";
+const baseUrl = "https://www.housephonetech.com.au";
+const siteName = "HousePhoneTech";
 const description =
   "Professional mobile on-site iPhone repair in Sydney. Screen and battery replacements completed in 20 minutes right in front of you. 12-month warranty, direct doorstep service.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${siteName} - On-Site iPhone Repair in Sydney`,
-    template: `%s | ${siteName}`,
+    default: "House Phone Tech - On-Site iPhone Repair in Sydney",
+    template: `%s | House Phone Tech`,
   },
   description,
   keywords: [
@@ -36,22 +36,24 @@ export const metadata: Metadata = {
     "iphone screen replacement sydney",
     "iphone battery replacement sydney",
     "mobile phone repair sydney",
-    "wefixiphone sydney",
+    "house phone tech sydney",
+    "housephonetech sydney",
+    "house phone tech",
   ],
   authors: [
     {
-      name: "WeFixiPhone Sydney",
+      name: "House Phone Tech Sydney",
       url: baseUrl,
     },
   ],
-  creator: "WeFixiPhone Sydney",
-  publisher: "WeFixiPhone Sydney",
+  creator: "House Phone Tech Sydney",
+  publisher: "House Phone Tech Sydney",
 
   // Open Graph
   openGraph: {
     type: "website",
     url: baseUrl,
-    title: `${siteName} - On-Site iPhone Repair in Sydney`,
+    title: "House Phone Tech - On-Site iPhone Repair in Sydney",
     description,
     siteName,
     images: [
@@ -59,7 +61,7 @@ export const metadata: Metadata = {
         url: `/logo_1200x630.png`,
         width: 1200,
         height: 630,
-        alt: `${siteName} - On-Site iPhone Repair`,
+        alt: "House Phone Tech - On-Site iPhone Repair",
       },
     ],
     locale: "en_AU",
@@ -68,10 +70,10 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} - On-Site iPhone Repair in Sydney`,
+    title: "House Phone Tech - On-Site iPhone Repair in Sydney",
     description,
     images: [`/logo_1200x630.png`],
-    creator: "@wefixiphone",
+    creator: "@housephonetech",
   },
 
   // Additional SEO
@@ -170,12 +172,12 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               "@id": baseUrl,
-              name: "WeFixiPhone Sydney",
+              name: "House Phone Tech Sydney",
               image: `${baseUrl}/logo_1200x630.png`,
               description,
               url: baseUrl,
               telephone: "+61-433 263 105",
-              email: "wefixiphone102@gmail.com",
+              email: "housephonetech102@gmail.com",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Sydney, NSW",
@@ -190,8 +192,8 @@ export default function RootLayout({
                 longitude: "151.2093",
               },
               sameAs: [
-                "https://www.facebook.com/wefixiphone.sydney",
-                "https://www.instagram.com/wefixiphone.sydney",
+                "https://www.facebook.com/housephonetech",
+                "https://www.instagram.com/housephonetech",
               ],
               priceRange: "$$",
               areaServed: "Sydney, NSW, Australia",
@@ -220,13 +222,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "WeFixiPhone Sydney",
+              name: "House Phone Tech Sydney",
               url: baseUrl,
               logo: `${baseUrl}/logo_500x500.png`,
               description,
               sameAs: [
-                "https://www.facebook.com/wefixiphone.sydney",
-                "https://www.instagram.com/wefixiphone.sydney",
+                "https://www.facebook.com/housephonetech",
+                "https://www.instagram.com/housephonetech",
               ],
             }),
           }}

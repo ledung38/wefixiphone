@@ -16,7 +16,7 @@ const generateDiagnosticEmailHTML = (params: {
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
       <!-- Header -->
       <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 24px; text-align: center; border-bottom: 2px solid #3b82f6;">
-        <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">WeFix <span style="color: #3b82f6;">iPhone</span></h1>
+        <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">House Phone <span style="color: #3b82f6;">Tech</span></h1>
         <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">Free Diagnostic Request (Pricing Page)</p>
       </div>
       
@@ -68,7 +68,7 @@ const generateDiagnosticEmailHTML = (params: {
 
       <!-- Footer -->
       <div style="background-color: #f8fafc; padding: 16px; text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9;">
-        <p style="margin: 0 0 4px 0;">© ${new Date().getFullYear()} WeFixiPhone. All rights reserved.</p>
+        <p style="margin: 0 0 4px 0;">© ${new Date().getFullYear()} House Phone Tech. All rights reserved.</p>
         <p style="margin: 0;">Sydney, NSW, Australia | Tel: 0433 263 105</p>
       </div>
     </div>

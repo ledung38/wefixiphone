@@ -49,14 +49,14 @@ export async function generateMetadata({
   const modelName = modelData.name;
   const partName = partData.name;
 
-  const title = `${modelName} ${partName} Price | On-Site Sydney - WeFixiPhone`;
+  const title = `${modelName} ${partName} Price | On-Site Sydney - House Phone Tech`;
   const description = `Check transparent pricing for ${modelName} ${partName.toLowerCase()} on-site in Sydney. Premium repair completed at your home or office in 20 mins with 12-month warranty.`;
-  const canonicalUrl = `https://www.wefixiphone.com.au/pricing?model=${model}&part=${part}`;
+  const canonicalUrl = `https://www.housephonetech.com.au/pricing?model=${model}&part=${part}`;
 
   return {
     title,
     description,
-    applicationName: "WeFixiPhone",
+    applicationName: "HousePhoneTech",
     alternates: {
       canonical: canonicalUrl,
       languages: {
@@ -67,13 +67,13 @@ export async function generateMetadata({
       title,
       description,
       url: canonicalUrl,
-      siteName: "WeFixiPhone",
+      siteName: "HousePhoneTech",
       images: [
         {
           url: "/logo_1200x630.png",
           width: 1200,
           height: 630,
-          alt: `${modelName} ${partName} - WeFixiPhone`,
+          alt: `${modelName} ${partName} - House Phone Tech`,
         },
       ],
       locale: "en_AU",
@@ -84,7 +84,7 @@ export async function generateMetadata({
       title,
       description,
       images: ["/logo_1200x630.png"],
-      creator: "@wefixiphone",
+      creator: "@housephonetech",
     },
   };
 }

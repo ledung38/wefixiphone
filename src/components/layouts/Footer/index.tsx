@@ -78,8 +78,8 @@ const Footer = () => {
       links: [
         { label: "0433 263 105", href: "tel:0433263105", icon: Phone },
         {
-          label: "wefixiphone102@gmail.com",
-          href: "mailto:wefixiphone102@gmail.com",
+          label: "housephonetech102@gmail.com",
+          href: "mailto:housephonetech102@gmail.com",
           icon: Mail,
         },
         { label: "Sydney, NSW, Australia", href: "#", icon: MapPin },
@@ -137,7 +137,7 @@ const Footer = () => {
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0" />
                     <Image
                       src="/logo_header2.png"
-                      alt="Logo"
+                      alt="House Phone Tech"
                       priority
                       width={120}
                       height={60}
@@ -146,9 +146,9 @@ const Footer = () => {
                     />
                   </div>
                   {/* <span className="text-lg font-black text-white leading-none tracking-tight">
-                      WeFix
+                      House Phone
                       <span className="text-primary font-extrabold">
-                        iPhone
+                        Tech
                       </span>
                     </span>
                     <span className="text-[9px] text-blue-200 font-bold tracking-widest uppercase mt-1">
@@ -234,8 +234,8 @@ const Footer = () => {
             className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400"
           >
             <p>
-              © {currentYear} WeFixiPhone. All Rights Reserved. Sydney Mobile
-              iPhone Repair.
+              © {currentYear} House Phone Tech. All Rights Reserved. Sydney
+              Mobile iPhone Repair.
             </p>
             <div className="flex gap-6">
               <motion.a

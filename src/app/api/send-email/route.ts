@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     // 2. Gửi mail
     await transporter.sendMail({
       from: process.env.NEXT_PUBLIC_MAIL_USER,
-      to: `${to}, wefixiphone102@gmail.com`,
+      to: `${to}, housephonetech102@gmail.com`,
       subject,
       html: message,
       attachments,

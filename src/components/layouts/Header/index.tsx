@@ -148,7 +148,7 @@ export const Header = () => {
                   />
                   <Image
                     src="/logo_header2.png"
-                    alt="Logo"
+                    alt="House Phone Tech"
                     priority
                     width={120}
                     height={60}
@@ -161,7 +161,7 @@ export const Header = () => {
                     src="/logo_header.png"
                     width={250}
                     height={250}
-                    alt="Logo"
+                    alt="House Phone Tech"
                     className={`transition-all duration-300 ${
                       !isScrolled && isHome
                         ? "brightness-200 saturate-150 drop-shadow-[0_0_12px_rgba(255,255,255,1)]"
@@ -197,9 +197,9 @@ export const Header = () => {
                           : "text-white",
                       )}
                     >
-                      WeFix
+                      House Phone
                       <span className="text-primary font-extrabold">
-                        iPhone
+                        Tech
                       </span>
                     </span>
                     <span

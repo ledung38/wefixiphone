@@ -3,7 +3,7 @@ import LayoutComponents from "@/components/layouts/LayoutComponents";
 import { BookingWizard } from "@/modules/booking/components/BookingWizard";
 import { Metadata } from "next";
 
-const url = "https://www.wefixiphone.com.au/booking";
+const url = "https://www.housephonetech.com.au/booking";
 const title = "Book an On-Site iPhone Repair";
 const description =
   "Schedule your mobile iPhone screen or battery replacement on-site in Sydney. Choose your location, date, and time, and our technician will come to you.";
@@ -11,7 +11,7 @@ const description =
 export const metadata: Metadata = {
   title,
   description,
-  applicationName: "WeFixiPhone",
+  applicationName: "HousePhoneTech",
   alternates: {
     canonical: url,
     languages: {
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     title,
     description,
     url,
-    siteName: "WeFixiPhone",
+    siteName: "HousePhoneTech",
     images: [
       {
         url: "/logo_1200x630.png",
         width: 1200,
         height: 630,
-        alt: "Book an On-Site iPhone Repair - WeFixiPhone",
+        alt: "Book an On-Site iPhone Repair - House Phone Tech",
       },
     ],
     locale: "en_AU",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title,
     description,
     images: ["/logo_1200x630.png"],
-    creator: "@wefixiphone",
+    creator: "@housephonetech",
   },
 };
 

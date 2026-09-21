@@ -17,7 +17,7 @@ export const ratingsExample: any[] = [
   {
     customerName: "Phương Hoài",
     comment:
-      "WeFixiPhone did an amazing job fixing my cracked iPhone camera lens. The camera focus is now clear, with no more spots or blurriness. Very friendly and convenient doorstep service!",
+      "House Phone Tech did an amazing job fixing my cracked iPhone camera lens. The camera focus is now clear, with no more spots or blurriness. Very friendly and convenient doorstep service!",
     serviceName: "Camera Glass Repair",
     avatar: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg", // Nữ
   },

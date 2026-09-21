@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { IPHONE_MODELS, PARTS } from "@/modules/pricing/constants/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.wefixiphone.com.au";
+  const baseUrl = "https://www.housephonetech.com.au";
 
   const routes = [
     {
