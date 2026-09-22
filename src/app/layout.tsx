@@ -112,7 +112,7 @@ export const metadata: Metadata = {
         type: "image/png",
       },
     ],
-    apple: "/logo_500x500.png",
+    apple: "/apple-touch-icon.png",
   },
 
   // Manifest
@@ -224,7 +224,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "House Phone Tech Sydney",
               url: baseUrl,
-              logo: `${baseUrl}/logo_500x500.png`,
+              logo: `${baseUrl}/android-chrome-512x512.png`,
               description,
               sameAs: [
                 "https://www.facebook.com/housephonetech",
@@ -266,7 +266,7 @@ export default function RootLayout({
         />
 
         {/* Apple icons */}
-        <link rel="apple-touch-icon" href="/logo-maskable.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
         {/* Android Chrome */}
         <link rel="manifest" href="/site.webmanifest" />

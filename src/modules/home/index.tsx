@@ -18,7 +18,7 @@ const Home = () => {
         {/* Background Image with overlay gradient */}
         <div className="absolute inset-0 z-0 ">
           <Image
-            src="/hero_repair.png"
+            src="/hero_repair.webp"
             priority
             width={1920}
             height={1080}

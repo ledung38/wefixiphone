@@ -111,7 +111,7 @@ export const WhyFixNow = () => {
           {/* Column 1: Left - Kept phone error warning image (4 Cols) */}
           <div className="lg:col-span-5 flex justify-center lg:sticky lg:top-24 mb-8 lg:mb-0">
             <Image
-              src={"/phone_error.png"}
+              src={"/phone_error.webp"}
               alt="iOS Warning Screen"
               width={600}
               height={600}

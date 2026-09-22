@@ -59,7 +59,7 @@ const DIff = () => {
             {/* Repaired Image (After) */}
             <div className="absolute inset-0 w-full h-full bg-slate-100 dark:bg-slate-900 pointer-events-none">
               <img
-                src="/repaired_iphone.png"
+                src="/repaired_iphone.webp"
                 alt="Repaired iPhone Screen"
                 className="w-full h-full object-cover pointer-events-none"
               />
@@ -76,7 +76,7 @@ const DIff = () => {
               }}
             >
               <img
-                src="/cracked_iphone.png"
+                src="/cracked_iphone.webp"
                 alt="Cracked iPhone Screen"
                 className="w-full h-full object-cover pointer-events-none"
               />

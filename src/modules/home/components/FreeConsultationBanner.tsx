@@ -191,7 +191,7 @@ export const FreeConsultationBanner = () => {
       {/* Background Image of Luxury iPhones */}
       <div className="absolute inset-0 w-full h-full z-0 select-none pointer-events-none">
         <Image
-          src="/cta_iphones_wide_banner.png"
+          src="/cta_iphones_wide_banner.webp"
           alt="Premium iPhone Models Showcase"
           width={1920}
           height={500}
