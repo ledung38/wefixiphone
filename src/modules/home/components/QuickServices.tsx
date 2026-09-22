@@ -295,7 +295,7 @@ export const QuickServices = () => {
         "border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-lg dark:hover:shadow-primary/5",
       description:
         "Professional replacement for cracked glass, unresponsive touch screens, vertical green lines, bleeding LCD/OLED black spots, or completely dead display panels. Includes Ambient Light Sensor calibration to restore authentic auto-brightness functions.",
-      icon: "/fix_screen_car.png",
+      icon: "/fix_screen_car.webp",
       link: `${Routes.PRICING}?part=screen`,
     },
     {
@@ -309,7 +309,7 @@ export const QuickServices = () => {
         "border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-lg dark:hover:shadow-primary/5",
       description:
         "High-quality battery cell replacement for health status capacity below 80%, rapid drainage, sudden auto-shutdowns at 20-30%, device overheating during charge, or physical swelling that lifts the glass screen.",
-      icon: "/battery.png",
+      icon: "/battery.webp",
       link: `${Routes.PRICING}?part=battery`,
     },
     {
@@ -322,7 +322,7 @@ export const QuickServices = () => {
         "border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-lg dark:hover:shadow-primary/5",
       description:
         "Full glass back panel restoration to repair spiderweb cracks, loose falling glass shards, and keep internal electronics protected. Preserves MagSafe and wireless charging coils functioning seamlessly.",
-      icon: "/back-glass.png",
+      icon: "/back-glass.webp",
       link: `${Routes.PRICING}?part=back-glass`,
     },
   ];

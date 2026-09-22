@@ -207,7 +207,7 @@ export const RepairProcess = () => {
       visual: (
         <div className="relative w-[155px] h-[310px] rounded-[30px] overflow-hidden border-[5px] border-slate-900 dark:border-slate-850 shadow-xl bg-slate-900 select-none">
           <Image
-            src="/repair_hands.png"
+            src="/repair_hands.webp"
             alt="Observe Repair Live Process"
             width={180}
             height={320}

@@ -147,7 +147,7 @@ export const Header = () => {
                     className={`absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
                   />
                   <Image
-                    src="/logo_header2.png"
+                    src="/logo_header2.webp"
                     alt="House Phone Tech"
                     priority
                     width={120}
@@ -158,7 +158,7 @@ export const Header = () => {
                 </div>
                 {/* <div className="flex items-center gap-2">
                   <Image
-                    src="/logo_header.png"
+                    src="/logo_header2.webp"
                     width={250}
                     height={250}
                     alt="House Phone Tech"
