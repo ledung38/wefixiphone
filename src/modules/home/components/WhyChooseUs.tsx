@@ -88,7 +88,7 @@ export const WhyChooseUs = () => {
           <div className="lg:col-span-5 flex justify-center items-center">
             <div className="relative w-full aspect-[1/1] max-w-[500px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-slate-900">
               <Image
-                src="/why_choose_us.png"
+                src="/why_choose_us.webp"
                 alt="House Phone Tech Mobile On-Site Repair Service"
                 width={500}
                 height={625}
