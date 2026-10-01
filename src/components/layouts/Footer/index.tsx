@@ -136,13 +136,12 @@ const Footer = () => {
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300" />
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0" />
                     <Image
-                      src="/logo_header2.webp"
+                      src="/logo_header_v2.png"
                       alt="House Phone Tech"
-                      priority
                       width={120}
                       height={60}
                       unoptimized
-                      className="relative h-10 sm:h-15  w-auto"
+                      className="relative h-10 sm:h-15 w-auto"
                     />
                   </div>
                   {/* <span className="text-lg font-black text-white leading-none tracking-tight">

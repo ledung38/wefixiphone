@@ -1,4 +1,4 @@
-import Image from "@/components/ui/Image";
+import Image from "next/image";
 import React from "react";
 import { QuickServices } from "./components/QuickServices";
 import { FreeConsultationBanner } from "./components/FreeConsultationBanner";
@@ -26,11 +26,12 @@ const Home = () => {
           <Image
             src="/hero_repair.webp"
             priority
+            fetchPriority="high"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
             width={1920}
             height={1080}
             alt="iPhone Repair Technician"
-            className="w-full h-full object-cover object-right lg:object-center opacity-85 dark:opacity-75 transition-opacity duration-500"
+            className="w-full h-full object-cover object-right lg:object-center opacity-85 dark:opacity-75"
           />
           <div className="absolute inset-0 lg:w-1/2 left-0 top-0 bottom-0">
             <div className="absolute inset-0 bg-slate-950/70 lg:bg-transparent z-10" />

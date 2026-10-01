@@ -1,7 +1,7 @@
 "use client";
 
 import { TextGradient } from "@/components/common/TextGradient";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useState } from "react";
 
 const DIff = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -61,6 +61,8 @@ const DIff = () => {
               <img
                 src="/repaired_iphone.webp"
                 alt="Repaired iPhone Screen"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover pointer-events-none"
               />
               <div className="absolute bottom-4 right-4 bg-emerald-500/90 text-white text-xs px-3 py-1 rounded-md font-bold backdrop-blur-sm">
@@ -78,6 +80,8 @@ const DIff = () => {
               <img
                 src="/cracked_iphone.webp"
                 alt="Cracked iPhone Screen"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover pointer-events-none"
               />
               <div className="absolute bottom-4 left-4 bg-rose-500/90 text-white text-xs px-3 py-1 rounded-md font-bold backdrop-blur-sm">

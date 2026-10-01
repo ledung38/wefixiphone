@@ -148,18 +148,18 @@ export const Header = () => {
                     className={`absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
                   />
                   <Image
-                    src="/logo_header2.webp"
+                    src="/logo_header_v2.webp"
                     alt="House Phone Tech"
-                    priority
                     width={120}
+                    priority
                     height={60}
                     unoptimized
-                    className="relative h-10 sm:h-15  w-auto"
+                    className="relative h-10 sm:h-15 w-auto"
                   />
                 </div>
                 {/* <div className="flex items-center gap-2">
                   <Image
-                    src="/logo_header2.webp"
+                    src="/logo_header_v2.webp"
                     width={250}
                     height={250}
                     alt="House Phone Tech"
