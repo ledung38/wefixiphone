@@ -78,6 +78,10 @@
     "typescript": "^5"
   },
   "type": "module",
+  "browserslist": [
+    "defaults and fully supports es6-module",
+    "not dead"
+  ],
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,css,scss}": [
       "yarn prettier:fix",

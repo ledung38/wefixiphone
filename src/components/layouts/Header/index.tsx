@@ -4,12 +4,6 @@ import { ModeToggle } from "@/components/common/ModeToggle";
 import { BellIcon, PhoneIcon } from "@/components/icons";
 import { MENU_ITEMS, MenuItem } from "@/components/layouts/contants";
 import { NavLink } from "@/components/layouts/Header/NavLink";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/Tooltip";
-
 import { useAppRouter } from "@/hooks/useAppRouter";
 import useDidUpdateEffect from "@/hooks/useDidUpdateEffect";
 import { Routes } from "@/lib/enum/routes";
@@ -17,7 +11,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { ChevronDown, Menu, X } from "lucide-react";
-import { motion } from "motion/react";
 import React, { useCallback, useEffect, useState } from "react";
 import Image from "@/components/ui/Image";
 import { Button } from "@/components/ui/Button";
@@ -130,152 +123,74 @@ export const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo - Premium Design */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
+            <div>
               <Link
                 href={Routes.HOME}
                 aria-label="Back to home"
                 className="flex items-center gap-3 flex-shrink-0 group"
               >
-                <div className="relative py-2 transition-all duration-300 group-hover:scale-110 px-1">
+                <div className="relative py-2 transition-all duration-300 group-hover:scale-105 px-1">
                   <div
-                    className={` absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
+                    className={`absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
                   />
                   <div
-                    className={`absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
+                    className={`absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300 group-hover:opacity-0 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
                   />
                   <Image
                     src="/logo_header_v2.webp"
                     alt="House Phone Tech"
                     width={120}
-                    priority
                     height={60}
                     unoptimized
                     className="relative h-10 sm:h-15 w-auto"
                   />
                 </div>
-                {/* <div className="flex items-center gap-2">
-                  <Image
-                    src="/logo_header_v2.webp"
-                    width={250}
-                    height={250}
-                    alt="House Phone Tech"
-                    className={`transition-all duration-300 ${
-                      !isScrolled && isHome
-                        ? "brightness-200 saturate-150 drop-shadow-[0_0_12px_rgba(255,255,255,1)]"
-                        : "dark:brightness-200 dark:saturate-150 dark:drop-shadow-[0_0_12px_rgba(255,255,255,1)]"
-                    }`}
-                  />
-                  <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-white shadow-lg shadow-primary/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-primary/30">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M11 11l1-1 3 3m-3-3v5"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex flex-col">
-                    <span
-                      className={cn(
-                        "text-lg font-black leading-none tracking-tight transition-colors duration-300",
-                        isScrolled || !isHome
-                          ? "text-slate-900 dark:text-white"
-                          : "text-white",
-                      )}
-                    >
-                      House Phone
-                      <span className="text-primary font-extrabold">
-                        Tech
-                      </span>
-                    </span>
-                    <span
-                      className={cn(
-                        "text-[9px] font-bold tracking-widest uppercase mt-1 transition-colors duration-300",
-                        isScrolled || !isHome
-                          ? "text-slate-500 dark:text-slate-400"
-                          : "text-blue-200",
-                      )}
-                    >
-                      Sydney Mobile Repair
-                    </span>
-                  </div>
-                </div> */}
               </Link>
-            </motion.div>
+            </div>
 
             {/* Desktop Navigation - Enhanced */}
             <nav className="hidden lg:flex items-center gap-8">
-              {MENU_ITEMS.map((item, index) => {
+              {MENU_ITEMS.map((item) => {
                 const hasSubTabs = item.children && item.children.length > 0;
 
                 if (hasSubTabs) {
                   return (
-                    <motion.div
-                      key={item.key}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: 0.15 + index * 0.08 }}
-                    >
-                      <Tooltip delayDuration={100}>
-                        <TooltipTrigger asChild>
-                          <div className="relative">
-                            <NavLink
-                              href={`${item.key}`}
-                              isActive={active === item.key}
-                              isTextBlack={isHome ? !!isScrolled : true}
-                            >
-                              <span className="flex items-center gap-1">
-                                {item.label}
-                                <ChevronDown size={14} className="opacity-60" />
-                              </span>
-                            </NavLink>
-                          </div>
-                        </TooltipTrigger>
-                        <TooltipContent
-                          side="bottom"
-                          sideOffset={16}
-                          className="z-[1000] w-max rounded-xl bg-white shadow-2xl border border-blue-100 p-2 animate-in fade-in slide-in-from-top-2"
-                        >
+                    <div key={item.key} className="relative group">
+                      <NavLink
+                        href={`${item.key}`}
+                        isActive={active === item.key}
+                        isTextBlack={isHome ? !!isScrolled : true}
+                      >
+                        <span className="flex items-center gap-1">
+                          {item.label}
+                          <ChevronDown
+                            size={14}
+                            className="opacity-60 transition-transform duration-200 group-hover:rotate-180"
+                          />
+                        </span>
+                      </NavLink>
+                      <div className="absolute top-full left-0 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-[1000]">
+                        <div className="w-max rounded-xl bg-white dark:bg-slate-900 shadow-2xl border border-blue-100 dark:border-white/10 p-2 min-w-[200px]">
                           <div className="py-1 min-w-max">
                             {item.children?.map((subTab) => (
                               <Link
                                 key={subTab.key}
                                 href={`${subTab.key}`}
-                                className="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-700 transition-all duration-200 whitespace-nowrap first:rounded-t-lg last:rounded-b-lg hover:translate-x-1"
+                                className="block px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-700 dark:hover:from-white/5 dark:hover:to-white/10 dark:hover:text-blue-400 transition-all duration-200 whitespace-nowrap rounded-lg hover:translate-x-1"
                                 onClick={() => setIsMobileMenuOpen(false)}
                               >
                                 {subTab.label}
                               </Link>
                             ))}
                           </div>
-                        </TooltipContent>
-                      </Tooltip>
-                    </motion.div>
+                        </div>
+                      </div>
+                    </div>
                   );
                 }
 
                 return (
-                  <motion.div
-                    key={item.key}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.15 + index * 0.08 }}
-                  >
+                  <div key={item.key}>
                     <NavLink
                       href={`${item.key}`}
                       isActive={active === item.key}
@@ -283,109 +198,63 @@ export const Header = () => {
                     >
                       {item.label}
                     </NavLink>
-                  </motion.div>
+                  </div>
                 );
               })}
             </nav>
 
             {/* Right Actions - Premium Buttons */}
-            <div className="flex items-center gap-2 sm:gap-3 ">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.4 }}
-                className="flex-1 group"
-              >
-                <a href="tel:0433263105" className=" hidden sm:flex">
-                  <motion.div
-                    whileHover="hover"
-                    initial="initial"
-                    variants={{}}
-                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    style={{ originX: 0.5, originY: 0.5 }}
-                  >
-                    <Button className="rounded-lg bg-primary hover:bg-primary/95 text-white">
-                      <motion.div
-                        variants={{
-                          initial: { rotate: 0 },
-                          hover: {
-                            rotate: [0, 15, -15, 10, -10, 0],
-                            transition: { duration: 0.5 },
-                          },
-                        }}
-                      >
-                        <PhoneIcon className="[&_path]:stroke-white size-5 transition-all " />
-                      </motion.div>
-                      <span>0433 263 105</span>
-                    </Button>
-                  </motion.div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex-1 group">
+                <a
+                  href="tel:0433263105"
+                  className="hidden sm:flex transition-transform duration-200 hover:scale-105 active:scale-95"
+                >
+                  <Button className="rounded-lg bg-primary hover:bg-primary/95 text-white flex items-center gap-2 group cursor-pointer shadow-md shadow-primary/20">
+                    <PhoneIcon className="[&_path]:stroke-white size-5 transition-transform duration-300 group-hover:rotate-12" />
+                    <span>0433 263 105</span>
+                  </Button>
                 </a>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.45 }}
-                className="group flex-1"
-              >
-                <motion.button
-                  whileHover="hover"
-                  initial="initial"
-                  variants={{}}
-                  className="w-full hidden lg:flex flex-1 gap-2 items-center bg-white font-semibold hover:bg-blue-50 hover:shadow-2xl transition-transform duration-300 active:scale-95 hover:scale-105 px-4 py-1.5 text-sm sm:text-base rounded-lg group bg-gradient-to-r from-orange-500 to-red-500 text-white cursor-pointer"
-                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                  style={{ originX: 0.5, originY: 0.5 }}
+              <div className="group flex-1">
+                <button
+                  type="button"
+                  className="w-full hidden lg:flex flex-1 gap-2 items-center font-semibold transition-all duration-200 active:scale-95 hover:scale-105 px-4 py-2 text-sm sm:text-base rounded-lg group bg-gradient-to-r from-orange-500 to-red-500 text-white cursor-pointer shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30"
                   onClick={() => {
                     route.push(Routes.BOOKING);
                   }}
                 >
-                  <motion.div
-                    variants={{
-                      initial: { rotate: 0 },
-                      hover: {
-                        rotate: [0, 15, -15, 10, -10, 0],
-                        transition: { duration: 0.5 },
-                      },
-                    }}
-                  >
-                    <BellIcon className="size-5" />
-                  </motion.div>
+                  <BellIcon className="size-5 transition-transform duration-300 group-hover:rotate-12" />
                   <span>Book now</span>
-                </motion.button>
-              </motion.div>
+                </button>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.5 }}
-              >
+              <div>
                 <ModeToggle />
-              </motion.div>
+              </div>
 
               {/* Mobile Menu Button - Premium Style */}
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.55 }}
+              <button
+                type="button"
                 onClick={toggleMobileMenu}
-                className={
-                  "lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:bg-slate-500/10 transition-all duration-200 active:bg-slate-500/20"
-                }
+                aria-label="Toggle Navigation Menu"
+                className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:bg-slate-500/10 transition-all duration-200 active:scale-90"
               >
                 {isMobileMenuOpen ? (
                   <X
-                    className={` max-sm:text-slate-400  h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white ${
-                      isHome && !isScrolled && "max-sm:text-white "
+                    className={`max-sm:text-slate-400 h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white ${
+                      isHome && !isScrolled ? "max-sm:text-white" : ""
                     }`}
                   />
                 ) : (
                   <Menu
                     className={`max-sm:text-slate-400 h-6 w-6 transition-transform duration-300 text-slate-500 dark:text-white ${
-                      isHome && !isScrolled && "max-sm:text-white "
+                      isHome && !isScrolled ? "max-sm:text-white" : ""
                     }`}
                   />
                 )}
-              </motion.button>
+              </button>
             </div>
           </div>
         </div>
