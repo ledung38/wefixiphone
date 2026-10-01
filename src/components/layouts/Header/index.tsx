@@ -5,11 +5,11 @@ import { BellIcon, PhoneIcon } from "@/components/icons";
 import { MENU_ITEMS, MenuItem } from "@/components/layouts/contants";
 import { NavLink } from "@/components/layouts/Header/NavLink";
 import {
-  Button,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui";
+} from "@/components/ui/Tooltip";
+
 import { useAppRouter } from "@/hooks/useAppRouter";
 import useDidUpdateEffect from "@/hooks/useDidUpdateEffect";
 import { Routes } from "@/lib/enum/routes";
@@ -20,6 +20,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { motion } from "motion/react";
 import React, { useCallback, useEffect, useState } from "react";
 import Image from "@/components/ui/Image";
+import { Button } from "@/components/ui/Button";
 
 // Mobile Menu Item Component
 const MobileMenuItem = ({

@@ -193,3 +193,5 @@ export const WhyFixNow = () => {
     </section>
   );
 };
+
+export default WhyFixNow;

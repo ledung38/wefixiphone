@@ -32,7 +32,7 @@ const PhoneFrame = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const RepairProcess = () => {
+const RepairProcess = () => {
   const steps: ProcessStep[] = [
     {
       id: "step-1",
@@ -352,3 +352,5 @@ export const RepairProcess = () => {
     </section>
   );
 };
+
+export default RepairProcess;

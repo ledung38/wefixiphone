@@ -1,7 +1,6 @@
 import React from "react";
 
 import { type VariantProps, cva } from "class-variance-authority";
-import { isNumber } from "lodash";
 import { cn } from "@/lib/utils";
 
 const flexVariants = cva("flex", {
@@ -80,7 +79,7 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
         {...props}
         style={{
           flex: flex ?? "unset",
-          gap: isNumber(gap) ? `${gap}px` : gap,
+          gap: typeof gap === "number" ? `${gap}px` : gap,
           ...props.style,
         }}
       >

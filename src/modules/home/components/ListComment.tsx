@@ -4,15 +4,18 @@ import {
   CarouselApi,
   CarouselContent,
   CarouselItem,
-  Container,
-  NextAvatar,
+} from "@/components/ui/Carousel";
+import { NextAvatar } from "@/components/ui/Avatar";
+import { Container } from "@/components/ui/Container";
+import { Text } from "@/components/ui/Text";
+
+import Flex from "@/components/ui/Flex";
+import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  Text,
-} from "@/components/ui";
-import Flex from "@/components/ui/Flex";
+} from "@/components/ui/Pagination";
 import { memo, useEffect, useRef, useState } from "react";
 
 const Item = ({ item }: { item: any }) => {

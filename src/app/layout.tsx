@@ -1,18 +1,30 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "@/components/ui/Sonner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const sfPro = localFont({
+  src: [
+    {
+      path: "../../public/fonts/SFPRODISPLAYREGULAR.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/SFPRODISPLAYMEDIUM.woff",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/SFPRODISPLAYBOLD.woff",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-sf-pro",
+  display: "swap",
 });
 
 // Base metadata setting
@@ -151,15 +163,6 @@ export default function RootLayout({
   return (
     <html lang="en-AU" suppressHydrationWarning>
       <head>
-        {/* Preconnect to external resources */}
-        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        {/* <meta name="google-site-verification" content="3Xa-dmqbOguKwSdaIQreaUQEJFoelDE0qtndSRF8D-M" /> */}
         {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
@@ -264,15 +267,10 @@ export default function RootLayout({
             }),
           }}
         />
-
-        {/* Apple icons */}
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-        {/* Android Chrome */}
-        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${sfPro.variable} font-sans antialiased`}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="data-theme"

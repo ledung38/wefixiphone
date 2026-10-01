@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 86400,
-    qualities: [60, 75, 85, 90, 95, 100],
+    qualities: [60, 75, 80, 85, 90, 95, 100],
   },
 
   // Headers for SEO
@@ -61,10 +61,6 @@ const nextConfig: NextConfig = {
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=(self), usb=()",
-          },
-          {
-            key: "Accept-Encoding",
-            value: "gzip, deflate, br",
           },
         ],
       },
@@ -109,9 +105,6 @@ const nextConfig: NextConfig = {
   // Production source maps (disable for smaller builds)
   productionBrowserSourceMaps: false,
 
-  // Swc minify
-  swcMinify: true,
-
   // Incremental static regeneration
   onDemandEntries: {
     maxInactiveAge: 60 * 1000,
@@ -124,12 +117,9 @@ const nextConfig: NextConfig = {
       process.env.NEXT_PUBLIC_SITE_URL || "https://www.housephonetech.com.au",
   },
 
-  // Turbopack for faster builds
+  // Optimize package imports for barrel libraries
   experimental: {
-    // Enable turbopack for faster builds in dev
-    turbo: {
-      resolveAlias: {},
-    },
+    optimizePackageImports: ["lucide-react", "motion"],
   },
   eslint: {
     ignoreDuringBuilds: true,

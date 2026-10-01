@@ -17,9 +17,9 @@ export const HeroContent = () => {
       {/* Headline Lockup */}
       <div className="space-y-4">
         <AnimateH1
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 1, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-white"
         >
           On-Site iPhone Repair in{" "}
@@ -28,18 +28,18 @@ export const HeroContent = () => {
           </span>
         </AnimateH1>
         <AnimateP
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
           className="text-2xl sm:text-3xl font-bold text-slate-200"
         >
           Screen & Battery Replacement{" "}
           <span className="text-primary">in just 20 mins</span>
         </AnimateP>
         <AnimateP
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
+          transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
           className="text-lg sm:text-xl font-semibold text-slate-300"
         >
           Doorstep Service • 12-Month Warranty
@@ -48,9 +48,9 @@ export const HeroContent = () => {
 
       {/* Subtext Grid */}
       <AnimateDiv
-        initial={{ opacity: 0, y: 25 }}
+        initial={{ opacity: 1, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
         className="grid grid-cols-2 gap-4 w-full mt-2 text-sm sm:text-base font-semibold text-slate-200"
       >
         <div className="flex items-center gap-3 gradient-border-premium px-4 py-3 rounded-2xl cursor-default">
@@ -81,7 +81,7 @@ export const HeroContent = () => {
 
       {/* CTAs */}
       <AnimateDiv
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0.25, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
         className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-4"

@@ -2,7 +2,7 @@
 import { AnimateDiv } from "@/components/common/Animate";
 import { TextGradient } from "@/components/common/TextGradient";
 import { CommentStar } from "@/components/icons/home";
-import { Container } from "@/components/ui";
+import { Container } from "@/components/ui/Container";
 import ListComment from "@/modules/home/components/ListComment";
 import { ratingsExample } from "@/modules/home/contants";
 import { motion } from "motion/react";

@@ -1,5 +1,5 @@
 "use client";
-import { Text } from "@/components/ui";
+import { Text } from "@/components/ui/Text";
 import { cn } from "@/lib/utils/index";
 import React from "react";
 

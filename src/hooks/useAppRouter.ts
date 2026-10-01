@@ -1,9 +1,8 @@
 "use client";
 
-import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 
-import * as NProgress from "nprogress";
+type NavigateOptions = Parameters<ReturnType<typeof useRouter>["push"]>[1];
 
 type TRouter = {
   push: (href: string, options?: NavigateOptions) => void;
@@ -20,8 +19,6 @@ export const useAppRouter = () => {
   const { push, back, replace } = router;
 
   otherRouter.push = async (...args) => {
-    NProgress.start();
-    setTimeout(() => NProgress.done(), 10000);
     return push(...args);
   };
 

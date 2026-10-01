@@ -1,14 +1,20 @@
 import Image from "@/components/ui/Image";
-import HomeAreas from "@/modules/home/components";
-import Testimonials from "@/modules/home/components/Testimonials";
 import React from "react";
 import { QuickServices } from "./components/QuickServices";
 import { FreeConsultationBanner } from "./components/FreeConsultationBanner";
-import { RepairProcess } from "./components/RepairProcess";
-import { WhyChooseUs } from "./components/WhyChooseUs";
-import { WhyFixNow } from "./components/WhyFixNow";
-import DIff from "@/modules/home/components/DIff";
 import { HeroContent } from "./components/HeroContent";
+import dynamic from "next/dynamic";
+
+const DIff = dynamic(() => import("@/modules/home/components/DIff"));
+const WhyFixNow = dynamic(() => import("./components/WhyFixNow"));
+const WhyChooseUs = dynamic(() => import("./components/WhyChooseUs"));
+const RepairProcess = dynamic(
+  () => import("@/modules/home/components/RepairProcess"),
+);
+const Testimonials = dynamic(
+  () => import("@/modules/home/components/Testimonials"),
+);
+const HomeAreas = dynamic(() => import("@/modules/home/components"));
 
 const Home = () => {
   return (
@@ -20,6 +26,7 @@ const Home = () => {
           <Image
             src="/hero_repair.webp"
             priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
             width={1920}
             height={1080}
             alt="iPhone Repair Technician"
