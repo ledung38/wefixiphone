@@ -8,22 +8,23 @@ import { Toaster } from "@/components/ui/Sonner";
 const sfPro = localFont({
   src: [
     {
-      path: "../../public/fonts/SFPRODISPLAYREGULAR.woff",
+      path: "../../public/fonts/sf-pro-display-regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/SFPRODISPLAYMEDIUM.woff",
+      path: "../../public/fonts/sf-pro-display-medium.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../../public/fonts/SFPRODISPLAYBOLD.woff",
+      path: "../../public/fonts/sf-pro-display-bold.woff2",
       weight: "700",
       style: "normal",
     },
   ],
   variable: "--font-sf-pro",
+  preload: true,
   display: "swap",
 });
 
