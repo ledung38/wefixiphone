@@ -130,34 +130,30 @@ export const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo - Premium Design */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+
+            <Link
+              href={Routes.HOME}
+              aria-label="Back to home"
+              className="flex items-center gap-3 flex-shrink-0 group"
             >
-              <Link
-                href={Routes.HOME}
-                aria-label="Back to home"
-                className="flex items-center gap-3 flex-shrink-0 group"
-              >
-                <div className="relative py-2 transition-all duration-300 group-hover:scale-110 px-1">
-                  <div
-                    className={` absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
-                  />
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
-                  />
-                  <Image
-                    src="/logo_header_v2.webp"
-                    alt="House Phone Tech"
-                    width={120}
-                    priority
-                    height={60}
-                    unoptimized
-                    className="relative h-10 sm:h-15 w-auto"
-                  />
-                </div>
-                {/* <div className="flex items-center gap-2">
+              <div className="relative py-2 transition-all duration-300 group-hover:scale-110 px-1">
+                <div
+                  className={` absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
+                />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-r from-blue-300 to-secondary rounded-full blur-lg opacity-75 transition-opacity duration-300  group-hover:opacity-0 ${!isScrolled && isHome ? "" : "hidden dark:block"}`}
+                />
+                <Image
+                  src="/logo_header_v2.webp"
+                  alt="House Phone Tech"
+                  width={120}
+                  priority
+                  height={60}
+                  unoptimized
+                  className="relative h-10 sm:h-15 w-auto"
+                />
+              </div>
+              {/* <div className="flex items-center gap-2">
                   <Image
                     src="/logo_header_v2.webp"
                     width={250}
@@ -215,8 +211,7 @@ export const Header = () => {
                     </span>
                   </div>
                 </div> */}
-              </Link>
-            </motion.div>
+            </Link>
 
             {/* Desktop Navigation - Enhanced */}
             <nav className="hidden lg:flex items-center gap-8">
