@@ -5,7 +5,7 @@
   "scripts": {
     "prepare": "husky",
     "dev": "next dev --turbopack --port 3038",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
     "prettier:fix": "prettier --write .",
     "lint": "next lint",
