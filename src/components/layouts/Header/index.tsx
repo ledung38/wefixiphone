@@ -147,7 +147,6 @@ export const Header = () => {
                   src="/logo_header_v2.webp"
                   alt="House Phone Tech"
                   width={120}
-                  priority
                   height={60}
                   unoptimized
                   className="relative h-10 sm:h-15 w-auto"
