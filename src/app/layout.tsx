@@ -24,7 +24,7 @@ const sfPro = localFont({
     },
   ],
   variable: "--font-sf-pro",
-  preload: true,
+  preload: false,
   display: "swap",
 });
 

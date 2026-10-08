@@ -120,6 +120,7 @@ const nextConfig: NextConfig = {
   // Optimize package imports for barrel libraries
   experimental: {
     optimizePackageImports: ["lucide-react", "motion"],
+    optimizeCss: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
