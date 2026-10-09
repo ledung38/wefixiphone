@@ -1,4 +1,3 @@
-"use client";
 import Footer from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import React, { PropsWithChildren } from "react";
